@@ -15,25 +15,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create test user
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        // Create categories
+        // Crear las categorías si no existen
         $categories = Category::factory()->count(10)->create();
-
-        // Create tags
+    
+        // Crear tags
         $tags = Tag::factory()->count(20)->create();
-
-        // Create products, randomly attached to a category and some tags
-        Product::factory()->count(50)->create()->each(function ($product) use ($categories, $tags) {
+    
+        // Crear productos, asociados a una categoría aleatoria y algunas etiquetas
+        Product::factory()->count(30)->create()->each(function ($product) use ($categories, $tags) {
+            // Asignar una categoría aleatoria al producto
             $category = $categories->random();
-            $product->category_id = $category->id;
-            $product->save();
-
+            $product->category()->associate($category)->save(); // Utilizamos associate() en lugar de category()
+    
+            // Asociar algunas etiquetas aleatorias al producto
             $product->tags()->attach($tags->random(rand(1, 3))->pluck('id'));
         });
+    }
+
+    public function down(): void
+    {
+        // Eliminar todos los productos
+        Product::truncate();
+
+        // Eliminar todos las categorías
+        Category::truncate();
+
+        // Eliminar todas las etiquetas
+        Tag::truncate();
     }
 }
