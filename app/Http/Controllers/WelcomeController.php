@@ -10,6 +10,9 @@ class WelcomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('welcome', ['categories' => $categories]);
+
+        return view('welcome', [
+            'categories' => $categories
+        ]);
     }
 }

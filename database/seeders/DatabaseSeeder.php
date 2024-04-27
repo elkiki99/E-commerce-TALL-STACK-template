@@ -34,13 +34,10 @@ class DatabaseSeeder extends Seeder
 
     public function down(): void
     {
-        // Eliminar todos los productos
         Product::truncate();
 
-        // Eliminar todos las categorías
         Category::truncate();
 
-        // Eliminar todas las etiquetas
         Tag::truncate();
     }
 }
