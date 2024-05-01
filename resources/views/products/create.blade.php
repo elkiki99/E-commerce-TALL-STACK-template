@@ -1,4 +1,5 @@
-@section('content')
+@include('layouts.header')
+
 <div>
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-3xl font-extrabold leading-9 text-center text-gray-900">
@@ -6,11 +7,10 @@
         </h2>
     </div>
 
-    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-screen-sm">
         <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
             <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                 @csrf
-
                 <div>
                     <label for="name" class="block text-sm font-medium leading-5 text-gray-700">
                         Product Name
@@ -69,20 +69,19 @@
                     <div class="mt-1 rounded-md shadow-sm">
                         <select id="category_id" name="category_id" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
                             <option value="">Select Category</option>
-                            {{-- You can populate categories dynamically from your database --}}
+                            @foreach ($categories as $category)
+                                <option for="">{{ $category->category }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
                 <div class="mt-6">
                     <span class="block w-full rounded-md shadow-sm">
-                        <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo active:bg-indigo-700">
-                            Create Product
-                        </button>
+                        <x-primary-button class="w-full text-center sm:w-auto">Create Product</x-primary-button>
                     </span>
                 </div>
             </form>
         </div>
     </div>
 </div>
-@endsection

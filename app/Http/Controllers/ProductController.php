@@ -30,10 +30,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
+        $categories = Category::all();
+        
         return view('products.create', [
-
+            'categories' => $categories
         ]);
     }
 }

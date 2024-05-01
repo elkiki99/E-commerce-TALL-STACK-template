@@ -16,7 +16,7 @@
                         <x-primary-button class="w-full md:w-auto">Add to cart</x-primary-button>
                     </div>
                 </div>
-            </div>
+            </div>  
         </div>
     @endforeach
 
