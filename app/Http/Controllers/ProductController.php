@@ -8,16 +8,32 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function index()
+    {
+        $categories = Category::all();
+        $products = Product::paginate(24);
+
+        return view('welcome', [
+            'categories' => $categories,
+            'products' => $products
+        ]);
+    }
 
     public function show($id)
     {
-        // Find the product with the provided ID
         $product = Product::findOrFail($id);
         $categories = Category::all();
 
         return view('products.show', [
             'product' => $product,
             'categories' => $categories
+        ]);
+    }
+
+    public function create(Request $request)
+    {
+        return view('products.create', [
+
         ]);
     }
 }
