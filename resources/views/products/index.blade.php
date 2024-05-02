@@ -1,3 +1,4 @@
+{{-- @include('layouts.app') --}}
 
 <div class="flex flex-wrap justify-between md:m-10">
     @foreach ($products as $product)

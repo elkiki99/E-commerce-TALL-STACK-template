@@ -16,7 +16,8 @@ class Product extends Model
         'description', 
         'image_name', 
         'stock', 
-        'category_id'
+        'category_id',
+        'tags_id'
     ];
     
     use HasFactory;
