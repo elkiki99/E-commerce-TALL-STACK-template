@@ -1,6 +1,6 @@
 
 <x-app-layout>
-    <div class="flex max-w-3xl p-12 mx-auto">
+    <div class="flex max-w-3xl p-10 mx-auto">
         <div class="flex flex-auto overflow-hidden bg-white rounded-lg shadow-md">
             <div class="md:flex">
                 <div class="md:w-1/2">

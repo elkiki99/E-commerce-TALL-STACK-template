@@ -1,5 +1,5 @@
 
-<div class="flex flex-wrap justify-between md:m-10">
+<div class="flex flex-wrap justify-between p-10 md:m-10">
     @foreach ($products as $product)
         <div class="flex flex-col w-full p-2 mb-4 md:w-1/2 lg:w-1/3">
             <div class="flex-auto overflow-hidden bg-white rounded-lg md:shadow-md">

@@ -18,5 +18,7 @@ Route::view('profile', 'profile')
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products/create', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
+Route::post('/products/edit/{id}', [ProductController::class, 'update'])->name('products.update');
 
 require __DIR__.'/auth.php';
