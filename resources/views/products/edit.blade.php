@@ -59,6 +59,10 @@
                         </div>
                     </div>
 
+                    <div class="w-2/4 mt-6">
+                        <img class="rounded" src="{{ asset('storage/img/products/' . $product->image_name ) }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload">
+                    </div>
+
                     <div class="mt-6">
                         <label for="stock" class="block text-sm font-medium leading-5 text-gray-700">
                             Stock

@@ -5,8 +5,7 @@
             <div class="flex-auto overflow-hidden bg-white rounded-lg md:shadow-md">
                 <div class="flex flex-col h-full p-6">
                     <a wire:navigate href="{{route('products.show', ['id' => $product->id])}}">
-                    <img src="{{ asset('img/products/' . $product->image_name . '.webp') }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload">
-                    </a>
+                    <img src="{{ asset('storage/img/products/' . $product->image_name ) }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload">
                     <a href="{{route('products.show', ['id' => $product->id])}}">
                         <h2 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h2>
                     </a>

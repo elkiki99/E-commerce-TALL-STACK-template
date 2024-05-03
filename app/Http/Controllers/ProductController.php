@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use App\Models\Tag;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -57,8 +57,8 @@ class ProductController extends Controller
             'tag' => 'required|exists:tags,id',
         ]);
 
-        $imagePath = $request->file('image')->store('public/products');
-        $imageName = str_replace('public/products/', '', $imagePath);
+        $imagePath = $request->file('image')->store('public/img/products');
+        $imageName = str_replace('public/img/products/', '', $imagePath);
     
         $product = Product::create([
             'name' => $validate['name'],
@@ -68,9 +68,8 @@ class ProductController extends Controller
             'stock' => $validate['stock'],
             'category_id' => $validate['category'],
         ]); 
-
+        
         $product->tags()->attach($validate['tag']);
-
         session()->flash('message', 'Product created successfully');
         return redirect()->route('dashboard');
     }
@@ -90,7 +89,7 @@ class ProductController extends Controller
     
     public function update(Request $request, Product $product)
     {
-        $validatedData = $request->validate([
+        $validate = $request->validate([
             'name' => 'required|string|max:98',
             'price' => 'required|numeric|min:0',
             'description' => 'required|string',
@@ -100,25 +99,26 @@ class ProductController extends Controller
             'tag' => 'required|exists:tags,id',
         ]);
     
-        // Actualizar el nombre, precio, descripción, stock y categoría
-        $product->update([
-            'name' => $validatedData['name'],
-            'price' => $validatedData['price'],
-            'description' => $validatedData['description'],
-            'stock' => $validatedData['stock'],
-            'category_id' => $validatedData['category'],
-        ]);
+        $updateData = [
+            'name' => $validate['name'],
+            'price' => $validate['price'],
+            'description' => $validate['description'],
+            'stock' => $validate['stock'],
+            'category_id' => $validate['category'],
+        ];
     
-        // Actualizar la imagen si se proporciona una nueva
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/products');
-            $imageName = str_replace('public/products/', '', $imagePath);
-            $product->update(['image_name' => $imageName]);
+            $imagePath = $request->file('image')->store('public/img/products');
+            $imageName = str_replace('public/img/products/', '', $imagePath);
+            $updateData['image_name'] = $imageName;
+    
+            if ($product->image_name) {
+                Storage::delete('public/img/products/' . $product->image_name);
+            }
         }
     
-        // Actualizar las etiquetas del producto
-        $product->tags()->sync([$validatedData['tag']]);
-    
+        $product->update($updateData);
+        $product->tags()->attach([$validate['tag']]);
         session()->flash('message', 'Product updated successfully');
         return redirect()->route('dashboard');
     }
