@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="mt-6">
-                        <label for="category_id" class="block text-sm font-medium leading-5 text-gray-700">
+                        <label for="category" class="block text-sm font-medium leading-5 text-gray-700">
                             Category
                         </label>
 
@@ -80,7 +80,7 @@
                             <select id="category" name="category" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
                                 <option selected disabled>-- Select Category --</option>
                                 @foreach ($categories as $category)
-                                    <option for="">{{ $category->category }}</option>
+                                    <option value="{{ $category->id }}">{{ $category->category }}</option>
                                 @endforeach
                             </select>
 
@@ -89,19 +89,19 @@
                     </div>
 
                     <div class="mt-6">
-                        <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
+                        <label for="tag" class="block text-sm font-medium leading-5 text-gray-700">
                             Tags
                         </label>
                         
                         <div class="mt-1 rounded-md shadow-sm">
-                            <select id="tags" name="tags" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                            <select id="tag" name="tag" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
                                 <option selected disabled>-- Select Tags --</option>
                                 @foreach ($tags as $tag)
-                                    <option for="">{{ $tag->tag }}</option>
+                                    <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
                                 @endforeach
                             </select>
 
-                            <x-input-error :messages="$errors->get('tags')" class="mt-2" />
+                            <x-input-error :messages="$errors->get('tag')" class="mt-2" />
                         </div>
                     </div>
 

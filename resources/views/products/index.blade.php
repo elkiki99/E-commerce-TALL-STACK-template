@@ -1,11 +1,10 @@
-{{-- @include('layouts.app') --}}
 
 <div class="flex flex-wrap justify-between md:m-10">
     @foreach ($products as $product)
         <div class="flex flex-col w-full p-2 mb-4 md:w-1/2 lg:w-1/3">
             <div class="flex-auto overflow-hidden bg-white rounded-lg md:shadow-md">
                 <div class="flex flex-col h-full p-6">
-                    <a href="{{route('products.show', ['id' => $product->id])}}">
+                    <a wire:navigate href="{{route('products.show', ['id' => $product->id])}}">
                     <img src="{{ asset('img/products/' . $product->image_name . '.webp') }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload">
                     </a>
                     <a href="{{route('products.show', ['id' => $product->id])}}">

@@ -11,6 +11,11 @@
                         <h2 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h2>
                         <p class="mt-2 text-4xl font-bold text-lime-500">${{ $product->price }}</p>
                         <p class="mt-2 text-gray-700">{{ $product->description }}</p>
+                        <div class="flex flex-wrap my-2">
+                            @foreach ($tags as $tag)
+                                <span class="inline-block px-3 py-1 mb-2 mr-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full">{{ $tag->tag }}</span>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="my-2 mt-auto">
                         <livewire:counter />

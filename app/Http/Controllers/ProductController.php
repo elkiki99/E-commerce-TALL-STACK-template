@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Tag;
 use App\Models\Product;
 use App\Models\Category;
@@ -24,10 +25,12 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $categories = Category::all();
+        $tags = $product->tags()->get();
 
         return view('products.show', [
             'product' => $product,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ]);
     }
 
@@ -48,30 +51,28 @@ class ProductController extends Controller
             'name' => 'required|string|max:98',
             'price' => 'required|numeric|min:0',
             'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'stock' => 'required|integer|min:0',
             'category' => 'required|exists:categories,id',
-            'tags' => 'required|exists:tags,id',
-            // 'tags.*' => 'exists:tags,id'
+            'tag' => 'required|exists:tags,id',
         ]);
 
-        $imagePath = $request->file('image_name')->store('img/products', 'public');
-
+        $imagePath = $request->file('image')->store('public/products');
+        $imageName = str_replace('public/products/', '', $imagePath);
+    
         $product = Product::create([
             'name' => $validate['name'],
             'price' => $validate['price'],
             'description' => $validate['description'],
-            'image' => $imagePath,
+            'image_name' => $imageName,
             'stock' => $validate['stock'],
-            'category' => $validate['category'],
-            'tags' => $validate['tags']
+            'category_id' => $validate['category'],
         ]); 
-    
-        if (isset($validate['tags'])) {
-            $product->tags()->sync($validate['tags']);
-        }
-    
-        return redirect()->route('products.show', $product->id);
+
+        $product->tags()->attach($validate['tag']);
+
+        session()->flash('message', 'Product created successfully');
+        return redirect()->route('dashboard');
     }
 
     // public function edit(Product $product)
