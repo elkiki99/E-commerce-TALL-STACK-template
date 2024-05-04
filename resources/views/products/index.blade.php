@@ -10,7 +10,7 @@
                         <h2 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h2>
                     </a>
                     <p class="mt-2 text-3xl font-bold text-lime-500">${{ $product->price }}</p>
-                    @if (auth()->user()->admin === 1)
+                    @if(auth()->user()->admin === 1)
                         <div class="flex flex-row mt-5">
                             <a wire:navigate href="{{route('products.edit', ['product' => $product->id])}}" class="mr-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -47,7 +47,6 @@
 
 <script>
     const deleteButtons = document.querySelectorAll('.delete-btn');
-
     deleteButtons.forEach(button => {
         button.addEventListener('click', function() {
             const form = button.closest('form');

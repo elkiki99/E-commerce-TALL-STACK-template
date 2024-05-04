@@ -55,7 +55,7 @@ new class extends Component
                         </x-slot>
                     </x-dropdown>
                 </div>
-                                                    
+                
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
                         {{ __('About') }}
