@@ -9,7 +9,7 @@
 
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-screen-sm">
             <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
-                <form method="POST" novalidate action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data">
+                <form method="POST" novalidate action="{{ route('products.update', $product) }}" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label for="name" class="block text-sm font-medium leading-5 text-gray-700">

@@ -21,9 +21,8 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::findOrFail($id);
         $categories = Category::all();
         $tags = $product->tags()->get();
 
@@ -74,9 +73,8 @@ class ProductController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function edit($id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($id);
         $categories = Category::all();
         $tags = Tag::all();
 
@@ -118,8 +116,16 @@ class ProductController extends Controller
         }
     
         $product->update($updateData);
-        $product->tags()->attach([$validate['tag']]);
+        $product->tags()->attach($validate['tag']);
         session()->flash('message', 'Product updated successfully');
+        return redirect()->route('dashboard');
+    }
+
+    public function destroy(Product $product)
+    {   
+        $product->delete();
+        $product->tags()->detach();
+        session()->flash('message', 'Product deleted successfully');
         return redirect()->route('dashboard');
     }
 }
