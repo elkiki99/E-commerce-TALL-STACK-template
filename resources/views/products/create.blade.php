@@ -29,7 +29,7 @@
                         </label>
 
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input value="{{ old('price') }}" id="price" placeholder="Your product price" name="price" type="number" step="0.01" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
+                            <input value="{{ old('price') }}" id="price" placeholder="49.99" name="price" type="number" step="0.01" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
 
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
@@ -94,7 +94,7 @@
                         </label>
                         
                         <div class="mt-1 rounded-md shadow-sm">
-                            <select id="tag" name="tag" required multiple class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                            <select id="tags" name="[tags]" required multiple class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
                                 @foreach ($tags as $tag)
                                     <option value="{{ $tag->id }}" {{ old('tag') == $tag->id ? 'selected' : '' }}>{{ $tag->tag }}</option>
                                 @endforeach
@@ -117,7 +117,7 @@
 
 <script>
     $(document).ready(function() { 
-        $("#tag").select2({
+        $("#tags").select2({
             placeholder: " -- Select Tags --",
             allowClear: true
         }); 

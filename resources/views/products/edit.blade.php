@@ -29,7 +29,7 @@
                         </label>
 
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input  value="{{ $product->price }}"id="price" placeholder="Your product price" name="price" type="number" step="0.01" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
+                            <input  value="{{ $product->price }}"id="price" placeholder="49.99" name="price" type="number" step="0.01" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
 
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
@@ -53,7 +53,7 @@
                         </label>
 
                         <div class="mt-1 rounded-md shadow-sm">
-                            <input id="image" name="image" type="file" accept="image/*,image/webp" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
+                            <input id="image" name="image" lang="en" type="file" accept="image/*,image/webp" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
 
                             <x-input-error :messages="$errors->get('image')" class="mt-2" />
                         </div>
@@ -97,16 +97,21 @@
                             Tags
                         </label>
                         
-                        <div class="mt-1 rounded-md shadow-sm">
-                            <select id="tag" name="tag" required multiple class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                                @foreach ($tags as $tag)
-                                    <option value="{{ $tag->id }}" {{ $product->tags->contains($tag->id) ? 'selected' : '' }}>{{ $tag->tag }}</option>
-                                @endforeach
-                            </select>
-
-                            <x-input-error :messages="$errors->get('tag')" class="mt-2" />
+                        <div class="mt-6">
+                            <label for="tags" class="block text-sm font-medium leading-5 text-gray-700">
+                                Tags
+                            </label>
+                            
+                            <div class="mt-1 rounded-md shadow-sm">
+                                <select id="tags" name="tags[]" required multiple class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+                                    @foreach ($tags as $tag)
+                                        <option value="{{ $tag->id }}" {{ $product->tags->contains($tag->id) ? 'selected' : '' }}>{{ $tag->tag }}</option>
+                                    @endforeach
+                                </select>
+                        
+                                <x-input-error :messages="$errors->get('tags')" class="mt-2" />
+                            </div>
                         </div>
-                    </div>
 
                     <div class="mt-6">
                         <span class="w-full rounded-md shadow-sm">
@@ -121,7 +126,7 @@
 
 <script>
     $(document).ready(function() { 
-        $("#tag").select2({
+        $("#tags").select2({
             placeholder: " -- Select Tags --",
             allowClear: true
         }); 

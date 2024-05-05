@@ -38,14 +38,14 @@ new #[Layout('layouts.guest')] class extends Component
         {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
     </div>
 
-    <form wire:submit="confirmPassword">
+    <form wire:submit="confirmPassword" novalidate>
         <!-- Password -->
         <div>
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input wire:model="password"
                           id="password"
-                          class="block mt-1 w-full"
+                          class="block w-full mt-1"
                           type="password"
                           name="password"
                           required autocomplete="current-password" />

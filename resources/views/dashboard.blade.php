@@ -10,7 +10,9 @@
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 @if(auth()->user()->admin === 1)
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <x-primary-button>Manage my products!</x-primary-button>
+                        <a wire:navigate href="{{route('products.create')}}" class="mr-2">
+                            <x-primary-button>Create new product!</x-primary-button>
+                        </a>
                     </div>
                 @else
                     <div class="p-6 text-gray-900 dark:text-gray-100">

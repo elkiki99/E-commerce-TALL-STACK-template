@@ -6,6 +6,5 @@
             <p class="text-lg">Do what inspires you</p>
         </div>
     </div>
-
     @include('products.index')
 </x-app-layout>

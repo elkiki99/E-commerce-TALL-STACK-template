@@ -53,7 +53,8 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'stock' => 'required|integer|min:0',
             'category' => 'required|exists:categories,id',
-            'tag' => 'required|exists:tags,id',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id'
         ]);
 
         $imagePath = $request->file('image')->store('public/img/products');
@@ -68,7 +69,7 @@ class ProductController extends Controller
             'category_id' => $validate['category'],
         ]); 
         
-        $product->tags()->attach($validate['tag']);
+        $product->tags()->sync(array_unique($validate['tags']));
         session()->flash('message', 'Product created successfully');
         return redirect()->route('dashboard');
     }
@@ -94,7 +95,8 @@ class ProductController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'stock' => 'required|integer|min:0',
             'category' => 'required|exists:categories,id',
-            'tag' => 'required|exists:tags,id',
+            'tags' => 'required|array',
+            'tags.*' => 'exists:tags,id'
         ]);
     
         $updateData = [
@@ -116,7 +118,7 @@ class ProductController extends Controller
         }
     
         $product->update($updateData);
-        $product->tags()->attach($validate['tag']);
+        $product->tags()->sync(array_unique($validate['tags']));
         session()->flash('message', 'Product updated successfully');
         return redirect()->route('dashboard');
     }
