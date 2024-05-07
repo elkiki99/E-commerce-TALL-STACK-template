@@ -6,5 +6,10 @@
             <p class="text-lg">Do what inspires you</p>
         </div>
     </div>
-    @include('products.index')
+    
+    <livewire:products.show-products />
+
+    <div class="justify-end w-full px-20 py-10">
+        {{ $products->links() }}
+    </div>
 </x-app-layout>

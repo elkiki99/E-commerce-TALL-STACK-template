@@ -12,13 +12,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
-        $products = Product::latest()->paginate(24);
-
-        return view('products.index', [
-            'categories' => $categories,
-            'products' => $products
-        ]);
+        return view('products.index');
     }
 
     public function show(Product $product)
