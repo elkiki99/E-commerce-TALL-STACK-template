@@ -23,13 +23,8 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $categories = Category::all();
-        $tags = $product->tags()->get();
-
         return view('products.show', [
-            'product' => $product,
-            'categories' => $categories,
-            'tags' => $tags
+            'product' => $product
         ]);
     }
 
@@ -123,11 +118,11 @@ class ProductController extends Controller
         return redirect()->route('dashboard');
     }
 
-    public function destroy(Product $product)
-    {   
-        $product->delete();
-        $product->tags()->detach();
-        session()->flash('message', 'Product deleted successfully');
-        return redirect()->route('dashboard');
-    }
+    // public function destroy(Product $product)
+    // {   
+    //     $product->delete();
+    //     $product->tags()->detach();
+    //     session()->flash('message', 'Product deleted successfully');
+    //     return redirect()->route('dashboard');
+    // }
 }
