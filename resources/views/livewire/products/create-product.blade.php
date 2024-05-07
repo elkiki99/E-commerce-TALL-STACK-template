@@ -1,102 +1,117 @@
 
-<form method="POST" novalidate action="{{ route('products.store') }}" enctype="multipart/form-data">
-    @csrf
-    <div>
-        <label for="name" class="block text-sm font-medium leading-5 text-gray-700">
-            Product Name
-        </label>
+<form class="space-y-5 md:w-1/2" wire:submit.prevent='createProduct'>
+    <div class="mt-4">
+        <x-input-label for="name" :value="__('Product name')" />
+        <x-text-input 
+            id="name" 
+            class="block w-full mt-1"
+            type="text"
+            wire:model="name"
+            :value="old('name')"
+            placeholder="Nike shoes"
+        />
 
-        <div class="mt-1 rounded-md shadow-sm">
-            <input value="{{ old('name') }}" id="name" placeholder="Your product name" name="name" type="text" required autofocus class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+        <x-input-error :messages="$errors->get('name')" class="mt-2" />
     </div>
-
-    <div class="mt-6">
-        <label for="price" class="block text-sm font-medium leading-5 text-gray-700">
-            Price
-        </label>
-
-        <div class="mt-1 rounded-md shadow-sm">
-            <input value="{{ old('price') }}" id="price" placeholder="49.99" name="price" type="number" step="0.01" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-
-            <x-input-error :messages="$errors->get('price')" class="mt-2" />
-        </div>
-    </div>
-
-    <div class="mt-6">
-        <label for="description" class="block text-sm font-medium leading-5 text-gray-700">
-            Description
-        </label>
-
-        <div class="mt-1 rounded-md shadow-sm">
-            <textarea id="description" placeholder="Your product description"  name="description" rows="4" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">{{ old('description') }}</textarea>
-
-            <x-input-error :messages="$errors->get('description')" class="mt-2" />
-        </div>
-    </div>
-
-    <div class="mt-6">
-        <label for="image_name" class="block text-sm font-medium leading-5 text-gray-700">
-            Image
-        </label>
-
-        <div class="mt-1 rounded-md shadow-sm">
-            <input id="image" name="image" type="file" accept="image/*,image/webp" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-
-            <x-input-error :messages="$errors->get('image')" class="mt-2" />
-        </div>
-    </div>
-
-    <div class="mt-6">
-        <label for="stock" class="block text-sm font-medium leading-5 text-gray-700">
-            Stock
-        </label>
-
-        <div class="mt-1 rounded-md shadow-sm">
-            <input value="{{ old('stock') }}" id="stock" placeholder="Example: 23" name="stock" type="number" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5" />
-
-            <x-input-error :messages="$errors->get('stock')" class="mt-2" />
-        </div>
-    </div>
-
-    <div class="mt-6">
-        <label for="category" class="block text-sm font-medium leading-5 text-gray-700">
-            Category
-        </label>
     
-        <div class="mt-1 rounded-md shadow-sm">
-            <select id="category" name="category" required class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                <option value="" selected disabled>-- Select Category --</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->category }}</option>
-                @endforeach
-            </select>
-    
-            <x-input-error :messages="$errors->get('category')" class="mt-2" />
-        </div>
+    <div class="mt-4">
+        <x-input-label for="price" :value="__('Price')" />
+        <x-text-input 
+            class="block w-full mt-1"
+            type="number"
+            wire:model="price"
+            :value="old('price')"
+            placeholder="49.99"
+        />
+
+        <x-input-error :messages="$errors->get('price')" class="mt-2" />
     </div>
 
-    <div class="mt-6">
-        <label for="tag" class="block text-sm font-medium leading-5 text-gray-700">
-            Tags
-        </label>
-        
-        <div class="mt-1 rounded-md shadow-sm">
-            <select id="tags" name="[tags]" required multiple class="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
-                @foreach ($tags as $tag)
-                    <option value="{{ $tag->id }}" {{ old('tag') == $tag->id ? 'selected' : '' }}>{{ $tag->tag }}</option>
-                @endforeach
-            </select>
+    <div class="mt-4">
+        <x-input-label for="description" :value="__('Description')" />
+        <textarea
+            id="description"
+            wire:model="description"
+            placeholder="Your product description"
+            class="block w-full h-24 px-3 py-2 mt-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5">
+        </textarea>
 
-            <x-input-error :messages="$errors->get('tag')" class="mt-2" />
-        </div>
+        <x-input-error :messages="$errors->get('description')" class="mt-2" />
     </div>
 
-    <div class="mt-6">
-        <span class="w-full rounded-md shadow-sm">
-            <x-primary-button class="w-full text-center sm:w-auto">Create product</x-primary-button>
-        </span>
+    <div class="mt-4">
+        <x-input-label for="image" :value="__('Image')" />
+        <x-text-input 
+            id="image"
+            wire:model="image"
+            type="file"
+            class="block w-full mt-1"
+            accept="image/*"
+        />
+
+        <x-input-error :messages="$errors->get('image')" class="mt-2" />
     </div>
+
+    <div class="mt-4">
+        <x-input-label for="stock" :value="__('Stock')" />
+        <x-text-input 
+            id="stock" 
+            class="block w-full mt-1"
+            type="number"
+            wire:model="stock"
+            :value="old('stock')"
+            placeholder="23"
+        />
+
+        <x-input-error :messages="$errors->get('stock')" class="mt-2" />
+    </div>
+
+    <div class="mt-4">
+        <x-input-label for="category" :value="__('Category')" />
+        <x-select
+            id="category" 
+            wire:model.fill="category"
+            class="block w-full mt-1"
+        >
+            <option selected disabled>-- Select Category --</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->category }}</option>
+            @endforeach
+        </x-select>
+
+        <x-input-error :messages="$errors->get('category')" class="mt-2" />
+    </div>
+
+    <div class="mt-4">
+        <x-input-label for="tags" :value="__('Tags')" />
+        <x-select
+            id="tags"
+            {{-- multiple --}}
+            wire:model="tags"
+            class="block w-full mt-1"
+        >
+            @foreach ($tags as $tag)
+                <option value="{{ $tag->id }}" 
+                    {{-- {{ in_array($tag->id, old('tags', [])) ? 'selected' : '' }} --}}
+                >{{ $tag->tag }}</option>
+            @endforeach
+        </x-select>
+
+        <x-input-error :messages="$errors->get('tags')" class="mt-2" />
+    </div>
+
+    <x-primary-button>
+        {{ __('Create product') }}
+    </x-primary-button>
 </form>
+{{-- 
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.hook('afterDomUpdate', () => {
+            $('#tags').select2({
+                placeholder: '-- Select Tags --',
+                allowClear: true
+            });
+        });
+    });
+</script> --}}

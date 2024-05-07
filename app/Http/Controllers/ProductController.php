@@ -23,45 +23,39 @@ class ProductController extends Controller
     }
 
     public function create()
-    {
-        $categories = Category::all();
-        $tags = Tag::all();
-        
-        return view('products.create', [
-            'categories' => $categories,
-            'tags' => $tags
-        ]);
+    {   
+        return view('products.create');
     }
 
-    public function store(Request $request)
-    {
-        $validate = $request->validate([
-            'name' => 'required|string|max:98',
-            'price' => 'required|numeric|min:0',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'stock' => 'required|integer|min:0',
-            'category' => 'required|exists:categories,id',
-            'tags' => 'required|array',
-            'tags.*' => 'exists:tags,id'
-        ]);
+    // public function store(Request $request)
+    // {
+    //     $validate = $request->validate([
+    //         'name' => 'required|string|max:98',
+    //         'price' => 'required|numeric|min:0',
+    //         'description' => 'required|string',
+    //         'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    //         'stock' => 'required|integer|min:0',
+    //         'category' => 'required|exists:categories,id',
+    //         'tags' => 'required|array',
+    //         'tags.*' => 'exists:tags,id'
+    //     ]);
 
-        $imagePath = $request->file('image')->store('public/img/products');
-        $imageName = str_replace('public/img/products/', '', $imagePath);
+    //     $imagePath = $request->file('image')->store('public/img/products');
+    //     $imageName = str_replace('public/img/products/', '', $imagePath);
     
-        $product = Product::create([
-            'name' => $validate['name'],
-            'price' => $validate['price'],
-            'description' => $validate['description'],
-            'image_name' => $imageName,
-            'stock' => $validate['stock'],
-            'category_id' => $validate['category'],
-        ]); 
+    //     $product = Product::create([
+    //         'name' => $validate['name'],
+    //         'price' => $validate['price'],
+    //         'description' => $validate['description'],
+    //         'image_name' => $imageName,
+    //         'stock' => $validate['stock'],
+    //         'category_id' => $validate['category'],
+    //     ]);
         
-        $product->tags()->sync(array_unique($validate['tags']));
-        session()->flash('message', 'Product created successfully');
-        return redirect()->route('dashboard');
-    }
+    //     $product->tags()->sync(array_unique($validate['tags']));
+    //     session()->flash('message', 'Product created successfully');
+    //     return redirect()->route('dashboard');
+    // }
 
     public function edit(Product $product)
     {
@@ -111,12 +105,4 @@ class ProductController extends Controller
         session()->flash('message', 'Product updated successfully');
         return redirect()->route('dashboard');
     }
-
-    // public function destroy(Product $product)
-    // {   
-    //     $product->delete();
-    //     $product->tags()->detach();
-    //     session()->flash('message', 'Product deleted successfully');
-    //     return redirect()->route('dashboard');
-    // }
 }

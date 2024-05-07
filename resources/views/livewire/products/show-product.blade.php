@@ -1,6 +1,6 @@
 <div class="md:flex">
     <div class="md:w-1/2">
-        <img src="{{ asset('storage/img/products/' . $product->image_name ) }}" alt="{{ $product->name }}" class="w-full h-full mb-4 lazyload">
+        {{-- <img src="{{ asset('storage/img/products/' . $product->image_name ) }}" alt="{{ $product->name }}" class="w-full h-full mb-4 lazyload"> --}}
     </div>
     <div class="flex flex-col justify-between p-4 md:w-1/2">
         <div>

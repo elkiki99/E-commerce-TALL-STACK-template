@@ -123,12 +123,3 @@
         </div>
     </div>
 </x-app-layout>
-
-<script>
-    $(document).ready(function() { 
-        $("#tags").select2({
-            placeholder: " -- Select Tags --",
-            allowClear: true
-        }); 
-    });
-</script>
