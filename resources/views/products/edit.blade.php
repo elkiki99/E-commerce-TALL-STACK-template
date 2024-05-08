@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="w-2/4 mt-6">
-                        <img class="rounded" src="{{ asset('storage/img/products/' . $product->image_name ) }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload">
+                        <img loading="lazy" class="rounded" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}" class="w-full h-auto mb-4">
                     </div>
 
                     <div class="mt-6">

@@ -6,6 +6,7 @@ use App\Models\Tag;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\Attributes\Computed;
 use Livewire\WithFileUploads;
 
 class CreateProduct extends Component
@@ -18,7 +19,7 @@ class CreateProduct extends Component
     public $image;
     public $stock;
     public $category;
-    public $tags;
+    public $tagId;
 
     protected $rules = [
         'name' => 'required|string|max:98',
@@ -27,41 +28,44 @@ class CreateProduct extends Component
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         'stock' => 'required|numeric|min:0',
         'category' => 'required|exists:categories,id',
-        'tags' => 'required|array',
-        'tags.*' => 'exists:tags,id'
+        'tagId' => 'required|array',
+        'tagId.*' => 'exists:tags,id'
     ];
 
     public function createProduct()
     {
+        // dump($this->tagId);
         $data = $this->validate();
 
-        //Image
         $image = $this->image->store('public/img/products');
         $data['image'] = str_replace('public/img/products/', '', $image);
 
-        //Store product
         $product = Product::create([
             'name' => $data['name'],
             'price' => $data['price'],
             'description' => $data['description'],
             'image' => $data['image'],
             'stock' => $data['stock'],
-            'category_id' => $data['category'],
+            'category_id' => $data['category']
         ]); 
         
-        $product->tags()->sync($data['tags']);
+        $product->tags()->sync(array_unique($data['tagId']));
         session()->flash('message', 'Product created successfully');
         return redirect()->route('dashboard');
+    }
+
+    #[Computed()]
+    public function tags()
+    {
+        return Tag::all();
     }
 
     public function render()
     {
         $categories = Category::all();
-        $this->tags = Tag::all();
 
         return view('livewire.products.create-product', [
-            'categories' => $categories,
-            'tags' => $this->tags
+            'categories' => $categories
         ]);
     }
 }

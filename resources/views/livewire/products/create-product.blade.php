@@ -73,7 +73,7 @@
             wire:model.fill="category"
             class="block w-full mt-1"
         >
-            <option selected disabled>-- Select Category --</option>
+            <option selected disabled>-- Select category --</option>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}">{{ $category->category }}</option>
             @endforeach
@@ -83,35 +83,45 @@
     </div>
 
     <div class="mt-4">
-        <x-input-label for="tags" :value="__('Tags')" />
-        <x-select
-            id="tags"
-            {{-- multiple --}}
-            wire:model="tags"
-            class="block w-full mt-1"
-        >
-            @foreach ($tags as $tag)
-                <option value="{{ $tag->id }}" 
-                    {{-- {{ in_array($tag->id, old('tags', [])) ? 'selected' : '' }} --}}
-                >{{ $tag->tag }}</option>
-            @endforeach
-        </x-select>
+        <x-input-label for="tagId" :value="__('Tags')" />
+    
+        <div wire:ignore>
+            <select
+                id="tags"
+                multiple
+                wire:model="tagId"
+                class="block w-full mt-1"
+            >
+                @foreach ($this->tags as $tag)
+                    <option value="{{ $tag->id }}" 
+                        {{-- {{ in_array($tag->id, old('tags', [])) ? 'selected' : '' }} --}}
+                    >{{ $tag->tag }}</option>
+                @endforeach
+            </select>
 
-        <x-input-error :messages="$errors->get('tags')" class="mt-2" />
+            <x-input-error :messages="$errors->get('tags')" class="mt-2" />
+        </div>
     </div>
 
     <x-primary-button>
         {{ __('Create product') }}
     </x-primary-button>
 </form>
-{{-- 
-<script>
-    document.addEventListener('livewire:load', function () {
-        Livewire.hook('afterDomUpdate', () => {
+
+@script()
+    <script>
+        $(document).ready(function() {
             $('#tags').select2({
-                placeholder: '-- Select Tags --',
+                theme: 'classic',
+                placeholder: "-- Select tag --",
                 allowClear: true
             });
+            $('#tags').on('change', function(){
+                let data = $(this).val();
+                console.log(data);
+                // $wire.set('tags', data, false);
+                $wire.tagId = data;
+            });
         });
-    });
-</script> --}}
+    </script>
+@endscript

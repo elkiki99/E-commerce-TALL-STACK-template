@@ -4,7 +4,7 @@
             <div class="flex-auto overflow-hidden bg-white rounded-lg md:shadow-md">
                 <div class="flex flex-col h-full p-6">
                     <a wire:navigate href="{{route('products.show', ['product' => $product->id])}}">
-                        {{-- <img src="{{ asset('storage/img/products/' . $product->image_name ) }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload"> --}}
+                        <img loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}" class="w-full h-auto mb-4 lazyload">
                     </a>
                     <a wire:navigate href="{{route('products.show', ['product' => $product->id])}}">
                         <h2 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h2>
