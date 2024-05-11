@@ -1,5 +1,5 @@
 
-<form class="space-y-5 md:w-1/2" wire:submit.prevent='createProduct'>
+<form class="space-y-5 md:w-1/2" wire:submit.prevent='editProduct'>
     <div class="mt-4">
         <x-input-label for="name" :value="__('Product name')" />
         <x-text-input 
@@ -16,10 +16,10 @@
     
     <div class="mt-4">
         <x-input-label for="price" :value="__('Price')" />
-        <x-text-input 
+        <x-text-input
             class="block w-full mt-1"
             type="number"
-            wire:model="price"
+            wire:model.fill="price"
             :value="old('price')"
             placeholder="49.99"
         />
@@ -43,20 +43,25 @@
         <x-input-label for="image" :value="__('Image')" />
         <x-text-input 
             id="image"
-            wire:model="image"
+            wire:model="new_image"
             type="file"
             class="block w-full mt-1"
             accept="image/*"
         />
+        
+        <div class="my-5 w-96">
+            <x-input-label :value="__('Actual image')" />
+            <img loading="lazy" src="{{ asset('storage/img/products/' . $image ) }}" alt="{{ $name }}" class="w-full h-full mb-4">
+        </div>
 
         <div class="my-5 w-96">
-            @if($image)
+            @if($new_image)
                 Image:
-                <img src="{{ $image->temporaryUrl() }}" alt="">
+                <img src="{{ $new_image->temporaryUrl() }}">
             @endif
         </div>
 
-        <x-input-error :messages="$errors->get('image')" class="mt-2" />
+        <x-input-error :messages="$errors->get('new_image')" class="mt-2" />
     </div>
 
     <div class="mt-4">
@@ -100,16 +105,18 @@
                 class="block w-full mt-1"
             >
                 @foreach ($this->tags as $tag)
-                    <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
+                    <option value="{{ $tag->id }}" 
+                        {{ in_array($tag->id, old('tag', [])) ? 'selected' : '' }}
+                    >{{ $tag->tag }}</option>
                 @endforeach
             </select>
 
-            <x-input-error :messages="$errors->get('tagId')" class="mt-2" />
+            <x-input-error :messages="$errors->get('tags')" class="mt-2" />
         </div>
     </div>
 
     <x-primary-button>
-        {{ __('Create product') }}
+        {{ __('Edit product') }}
     </x-primary-button>
 </form>
 

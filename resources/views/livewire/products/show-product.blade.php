@@ -1,6 +1,6 @@
 <div class="md:flex">
     <div class="md:w-1/2">
-        <img loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}" class="w-full h-full mb-4">
+        <img class="w-auto h-auto" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}" class="w-full h-full mb-4">
     </div>
     <div class="flex flex-col justify-between p-4 md:w-1/2">
         <div>
@@ -50,7 +50,6 @@
 @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {
-            // event.preventDefault();
             @this.on('showAlert', (productId) => {
                 Swal.fire({
                     title: 'Are you sure?',
@@ -70,7 +69,7 @@
                         );
                         setTimeout(() => {
                             @this.call('deleteProduct', productId);
-                        }, 3000);
+                        }, 1500);
                     }
                 })
             });

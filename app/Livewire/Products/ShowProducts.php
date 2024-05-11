@@ -14,7 +14,7 @@ class ShowProducts extends Component
         $product->delete();
         $product->tags()->detach();
         session()->flash('message', 'Product deleted successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('home');
     }
 
     public function render()

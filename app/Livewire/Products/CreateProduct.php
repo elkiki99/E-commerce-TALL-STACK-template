@@ -28,13 +28,11 @@ class CreateProduct extends Component
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         'stock' => 'required|numeric|min:0',
         'category' => 'required|exists:categories,id',
-        'tagId' => 'required|array',
-        'tagId.*' => 'exists:tags,id'
+        'tagId' => 'required|array|exists:tags,id'
     ];
 
     public function createProduct()
     {
-        // dump($this->tagId);
         $data = $this->validate();
 
         $image = $this->image->store('public/img/products');
