@@ -48,8 +48,7 @@ new class extends Component
                         
                         <x-slot name="content">
                             @foreach (App\Models\Category::all() as $category)
-                                <x-dropdown-link :href="route('profile')" wire:navigate>
-                                    {{ $category->category }}
+                                <x-dropdown-link wire:navigate href="{{route('categories.show', ['category' => $category->id])}}">{{ $category->category }}
                                 </x-dropdown-link>
                             @endforeach
                         </x-slot>
@@ -237,8 +236,7 @@ new class extends Component
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             @foreach (App\Models\Category::all() as $category)
                 <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')" wire:navigate>
-                        {{ $category->category }}
+                    <x-responsive-nav-link wire:navigate href="{{route('categories.show', ['category' => $category->id])}}">{{ $category->category }}
                     </x-responsive-nav-link>
                 </div>
             @endforeach

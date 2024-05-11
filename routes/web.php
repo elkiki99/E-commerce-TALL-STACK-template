@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -18,6 +19,9 @@ Route::get('/products', [ProductController::class, 'index'])->name('products.ind
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
+
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 
 
 require __DIR__.'/auth.php';

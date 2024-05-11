@@ -11,11 +11,13 @@ class ShowProduct extends Component
     protected $listeners = ['deleteProduct'];
     
     public $product;
+    public $category;
     public $tags;
 
     public function mount(Product $product)
     {
         $this->product = $product;
+        $this->category = Category::find($this->product->category_id);
         $this->tags = $product->tags()->get();
     }
     
@@ -28,12 +30,7 @@ class ShowProduct extends Component
     }
 
     public function render()
-    {
-        $categories = Category::all();
-        
-        return view('livewire.products.show-product', [
-            'categories' => $categories,
-            'tags' => $this->tags
-        ]);
+    {   
+        return view('livewire.products.show-product');
     }
 }
