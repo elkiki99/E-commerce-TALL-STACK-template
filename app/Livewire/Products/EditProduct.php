@@ -35,7 +35,6 @@ class EditProduct extends Component
 
     public function mount(Product $product)
     {
-
         $this->product_id = $product->id;
         $this->name = $product->name;
         $this->price = $product->price;

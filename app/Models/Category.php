@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
+    protected $fillable = [
+        'category'
+    ];
     use HasFactory;
 
     public function products()

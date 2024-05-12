@@ -20,8 +20,9 @@ Route::get('/products/create', [ProductController::class, 'create'])->name('prod
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
 
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-
+Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
 
 require __DIR__.'/auth.php';

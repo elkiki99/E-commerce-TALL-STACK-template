@@ -1,5 +1,5 @@
 
-<form class="space-y-5 md:w-1/2" wire:submit.prevent='createCategory'>
+<form class="space-y-5 md:w-1/2" wire:submit.prevent='editCategory'>
     <div class="mt-4">
         <x-input-label for="category" :value="__('Category name')" />
         <x-text-input 
@@ -15,6 +15,6 @@
     </div>
     
     <x-primary-button>
-        {{ __('Create category') }}
+        {{ __('Update category') }}
     </x-primary-button>
 </form>
