@@ -1,5 +1,5 @@
 
-<form class="space-y-5 md:w-1/2" wire:submit.prevent='editCategory'>
+<form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='editCategory'>
     <div class="mt-4">
         <x-input-label for="category" :value="__('Category name')" />
         <x-text-input 
