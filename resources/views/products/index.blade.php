@@ -7,8 +7,5 @@
     </x-slot>
 
     <livewire:products.show-products />
-
-    <div class="justify-end w-full px-20 py-10">
-        {{ $products->links() }}
-    </div>
+    
 </x-app-layout>

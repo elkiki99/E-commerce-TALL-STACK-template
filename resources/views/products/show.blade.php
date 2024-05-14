@@ -6,8 +6,8 @@
         </h2>
     </x-slot>
     
-    <div class="flex max-w-3xl p-10 mx-auto">
-        <div class="flex flex-auto overflow-hidden bg-white rounded-lg shadow-md">
+    <div class="flex justify-center pt-10">
+        <div class="bg-white rounded-lg shadow-md  sm:w-auto xl:w-1/2 md:w-3/4">
             <livewire:products.show-product :$product />
         </div>
     </div>
