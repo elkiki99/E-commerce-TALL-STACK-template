@@ -1,4 +1,4 @@
-<div class="flex flex-wrap justify-between p-10">
+<div class="flex flex-wrap p-10">
     @foreach ($products as $product)
         <div wire:key="{{ $product->id }}" class="flex flex-col w-full p-2 mb-4 md:w-1/2 lg:w-1/3 xl:w-1/4">
             <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg md:shadow-md">
@@ -9,7 +9,7 @@
                         </a>
                     </div>
                     <div class="flex flex-col flex-grow">
-                        <p class="mt-2 text-2xl font-bold text-green-500">${{ $product->price }}</p>
+                        <p class="mt-2 text-2xl font-normal text-green-500">${{ $product->price }}</p>
                         <a wire:navigate href="{{route('products.show', ['product' => $product->id])}}">
                             <h2 class="mt-2 text-xl font-semibold text-gray-800">{{ $product->name }}</h2>
                         </a>
@@ -58,7 +58,7 @@
         </div>
     @endforeach
 
-    <div class="justify-end w-full px-5 py-10">
+    <div class="justify-end w-full px-5 pt-5">
         {{ $products->links() }}
     </div>
 </div>

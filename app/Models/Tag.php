@@ -10,8 +10,12 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'tag'
+    ];
+
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class, 'tag_product');
     }
 }

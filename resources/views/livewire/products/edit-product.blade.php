@@ -118,6 +118,15 @@
     <x-primary-button>
         {{ __('Edit product') }}
     </x-primary-button>
+    
+    <style>
+        .select2-search--inline {
+            margin: 2rem 0rem 0rem 0rem;
+        }
+        .select2-selection {
+            height: 2.5rem;
+        }
+    </style>
 </form>
 
 @script()

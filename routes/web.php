@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TagsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
@@ -24,5 +25,10 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+
+Route::get('/tags', [TagsController::class, 'index'])->name('tags.index');
+
+Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
+
 
 require __DIR__.'/auth.php';
