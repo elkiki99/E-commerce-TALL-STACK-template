@@ -44,9 +44,9 @@
 
                     <h3 class="mt-6 text-lg font-semibold">Tags Management</h3>
                     <div class="grid grid-cols-1 gap-4 my-4">
-                        {{-- <a wire:navigate href="{{ route('categories.create') }}" class="m-2">
+                        <a wire:navigate href="{{ route('tags.create') }}" class="m-2">
                             <x-primary-button>Create new tag</x-primary-button>
-                        </a> --}}
+                        </a>
                         <a wire:navigate href="{{ route('tags.index') }}" class="m-2">
                             <x-primary-button>View all tags</x-primary-button>
                         </a>

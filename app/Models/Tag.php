@@ -11,7 +11,8 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tag'
+        'tag',
+        'description'
     ];
 
     public function products()

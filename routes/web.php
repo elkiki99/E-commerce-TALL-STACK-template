@@ -27,7 +27,7 @@ Route::get('/categories/{category}', [CategoryController::class, 'show'])->name(
 Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
 
 Route::get('/tags', [TagsController::class, 'index'])->name('tags.index');
-
+Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 
 
