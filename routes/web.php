@@ -29,6 +29,7 @@ Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->
 Route::get('/tags', [TagsController::class, 'index'])->name('tags.index');
 Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
+Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->name('tags.edit');
 
 
 require __DIR__.'/auth.php';

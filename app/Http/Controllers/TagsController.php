@@ -25,6 +25,8 @@ class TagsController extends Controller
 
     public function edit(Tag $tag)
     {
-        //
+        return view('tags.edit', [
+            'tag' => $tag
+        ]);
     }
 }
