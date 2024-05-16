@@ -8,11 +8,21 @@ class TagsController extends Controller
 {
     public function index()
     {
+        if(auth()->user()->admin === 0) {
+            return redirect()->route('home');
+        }
+
+        $this->authorize('viewAny', Tag::class);
         return view('tags.index');
     }
 
     public function create()
     {
+        if(auth()->user()->admin === 0) {
+            return redirect()->route('home');
+        }
+
+        $this->authorize('create', Tag::class);
         return view('tags.create');
     }
 
@@ -25,6 +35,11 @@ class TagsController extends Controller
 
     public function edit(Tag $tag)
     {
+        if(auth()->user()->admin === 0) {
+            return redirect()->route('home');
+        }
+        
+        $this->authorize('update', $tag);
         return view('tags.edit', [
             'tag' => $tag
         ]);

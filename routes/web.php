@@ -31,5 +31,4 @@ Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
-
 require __DIR__.'/auth.php';

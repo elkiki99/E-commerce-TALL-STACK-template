@@ -2,9 +2,10 @@
 
 namespace App\Policies;
 
+use App\Models\Tag;
 use App\Models\User;
 
-class CategoryPolicy
+class TagPolicy
 {
     public function viewAny(User $user): bool
     {
@@ -12,12 +13,11 @@ class CategoryPolicy
     }
 
     public function create(User $user): bool
-    {        
+    {
         return $user->admin === 1;
-
     }
 
-    public function update(User $user): bool
+    public function update(User $user, Tag $tag): bool
     {
         return $user->admin === 1;
     }
