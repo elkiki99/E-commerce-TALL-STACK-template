@@ -31,7 +31,7 @@ new class extends Component
             </div>
 
             <!-- Navigation Links -->
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+            <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
                 <div class="flex items-center justify-center">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
