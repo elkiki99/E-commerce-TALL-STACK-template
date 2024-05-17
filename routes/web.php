@@ -3,18 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagsController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
 Route::get('/', HomeController::class)->name('home');
-
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
-Route::view('profile', 'profile')
-    ->middleware(['auth'])
-    ->name('profile');
+Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->middleware(['auth', 'verified'])->name('products.create');
@@ -30,5 +25,20 @@ Route::get('/tags', [TagsController::class, 'index'])->name('tags.index');
 Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth', 'verified'])->name('tags.create');
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
+
+
+Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+    Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
+    
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::get('/categories/edit/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
+
+    Route::get('/tags', [TagsController::class, 'index'])->name('tags.index');
+    Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');
+    Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->name('tags.edit');
+});
+
 
 require __DIR__.'/auth.php';

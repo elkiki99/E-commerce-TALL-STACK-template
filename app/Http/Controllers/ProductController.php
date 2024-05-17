@@ -12,11 +12,7 @@ class ProductController extends Controller
     }
 
     public function create()
-    {   
-        if(auth()->user()->admin === 0) {
-            return redirect()->route('home');
-        }
-
+    {
         $this->authorize('create', Product::class);
         return view('products.create');
     }
@@ -30,10 +26,6 @@ class ProductController extends Controller
     
     public function edit(Product $product)
     {
-        if(auth()->user()->admin === 0) {
-            return redirect()->route('home');
-        }
-        
         $this->authorize('update', $product);
         return view('products.edit', [
             'product' => $product
