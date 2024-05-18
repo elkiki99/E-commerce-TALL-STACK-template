@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use App\Models\CartItem;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,4 +31,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Tag::class, 'tag_product');
     }
+
+    // public function items()
+    // {
+    //     return $this->hasMany(CartItem::class);
+    // }
 }

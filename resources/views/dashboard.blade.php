@@ -59,10 +59,11 @@
                     </div>
                 </div>
                 @else
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <x-primary-button wire:navigate href="{{ route('products.index') }}">View my products
-                    </x-primary-button>
-                </div>
+                    <div class="m-10">
+                        {{-- <a wire:navigate href="{{ route('cart.show', [$cart->id => 'cart']) }}" class="m-2"> --}}
+                            <x-primary-button>My cart</x-primary-button>
+                        {{-- </a> --}}
+                    </div>
                 @endif
             </div>
         </div>

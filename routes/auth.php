@@ -2,6 +2,7 @@
 
 use Livewire\Volt\Volt;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 Route::middleware('guest')->group(function () {
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
+
+    Route::get('/cart/{id}', [CartController::class, 'showAuthenticated'])->name('cart.show.authenticated')->middleware('check.cart.ownership');
 
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
