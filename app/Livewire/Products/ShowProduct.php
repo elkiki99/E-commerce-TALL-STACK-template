@@ -8,7 +8,7 @@ use App\Models\Category;
 
 class ShowProduct extends Component
 {
-    protected $listeners = ['deleteProduct'];
+    protected $listeners = ['deleteProduct', 'addToCart'];
     
     public $product;
     public $category;
@@ -27,6 +27,11 @@ class ShowProduct extends Component
         $product->tags()->detach();
         session()->flash('message', 'Product deleted successfully');
         return redirect()->route('dashboard');
+    }
+    
+    public function addToCart(Product $product) 
+    {
+        dd($product->id);
     }
 
     public function render()

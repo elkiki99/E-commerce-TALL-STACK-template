@@ -12,14 +12,7 @@ Route::get('/', HomeController::class)->name('home');
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/cart/{user}', [CartController::class, 'show'])->name('cart.show');
-});
-
-Route::get('/cart', [CartController::class, 'show'])->name('cart.show');    
-
-// Route::post('/cart/{id}/add', [CartController::class, 'addItem'])->name('cart.add');
-// Route::delete('/cart/{cartId}/item/{itemId}', [CartController::class, 'removeItem'])->name('cart.remove');
+Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->middleware(['auth', 'verified'])->name('products.create');
@@ -38,6 +31,8 @@ Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['au
 
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
+    Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
+
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::get('/products/edit/{product}', [ProductController::class, 'edit'])->name('products.edit');
     

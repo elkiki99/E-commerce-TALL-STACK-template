@@ -27,8 +27,6 @@ Route::middleware('auth')->group(function () {
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
 
-    Route::get('/cart/{id}', [CartController::class, 'showAuthenticated'])->name('cart.show.authenticated')->middleware('check.cart.ownership');
-
     Volt::route('confirm-password', 'pages.auth.confirm-password')
         ->name('password.confirm');
 });

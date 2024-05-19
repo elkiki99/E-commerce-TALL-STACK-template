@@ -8,7 +8,6 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-                @if(auth()->user()->admin === 1)
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="text-lg font-semibold">Product Management</h3>
                     <div class="grid grid-cols-1 gap-4 my-4">
@@ -58,13 +57,6 @@
                         </a> --}}
                     </div>
                 </div>
-                @else
-                    <div class="m-10">
-                        {{-- <a wire:navigate href="{{ route('cart.show', [$cart->id => 'cart']) }}" class="m-2"> --}}
-                            <x-primary-button>My cart</x-primary-button>
-                        {{-- </a> --}}
-                    </div>
-                @endif
             </div>
         </div>
 

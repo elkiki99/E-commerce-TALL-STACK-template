@@ -13,24 +13,24 @@
                         
                     @forelse ($carts as $cart)
                         @if (!$cart->items->isEmpty())
-                            <table class="w-full my-4 border-t-2">
+                            <table class="w-full">
                                 <thead>
-                                    <tr>
-                                        <th class="pt-5 text-start">Image</th>
-                                        <th class="pt-5 text-start">Product</th>
-                                        <th class="pt-5 text-start">Price</th>
-                                        <th class="pt-5 text-start">Quantity</th>
-                                        <th class="pt-5 text-start">Total</th>
+                                    <tr class="border-t-2">
+                                        <th class="pt-5 text-left">Image</th>
+                                        <th class="pt-5 text-left">Product</th>
+                                        <th class="pt-5 text-left">Price</th>
+                                        <th class="pt-5 text-left">Quantity</th>
+                                        <th class="pt-5 text-left">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($cart->items as $item)
-                                        <tr>
+                                        <tr class="product-row">
                                             <td><img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class="w-16 h-16"></td>
                                             <td>{{ $item->product->name }}</td>
                                             <td>{{ $item->product->price }}</td>
                                             <td>{{ $item->quantity }}</td>
-                                            <td>$ {{ $item->product->price * $item->quantity }}</td>
+                                            <td>{{ $item->product->price * $item->quantity }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -44,4 +44,3 @@
         </div>
     </div>
 </x-app-layout>
-

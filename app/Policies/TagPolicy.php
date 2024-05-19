@@ -17,7 +17,7 @@ class TagPolicy
         return $user->admin === 1;
     }
 
-    public function update(User $user, Tag $tag): bool
+    public function update(User $user): bool
     {
         return $user->admin === 1;
     }
