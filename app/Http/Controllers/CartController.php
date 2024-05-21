@@ -6,12 +6,10 @@ use App\Models\Cart;
 
 class CartController extends Controller
 {
-    public function show()
+    public function show(Cart $cart)
     {
-        $carts = Cart::where('user_id', auth()->id())->with('items')->get();
-
         return view('cart.show', [
-            'carts' => $carts
+            'cart' => $cart
         ]);
     }
 }

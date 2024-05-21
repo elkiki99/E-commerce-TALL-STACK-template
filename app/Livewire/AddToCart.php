@@ -26,16 +26,22 @@ class AddToCart extends Component
     public function addToCart()
     {
         if($this->quantity > 0) {
-            $cart = Cart::create([
-                'user_id' => auth()->user()->id
-            ]);
-    
-            CartItem::create([
-                'cart_id' => $cart->id,
-                'product_id' => $this->productId,
-                'quantity' => $this->quantity
-            ]);
+            $cart = Cart::firstOrCreate(['user_id' => auth()->user()->id]);
 
+            $cartItem = CartItem::where('cart_id', $cart->id)
+                ->where('product_id', $this->productId)
+                ->first();
+
+            if ($cartItem) {
+                $cartItem->quantity += $this->quantity;
+                $cartItem->save();
+            } else {
+                CartItem::create([
+                    'cart_id' => $cart->id,
+                    'product_id' => $this->productId,
+                    'quantity' => $this->quantity
+                ]);
+            }
             $this->dispatch('addToCartSuccess');
 
         } else {

@@ -11,34 +11,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="my-5 text-2xl font-bold text-center">Go to checkout</h1>
                         
-                    @forelse ($carts as $cart)
-                        @if (!$cart->items->isEmpty())
-                            <table class="w-full">
-                                <thead>
-                                    <tr class="border-t-2">
-                                        <th class="pt-5 text-left">Image</th>
-                                        <th class="pt-5 text-left">Product</th>
-                                        <th class="pt-5 text-left">Price</th>
-                                        <th class="pt-5 text-left">Quantity</th>
-                                        <th class="pt-5 text-left">Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($cart->items as $item)
-                                        <tr class="product-row">
-                                            <td><img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class="w-16 h-16"></td>
-                                            <td>{{ $item->product->name }}</td>
-                                            <td>{{ $item->product->price }}</td>
-                                            <td>{{ $item->quantity }}</td>
-                                            <td>{{ $item->product->price * $item->quantity }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @endif
-                    @empty
-                        <a wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
-                    @endforelse
+                    <livewire:cart.show-cart :cart="$cart"/>
                 </div>
             </div>
         </div>
