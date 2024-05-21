@@ -17,12 +17,6 @@
                         <a wire:navigate href="{{ route('products.index') }}" class="m-2">
                             <x-primary-button>View all products</x-primary-button>
                         </a>
-                        {{-- <a wire:navigate href="{{ route('products.edit') }}" class="m-2">
-                            <x-primary-button>Edit product</x-primary-button>
-                        </a>
-                        <a wire:navigate href="{{ route('products.delete') }}" class="m-2">
-                            <x-primary-button>Delete product</x-primary-button>
-                        </a> --}}
                     </div>
 
                     <h3 class="mt-6 text-lg font-semibold">Category Management</h3>
@@ -33,12 +27,6 @@
                         <a wire:navigate href="{{ route('categories.index') }}" class="m-2">
                             <x-primary-button>View all categories</x-primary-button>
                         </a>
-                        {{-- <a wire:navigate href="{{ route('categories.edit') }}" class="m-2">
-                            <x-primary-button>Edit category</x-primary-button>
-                        </a>
-                        <a wire:navigate href="{{ route('categories.delete') }}" class="m-2">
-                            <x-primary-button>Delete category</x-primary-button>
-                        </a> --}}
                     </div>
 
                     <h3 class="mt-6 text-lg font-semibold">Tags Management</h3>
@@ -49,12 +37,6 @@
                         <a wire:navigate href="{{ route('tags.index') }}" class="m-2">
                             <x-primary-button>View all tags</x-primary-button>
                         </a>
-                        {{-- <a wire:navigate href="{{ route('categories.edit') }}" class="m-2">
-                            <x-primary-button>Edit category</x-primary-button>
-                        </a>
-                        <a wire:navigate href="{{ route('categories.delete') }}" class="m-2">
-                            <x-primary-button>Delete category</x-primary-button>
-                        </a> --}}
                     </div>
                 </div>
             </div>

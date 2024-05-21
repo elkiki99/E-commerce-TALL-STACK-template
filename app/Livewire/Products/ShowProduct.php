@@ -28,11 +28,6 @@ class ShowProduct extends Component
         session()->flash('message', 'Product deleted successfully');
         return redirect()->route('dashboard');
     }
-    
-    public function addToCart(Product $product) 
-    {
-        dd($product->id);
-    }
 
     public function render()
     {   
