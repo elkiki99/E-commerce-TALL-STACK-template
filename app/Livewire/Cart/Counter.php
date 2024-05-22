@@ -3,17 +3,27 @@
 namespace App\Livewire\Cart;
 
 use Livewire\Component;
+use App\Models\CartItem;
 
 class Counter extends Component
 {
     public $count = 0;
     public $productId;
+    public $cartId;
     
     protected $listeners = ['updateCount'];
 
     public function mount($productId)
     {
         $this->productId = $productId;
+        $user = auth()->user();
+    
+        if ($user->cart) {
+            $this->cartId = $user->cart->id;
+        } else {
+            $this->cartId = null;
+        }
+    
         $this->updateCount();
     }
 
@@ -33,7 +43,13 @@ class Counter extends Component
 
     public function updateCount()
     {
-
+        $cartItem = CartItem::where('cart_id', $this->cartId)
+            ->where('product_id', $this->productId)
+            ->first();
+    
+        if ($cartItem) {
+            $this->count = $cartItem->quantity;
+        }
     }
 
     public function render()

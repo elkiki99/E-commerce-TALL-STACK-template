@@ -7,7 +7,7 @@ use Livewire\Component;
 use App\Models\CartItem;
 
 class AddToCart extends Component
-{
+{   
     protected $listeners = ['addToCart', 'countUpdated'];
 
     public $productId;
@@ -33,7 +33,7 @@ class AddToCart extends Component
                 ->first();
 
             if ($cartItem) {
-                $cartItem->quantity += $this->quantity;
+                $cartItem->quantity = $this->quantity;
                 $cartItem->save();
             } else {
                 CartItem::create([

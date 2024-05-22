@@ -8,6 +8,7 @@
                     <th class="py-2 text-left">Price</th>
                     <th class="py-2 text-left">Quantity</th>
                     <th class="py-2 text-left">Total</th>
+                    <th class="py-2 text-left">  </th>
                 </tr>
             </thead>
             <tbody>
@@ -16,8 +17,9 @@
                         <td class="py-2"><img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class="w-16 h-16"></td>
                         <td class="py-2">{{ $item->product->name }}</td>
                         <td class="py-2">{{ $item->product->price }}</td>
-                        <td class="py-2">{{ $item->quantity }}</td>
+                        <td class="py-2"><livewire:cart.counter :productId="$item->product->id" /></td>
                         <td class="py-2">{{ $item->product->price * $item->quantity }}</td>
+                        <td class="py-2"><livewire:cart.delete-cart-product /></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -30,9 +32,13 @@
                 </tr>
             </thead>
         </table>
+        <div>
+            <livewire:cart.update-cart :productId="$item->product->id" />
+        </div>
         <div class="flex">
             <x-primary-button class="mx-20 ml-auto">Checkout</x-primary-button>
         </div>
+        
     @else
         <a wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
     @endif

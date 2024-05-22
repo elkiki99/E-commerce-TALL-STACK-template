@@ -10,7 +10,7 @@
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="my-5 text-2xl font-bold text-center">Go to checkout</h1>
-                        
+                    
                     <livewire:cart.show-cart :cart="$cart"/>
                 </div>
             </div>
