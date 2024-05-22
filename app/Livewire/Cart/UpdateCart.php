@@ -2,27 +2,27 @@
 
 namespace App\Livewire\Cart;
 
-use App\Models\Cart;
 use Livewire\Component;
+use App\Models\Cart;
 use App\Models\CartItem;
 
 class UpdateCart extends Component
 {
-    protected $listeners = ['countUpdated'];
-
     public $cartItems;
-    public $quantity;
     public $productId;
+    public $dynamicQuantities = [];
+
+    protected $listeners = ['countUpdated'];
 
     public function mount($productId)
     {
-        $this->$productId = $productId;
+        $this->productId = $productId;
         $this->loadCartItems();
     }
 
-    public function countUpdated($quantity)
+    public function countUpdated($productId, $quantity)
     {
-        $this->quantity = $quantity;
+        $this->dynamicQuantities[$productId] = $quantity;
     }
 
     public function loadCartItems()
@@ -31,18 +31,25 @@ class UpdateCart extends Component
         if ($cart) {
             $this->cartItems = CartItem::where('cart_id', $cart->id)->get();
         } else {
-            $cart === null;
+            $this->cartItems = collect();
         }
     }
 
     public function updateCart()
     {
-        foreach($this->cartItems as $item) {
-            // dump($item['id']);
-            // dump($item['quantity']);
+        foreach ($this->cartItems as $item) {
+            $productId = $item->product_id;
+            $databaseQuantity = $item->quantity;
+            $dynamicQuantity = $this->dynamicQuantities[$productId] ?? $databaseQuantity;
 
-            dd($this->quantity);
+            dump("Product ID: $productId");
+            dump("Database Quantity: $databaseQuantity");
+            dump("Dynamic Quantity: $dynamicQuantity");
+
+            // Aquí puedes realizar la lógica de actualización en la base de datos si es necesario
         }
+
+        $this->emit('cartUpdatedSuccess');
     }
 
     public function render()

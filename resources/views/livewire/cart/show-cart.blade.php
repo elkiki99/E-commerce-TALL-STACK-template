@@ -8,7 +8,7 @@
                     <th class="py-2 text-left">Price</th>
                     <th class="py-2 text-left">Quantity</th>
                     <th class="py-2 text-left">Total</th>
-                    <th class="py-2 text-left">  </th>
+                    <th class="py-2 text-left"></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,12 +33,11 @@
             </thead>
         </table>
         <div>
-            <livewire:cart.update-cart :productId="$item->product->id" />
+            <livewire:cart.update-cart :productId="$items->first()->product->id" />
         </div>
         <div class="flex">
             <x-primary-button class="mx-20 ml-auto">Checkout</x-primary-button>
         </div>
-        
     @else
         <a wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
     @endif

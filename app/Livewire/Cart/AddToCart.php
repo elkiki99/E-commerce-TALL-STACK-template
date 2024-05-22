@@ -18,14 +18,16 @@ class AddToCart extends Component
         $this->productId = $productId;
     }
 
-    public function countUpdated($quantity)
+    public function countUpdated($productId, $quantity)
     {
-        $this->quantity = $quantity;
+        if ($this->productId == $productId) {
+            $this->quantity = $quantity;
+        }
     }
 
     public function addToCart()
     {
-        if($this->quantity > 0) {
+        if ($this->quantity > 0) {
             $cart = Cart::firstOrCreate(['user_id' => auth()->user()->id]);
 
             $cartItem = CartItem::where('cart_id', $cart->id)
