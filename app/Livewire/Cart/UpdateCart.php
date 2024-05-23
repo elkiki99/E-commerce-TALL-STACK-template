@@ -52,7 +52,7 @@ class UpdateCart extends Component
     
             if ($dynamicQuantity !== $databaseQuantity) {
                 $item->quantity = $dynamicQuantity;
-                $item->save();  // Guardar el cambio en la base de datos
+                $item->save();
                 $changesDetected = true;
             }
         }

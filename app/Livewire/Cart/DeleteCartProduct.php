@@ -21,10 +21,7 @@ class DeleteCartProduct extends Component
 
         if ($cartItem) {
             $cartItem->delete();
-
-            // Verificar si el carrito está vacío después de eliminar el producto
             if (CartItem::where('cart_id', $cartItem->cart_id)->count() === 0) {
-                // Eliminar el registro de cart
                 Cart::where('id', $cartItem->cart_id)->delete();
             }
 

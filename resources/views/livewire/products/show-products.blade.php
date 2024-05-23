@@ -1,5 +1,5 @@
 <div class="flex flex-wrap p-10">
-    <ul class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <ul class="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         @foreach ($products as $product)
             <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
                 <div class="flex flex-col h-full overflow-hidden bg-white rounded-lg shadow-md">
@@ -53,30 +53,47 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
 
     <script>
+        document.addEventListener('livewire:initialized', () => {
+                @this.on('showAlert', (productId) => {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This action cannot be restored',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'The product was deleted',
+                                'Deleted succesfully',
+                                'success'
+                            );
+                            window.setTimeout(() => {
+                                @this.call('deleteProduct', productId);
+                            }, 1500);
+                        }
+                    })
+                });
+            });
+    </script>
+
+    <script>
         document.addEventListener('livewire:initialized', () => {  
-            @this.on('showAlert', (productId) => {
+            @this.on('showAddToCart', (productId) => {
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'This action cannot be restored',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'The product was deleted',
-                            'Deleted successfully',
-                            'success'
-                        );
-                        window.setTimeout(() => {
-                            @this.call('deleteProduct', productId);
-                        }, 1500);
-                    }
-                })
+                    title: '¡Product added successfully!',
+                    text: 'Your product was added to your shopping cart.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+
+                window.setTimeout(() => {
+                    @this.call('addToCart', productId);
+                }, 500);
             });
         }); 
-    </script>
+    </script> 
 @endpush

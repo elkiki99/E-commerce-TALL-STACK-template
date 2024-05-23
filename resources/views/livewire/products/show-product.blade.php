@@ -1,4 +1,4 @@
-<div class="xl:flex md:flex">
+<div class="md:flex">
     <div class="md:w-1/2">
         <img class="object-contain w-full h-full" loading="lazy"
             src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{$product->name}}">

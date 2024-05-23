@@ -36,7 +36,7 @@
             <livewire:cart.update-cart :productId="$items->first()->product->id" />
         </div>
         <div class="flex">
-            <x-primary-button class="mx-20 ml-auto">Checkout</x-primary-button>
+            <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="mx-20 ml-auto">Checkout</x-primary-button>
         </div>
     @else
         <a wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>

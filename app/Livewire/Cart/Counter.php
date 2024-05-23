@@ -18,7 +18,7 @@ class Counter extends Component
         $this->productId = $productId;
         $user = auth()->user();
     
-        if ($user->cart) {
+        if (isset($user) && $user->cart) {
             $this->cartId = $user->cart->id;
         } else {
             $this->cartId = null;
