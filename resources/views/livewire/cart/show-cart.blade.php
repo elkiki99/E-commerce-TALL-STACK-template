@@ -1,5 +1,5 @@
 <div>
-    @if($cart)
+    @if($cart && count($items) > 0)
         <table class="w-full">
             <thead>
                 <tr>
@@ -19,7 +19,7 @@
                         <td class="py-2">{{ $item->product->price }}</td>
                         <td class="py-2"><livewire:cart.counter :productId="$item->product->id" /></td>
                         <td class="py-2">{{ $item->product->price * $item->quantity }}</td>
-                        <td class="py-2"><livewire:cart.delete-cart-product /></td>
+                        <td class="py-2"><livewire:cart.delete-cart-product :productId="$item->product->id" /></td>
                     </tr>
                 @endforeach
             </tbody>

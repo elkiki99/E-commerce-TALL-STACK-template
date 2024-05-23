@@ -20,14 +20,10 @@ class UpdateCart extends Component
         $this->loadCartItems();
     }
 
-    public function countUpdated($productId, $quantity)
-    {
-        $this->dynamicQuantities[$productId] = $quantity;
-    }
-
     public function loadCartItems()
     {
-        $cart = Cart::where('user_id', auth()->user()->id)->first();    
+        $cart = Cart::where('user_id', auth()->user()->id)->first();
+           
         if ($cart) {
             $this->cartItems = CartItem::where('cart_id', $cart->id)->get();
         } else {
@@ -35,23 +31,40 @@ class UpdateCart extends Component
         }
     }
 
+    public function countUpdated($productId, $quantity)
+    {
+        $this->dynamicQuantities[$productId] = $quantity;
+    }
+
     public function updateCart()
     {
+        $changesDetected = false;
+    
         foreach ($this->cartItems as $item) {
             $productId = $item->product_id;
             $databaseQuantity = $item->quantity;
             $dynamicQuantity = $this->dynamicQuantities[$productId] ?? $databaseQuantity;
-
-            dump("Product ID: $productId");
-            dump("Database Quantity: $databaseQuantity");
-            dump("Dynamic Quantity: $dynamicQuantity");
-
-            // Aquí puedes realizar la lógica de actualización en la base de datos si es necesario
+    
+            if ($dynamicQuantity < 1) {
+                $this->dispatch('addToCartError');
+                return;
+            }
+    
+            if ($dynamicQuantity !== $databaseQuantity) {
+                $item->quantity = $dynamicQuantity;
+                $item->save();  // Guardar el cambio en la base de datos
+                $changesDetected = true;
+            }
         }
-
-        $this->emit('cartUpdatedSuccess');
+    
+        if ($changesDetected) {
+            $this->dispatch('cartUpdatedSuccess');
+        } else {
+            $this->dispatch('cartUpdatedError');
+        }
     }
-
+    
+    
     public function render()
     {
         return view('livewire.cart.update-cart');

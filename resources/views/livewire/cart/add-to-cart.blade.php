@@ -16,16 +16,24 @@
                     text: 'Your product was added to your shopping cart.',
                     icon: 'success',
                     confirmButtonText: 'OK',
-                    footer: '<a href="{{ route("cart.show") }}">Go to cart</a>'
+                    footer: '<a href="{{ route("cart.show") }}">Go to cart</a>',
                 });
+                setTimeout(() => {
+                    Swal.close();
+                }, 2500);
             });
 
             @this.on('addToCartError', () => {
                 Swal.fire({
                     title: 'Error',
                     text: 'Please add a valid amount',
-                    icon: 'error'
+                    icon: 'error',
+                    willClose: () => {
+                    }
                 });
+                setTimeout(() => {
+                    Swal.close();
+                }, 1500);
             });
         }); 
     </script>

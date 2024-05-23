@@ -4,6 +4,7 @@ namespace App\Livewire\Cart;
 
 use App\Models\Cart;
 use Livewire\Component;
+use App\Models\CartItem;
 
 class ShowCart extends Component
 {
@@ -26,10 +27,13 @@ class ShowCart extends Component
     }
 
     public function render()
-    {   
+    {
+        $items = CartItem::with('product')->get();
+        $grandTotal = $items->sum(fn($item) => $item->product->price * $item->quantity);
+
         return view('livewire.cart.show-cart', [
-            'cart' => $this->cart,
-            'items' => $this->items
+            'items' => $items,
+            'grandTotal' => $grandTotal,
         ]);
     }
 }
