@@ -77,7 +77,6 @@ class AddToCart extends Component
                     } else {
                         session()->put('cart', $cart);
                         $this->dispatch('addToCartSuccess');
-                        dd($cart);
                     }
                 }
 

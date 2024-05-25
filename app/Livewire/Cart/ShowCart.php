@@ -2,38 +2,50 @@
 
 namespace App\Livewire\Cart;
 
-use App\Models\Cart;
 use Livewire\Component;
-use App\Models\CartItem;
 
 class ShowCart extends Component
 {
     public $cart;
-    public $items;
-    public $grandTotal;
+    public $items = [];
+    public $grandTotal = 0;
 
-    public function mount()
+    public function mount($cart)
     {
-        $this->cart = Cart::where('user_id', auth()->id())->first();
-        $this->items = $this->cart ? $this->cart->items : collect();
-        $this->calculateGrandTotal();
+        $this->cart = $cart;
+        $this->loadCartItems();
     }
 
-    public function calculateGrandTotal()
+    private function loadCartItems()
     {
-        $this->grandTotal = $this->items->reduce(function ($carry, $item) {
-            return $carry + ($item->product->price * $item->quantity);
-        }, 0);
+        $this->items = [];
+        $this->grandTotal = 0;
+
+        if (auth()->check()) {
+            foreach ($this->cart->items as $item) {
+                $this->items[] = [
+                    'product' => $item->product,
+                    'quantity' => $item->quantity,
+                ];
+                $this->grandTotal += $item->product->price * $item->quantity;
+            }
+        } else {
+            foreach ($this->cart as $productId => $details) {
+                $product = \App\Models\Product::find($productId);
+                $this->items[] = [
+                    'product' => $product,
+                    'quantity' => $details['quantity'],
+                ];
+                $this->grandTotal += $product->price * $details['quantity'];
+            }
+        }
     }
 
     public function render()
     {
-        $items = CartItem::with('product')->get();
-        $grandTotal = $items->sum(fn($item) => $item->product->price * $item->quantity);
-
         return view('livewire.cart.show-cart', [
-            'items' => $items,
-            'grandTotal' => $grandTotal,
+            'items' => $this->items,
+            'grandTotal' => $this->grandTotal,
         ]);
     }
-}
+}   

@@ -17,17 +17,27 @@ class DeleteCartProduct extends Component
 
     public function deleteProduct()
     {
-        $cartItem = CartItem::where('product_id', $this->productId)->first();
+        if(auth()->check()) {
+            $cartItem = CartItem::where('product_id', $this->productId)->first();
 
-        if ($cartItem) {
-            $cartItem->delete();
-            if (CartItem::where('cart_id', $cartItem->cart_id)->count() === 0) {
-                Cart::where('id', $cartItem->cart_id)->delete();
+            if ($cartItem) {
+                $cartItem->delete();
+                if (CartItem::where('cart_id', $cartItem->cart_id)->count() === 0) {
+                    Cart::where('id', $cartItem->cart_id)->delete();
+                }
+
+                $this->dispatch('itemCartDeleted');
             }
+        } else {
+            
+            if (isset($cart[$this->productId])) {
+                unset($cart[$this->productId]);
+                session()->put('cart', $cart);
 
-            $this->dispatch('itemCartDeleted');
+                $this->dispatch('itemCartDeleted');
+            }
         }
-    }
+    }   
 
     public function render()
     {

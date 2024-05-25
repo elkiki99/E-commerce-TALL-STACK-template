@@ -1,5 +1,5 @@
 <div>
-    @if($cart && count($items) > 0)
+    @if(count($items) > 0)
         <table class="w-full">
             <thead>
                 <tr>
@@ -14,12 +14,12 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr class="border-t-2">
-                        <td class="py-2"><img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class="w-16 h-16"></td>
-                        <td class="py-2">{{ $item->product->name }}</td>
-                        <td class="py-2">{{ $item->product->price }}</td>
-                        <td class="py-2"><livewire:cart.counter :productId="$item->product->id" /></td>
-                        <td class="py-2">{{ $item->product->price * $item->quantity }}</td>
-                        <td class="py-2"><livewire:cart.delete-cart-product :productId="$item->product->id" /></td>
+                        <td class="py-2"><img src="{{ $item['product']->image }}" alt="{{ $item['product']->name }}" class="w-16 h-16"></td>
+                        <td class="py-2">{{ $item['product']->name }}</td>
+                        <td class="py-2">{{ $item['product']->price }}</td>
+                        <td class="py-2"><livewire:cart.counter :productId="$item['product']->id" /></td>
+                        <td class="py-2">{{ $item['product']->price * $item['quantity']  }}</td>
+                        <td class="py-2"><livewire:cart.delete-cart-product :productId="$item['product']->id" /></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -33,7 +33,7 @@
             </thead>
         </table>
         <div>
-            <livewire:cart.update-cart :productId="$items->first()->product->id" />
+            {{-- <livewire:cart.update-cart :productId="$items->first()->product->id" /> --}}
         </div>
         <div class="flex">
             <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="mx-20 ml-auto">Checkout</x-primary-button>
