@@ -37,6 +37,11 @@
                 <livewire:cart.update-cart :productId="$items[0]['product']->id" />
             @endif
         </div>
+        
+        <div>
+            <livewire:cart.clear-cart :productId="$items[0]['product']->id" />
+        </div>
+        
         <div class="flex">
             <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="mx-20 ml-auto">Checkout</x-primary-button>
         </div>
