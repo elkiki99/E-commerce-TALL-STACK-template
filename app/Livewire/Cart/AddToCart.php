@@ -55,14 +55,9 @@ class AddToCart extends Component
             {
                 $product = Product::find($this->productId);
 
-                if (!$product) {
-                    abort(404);
-                }
-
-                $cart = session()->get('cart');
+                $cart = session()->get('cart', []);
 
                 if (!$cart) {
-
                     $cart = [
                         $this->productId => [
                             "name" => $product->name,
@@ -100,11 +95,8 @@ class AddToCart extends Component
                 } else {
                     session()->put('cart', $cart);
                     if (request()->wantsJson()) {
-                        // return response()->json(['message' => 'Product added to cart successfully!']);
                         $this->dispatch('addToCartSuccess');
                     }
-    
-                    // return redirect()->back()->with('success', 'Product added to cart successfully!');
                     $this->dispatch('addToCartSuccess');
                 }
             }

@@ -19,15 +19,20 @@ class UpdateCart extends Component
         $this->productId = $productId;
         $this->loadCartItems();
     }
-
+    
     public function loadCartItems()
     {
-        $cart = Cart::where('user_id', auth()->user()->id)->first();
-           
-        if ($cart) {
-            $this->cartItems = CartItem::where('cart_id', $cart->id)->get();
+        if (auth()->check()) {
+            $cart = Cart::where('user_id', auth()->user()->id)->first();
+
+            if ($cart) {
+                $this->cartItems = CartItem::where('cart_id', $cart->id)->get();
+            } else {
+                $this->cartItems = collect();
+            }
         } else {
-            $this->cartItems = collect();
+            $cart = session()->get('cart', []);
+            $this->cartItems = collect($cart);
         }
     }
 
@@ -40,20 +45,39 @@ class UpdateCart extends Component
     {
         $changesDetected = false;
     
-        foreach ($this->cartItems as $item) {
-            $productId = $item->product_id;
-            $databaseQuantity = $item->quantity;
-            $dynamicQuantity = $this->dynamicQuantities[$productId] ?? $databaseQuantity;
+        if (auth()->check()) {
+            foreach ($this->cartItems as $item) {
+                $productId = $item->product_id;
+                $actualQuantity = $item->quantity;
+                $dynamicQuantity = $this->dynamicQuantities[$productId] ?? $actualQuantity;
     
-            if ($dynamicQuantity < 1) {
-                $this->dispatch('addToCartError');
-                return;
+                if ($dynamicQuantity < 1) {
+                    $this->dispatch('addToCartError');
+                    return;
+                }
+    
+                if ($dynamicQuantity !== $actualQuantity) {
+                    $item->quantity = $dynamicQuantity;
+                    $item->save();
+                    $changesDetected = true;
+                }
             }
+        } else {
+            foreach ($this->cartItems as $productId => $quantity) {
+                $actualQuantity = $quantity;
+                $dynamicQuantity = $this->dynamicQuantities[$productId] ?? $actualQuantity;
     
-            if ($dynamicQuantity !== $databaseQuantity) {
-                $item->quantity = $dynamicQuantity;
-                $item->save();
-                $changesDetected = true;
+                if ($dynamicQuantity < 1) {
+                    $this->dispatch('addToCartError');
+                    return;
+                }
+    
+                if ($dynamicQuantity !== $actualQuantity) {
+                    $cart = session()->get('cart', []);
+                    $cart[$productId]['quantity'] = $dynamicQuantity;
+                    session()->put('cart', $cart);
+                    $changesDetected = true;
+                }
             }
         }
     
@@ -63,7 +87,6 @@ class UpdateCart extends Component
             $this->dispatch('cartUpdatedError');
         }
     }
-    
     
     public function render()
     {

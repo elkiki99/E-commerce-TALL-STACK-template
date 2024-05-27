@@ -43,12 +43,22 @@ class Counter extends Component
 
     public function updateCount()
     {
-        $cartItem = CartItem::where('cart_id', $this->cartId)
+        if(auth()->check()) {
+            $cartItem = CartItem::where('cart_id', $this->cartId)
             ->where('product_id', $this->productId)
             ->first();
     
-        if ($cartItem) {
-            $this->count = $cartItem->quantity;
+            if ($cartItem) {
+                $this->count = $cartItem->quantity;
+            }
+        } else {
+            $cart = session()->get('cart', []);
+        
+            if (isset($cart[$this->productId])) {
+                $this->count = $cart[$this->productId]['quantity'];
+            } else {
+                $this->count = 0;
+            }
         }
     }
 

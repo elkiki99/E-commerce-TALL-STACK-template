@@ -28,8 +28,9 @@ class DeleteCartProduct extends Component
 
                 $this->dispatch('itemCartDeleted');
             }
-        } else {
-            
+        } else {            
+            $cart = session()->get('cart', []);
+
             if (isset($cart[$this->productId])) {
                 unset($cart[$this->productId]);
                 session()->put('cart', $cart);

@@ -1,4 +1,4 @@
-<div>
+<div class="mt-10">
     @if(count($items) > 0)
         <table class="w-full">
             <thead>
@@ -33,7 +33,9 @@
             </thead>
         </table>
         <div>
-            {{-- <livewire:cart.update-cart :productId="$items->first()->product->id" /> --}}
+            @if(!empty($items))
+                <livewire:cart.update-cart :productId="$items[0]['product']->id" />
+            @endif
         </div>
         <div class="flex">
             <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="mx-20 ml-auto">Checkout</x-primary-button>
