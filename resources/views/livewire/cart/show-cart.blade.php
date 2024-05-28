@@ -44,9 +44,19 @@
                     </thead>
                 </table>
                 
-                <div class="flex mt-5">
-                    <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="sm:ml-auto">Checkout</x-primary-button>
-                </div>
+                @auth
+                    <div class="flex mt-5">
+                        <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="sm:ml-auto">Checkout</x-primary-button>
+                    </div>
+                @else
+                    <p class="my-5">
+                        <a class="text-violet-500" href="{{ route('login') }}">Log in</a>
+                        or
+                        <a class="text-violet-500" href="{{ route('register') }}">register</a>
+                        to complete your purchase
+                    </p>
+                @endauth
+                
             </div>
         </div>
         

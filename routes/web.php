@@ -7,7 +7,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CheckOutController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', HomeController::class)->name('home');
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
@@ -30,9 +30,7 @@ Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
-
-Route::get('/checkout', [CheckOutController::class, 'index'])->name('checkout.index');
-
+Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
