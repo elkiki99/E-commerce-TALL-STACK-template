@@ -28,14 +28,14 @@ class AddToCart extends Component
 
     public function addToCart()
     {
-        if(auth()->check()) {
+        if (auth()->check()) {
             if ($this->quantity > 0) {
                 $cart = Cart::firstOrCreate(['user_id' => auth()->user()->id]);
-    
+
                 $cartItem = CartItem::where('cart_id', $cart->id)
                     ->where('product_id', $this->productId)
                     ->first();
-    
+
                 if ($cartItem) {
                     $cartItem->quantity = $this->quantity;
                     $cartItem->save();
@@ -47,61 +47,32 @@ class AddToCart extends Component
                     ]);
                 }
                 $this->dispatch('addToCartSuccess');
-    
+
             } else {
                 $this->dispatch('addToCartError');
             }
         } else {
-            {
+            if ($this->quantity > 0) {
                 $product = Product::find($this->productId);
-
                 $cart = session()->get('cart', []);
 
-                if (!$cart) {
-                    $cart = [
-                        $this->productId => [
-                            "name" => $product->name,
-                            "quantity" => $this->quantity,
-                            "price" => $product->price,
-                            "image" => $product->image
-                        ]
-                    ];
-
-                    if($this->quantity < 1) {
-                        $this->dispatch('addToCartError');
-                    } else {
-                        session()->put('cart', $cart);
-                        $this->dispatch('addToCartSuccess');
-                    }
-                }
-
                 if (isset($cart[$this->productId])) {
-
-                    $cart[$this->productId]['quantity']++;
-
-                    session()->put('cart', $cart);
-                    $this->dispatch('addToCartSuccess');
-                }
-
-                $cart[$this->productId] = [
-                    "name" => $product->name,
-                    "quantity" => $this->quantity,
-                    "price" => $product->price,
-                    "image" => $product->image
-                ];
-
-                if($this->quantity < 1) {
-                    $this->dispatch('addToCartError');
+                    $cart[$this->productId]['quantity'] = $this->quantity;
                 } else {
-                    session()->put('cart', $cart);
-                    if (request()->wantsJson()) {
-                        $this->dispatch('addToCartSuccess');
-                    }
-                    $this->dispatch('addToCartSuccess');
+                    $cart[$this->productId] = [
+                        "name" => $product->name,
+                        "quantity" => $this->quantity,
+                        "price" => $product->price,
+                        "image" => $product->image
+                    ];
                 }
+
+                session()->put('cart', $cart);
+                $this->dispatch('addToCartSuccess');
+            } else {
+                $this->dispatch('addToCartError');
             }
         }
-
     }
 
     public function render()

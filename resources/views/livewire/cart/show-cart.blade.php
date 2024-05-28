@@ -24,27 +24,32 @@
                 @endforeach
             </tbody>
         </table>
-        <table class="mx-20 my-5 ml-auto">
-            <thead>
-                <tr>
-                    <th>Grand total:</th>
-                    <td>${{ number_format($grandTotal, 2) }}</td>
-                </tr>
-            </thead>
-        </table>
-        <div>
-            @if(!empty($items))
-                <livewire:cart.update-cart :productId="$items[0]['product']->id" />
-            @endif
+
+        <div class="mt-5 sm:flex">
+            <div class="">
+                @if(!empty($items))
+                    <livewire:cart.update-cart :productId="$items[0]['product']->id" />
+                @endif
+                
+                <livewire:cart.clear-cart :productId="$items[0]['product']->id" />
+            </div>
+            
+            <div class="sm:mx-20 sm:ml-auto">
+                <table class="flex mt-10 sm:mt-0">
+                    <thead>
+                        <tr>
+                            <th>Grand total:</th>
+                            <td>${{ number_format($grandTotal, 2) }}</td>
+                        </tr>
+                    </thead>
+                </table>
+                
+                <div class="flex mt-5">
+                    <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="sm:ml-auto">Checkout</x-primary-button>
+                </div>
+            </div>
         </div>
         
-        <div>
-            <livewire:cart.clear-cart :productId="$items[0]['product']->id" />
-        </div>
-        
-        <div class="flex">
-            <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="mx-20 ml-auto">Checkout</x-primary-button>
-        </div>
     @else
         <a wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
     @endif

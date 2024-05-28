@@ -17,7 +17,7 @@ class ShowCart extends Component
         $this->loadCartItems();
     }
 
-    private function loadCartItems()
+    public function loadCartItems()
     {
         $this->items = [];
         $this->grandTotal = 0;
@@ -57,4 +57,4 @@ class ShowCart extends Component
             'grandTotal' => $this->grandTotal,
         ]);
     }
-}   
+}

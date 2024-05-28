@@ -17,9 +17,15 @@
                     icon: 'success',
                     confirmButtonText: 'OK',
                     footer: '<a href="{{ route("cart.show") }}">Go to cart</a>',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emit('refreshCartComponent');
+                    }
                 });
+
                 setTimeout(() => {
                     Swal.close();
+                    Livewire.emit('refreshCartComponent');
                 }, 2500);
             });
 
