@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Cart;
+namespace App\Livewire\Payment;
 
 use App\Models\Product;
 use Livewire\Component;
 
-class ShowCart extends Component
+class Checkout extends Component
 {
     public $cart;
     public $items = [];
@@ -54,7 +54,7 @@ class ShowCart extends Component
 
     public function render()
     {
-        return view('livewire.cart.show-cart', [
+        return view('livewire.payment.checkout', [
             'items' => $this->items,
             'grandTotal' => $this->grandTotal,
         ]);

@@ -31,8 +31,8 @@ Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
 
-Route::get('/payment', [PayPalController::class, 'index'])->name('payment.index');
-Route::get('/create/{amount}', [PayPalController::class, 'create'])->name('payment.create');
+Route::get('/payment', [PayPalController::class, 'show'])->name('payment.show');
+Route::get('/create/{grandTotal}', [PayPalController::class, 'create'])->name('payment.create');
 Route::post('/complete', [PayPalController::class, 'complete'])->name('payment.complete');
 
 
