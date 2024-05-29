@@ -30,10 +30,9 @@ Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
-
-Route::get('/payment', [PayPalController::class, 'show'])->name('payment.show');
-Route::get('/create/{grandTotal}', [PayPalController::class, 'create'])->name('payment.create');
-Route::post('/complete', [PayPalController::class, 'complete'])->name('payment.complete');
+Route::get('/payment', [PayPalController::class, 'show'])->middleware('auth', 'verified')->name('payment.show');
+Route::get('/create/{grandTotal}', [PayPalController::class, 'create'])->middleware('auth', 'verified')->name('payment.create');
+Route::post('/complete', [PayPalController::class, 'complete'])->middleware('auth', 'verified')->name('payment.complete');
 
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
@@ -50,6 +49,5 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::get('/tags/create', [TagsController::class, 'create'])->name('tags.create');
     Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->name('tags.edit');
 });
-
 
 require __DIR__.'/auth.php';

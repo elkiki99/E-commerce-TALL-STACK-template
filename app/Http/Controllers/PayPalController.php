@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
 
@@ -19,24 +18,29 @@ class PayPalController extends Controller
         }
 
         return view('payment.show', [
-            'cart' => $cart
+            'cart' => $cart,
+            'grandTotal' => session('grand_total', 0)
         ]);
     }
 
     private function getAccessToken()
     {
-        $response = Http::withHeaders([
+        $headers = [
             'Content-Type' => 'application/x-www-form-urlencoded',
             'Authorization' => 'Basic ' . base64_encode(config('paypal.client_id') . ':' . config('paypal.client_secret'))
-        ])->post(config('paypal.base_url') . '/v1/oauth2/token');
+        ];
 
-        return json_decode($response->body())->access_token;
+        $response = Http::withHeaders($headers)
+            ->withBody('grant_type=client_credentials')
+            ->post(config('paypal.base_url') . '/v1/oauth2/token');
+        
+        return json_decode($response->body())->acces_token;
     }
      
-    public function create()
+    public function create($grandTotal) : string
     {
+        $grandTotal = session('grand_total', 0);
         $id = uuid_create();
-        $amount = 0;
     
         $headers = [
             'Content-Type' => 'application/json',
@@ -51,7 +55,7 @@ class PayPalController extends Controller
                     "reference_id" => $id,
                     "amount" => [
                         "currency_code" => "USD",
-                        "value" => number_format($amount, 2),
+                        "value" => number_format($grandTotal, 2),
                     ]
                 ]
             ]
@@ -81,45 +85,6 @@ class PayPalController extends Controller
     
         return json_decode($response->body());
     }
-
-
-    // public function createOrder(Request $request)
-    // {
-    //     $amount = $request->input('amount');
-
-    //     if (empty($amount)) {
-    //         return response()->json(['error' => 'Amount is required'], 400);
-    //     }
-
-    //     $provider = new PayPalClient;
-    //     $provider->setApiCredentials(config('paypal'));
-    //     $provider->getAccessToken();
-
-    //     $order = $provider->createOrder([
-    //         "intent" => "CAPTURE",
-    //         "purchase_units" => [
-    //             [
-    //                 "amount" => [
-    //                     "currency_code" => "USD",
-    //                     "value" => $amount
-    //                 ]
-    //             ]
-    //         ]
-    //     ]);
-
-    //     return response()->json($order);
-    // }
-
-    // public function captureOrder(Request $request)
-    // {
-    //     $provider = new PayPalClient;
-    //     $provider->setApiCredentials(config('paypal'));
-    //     $provider->getAccessToken();
-
-    //     $result = $provider->capturePaymentOrder($request->input('orderID'));
-
-    //     return response()->json($result);
-    // }
 }   
 
 

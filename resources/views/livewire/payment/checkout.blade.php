@@ -4,7 +4,7 @@
     </div>
     
     @if(($items))
-        <div class="justify-center col-12 col-lg-6 offset-lg-3">
+        <div class="justify-center">
             @foreach ($items as $item)
                 <div class="flex border-t-2 col-2">
                     <img src="{{ $item['product']->image }}" alt="{{ $item['product']->name }}" class="w-32 h-32 m-2"></img>
@@ -17,10 +17,10 @@
                 </div>
             @endforeach
 
-            <h2 class="font-bold text-xl">Grand total:</h2>
-            <p class="text-2xl">${{ number_format($grandTotal, 2) }}</p>
+            <h2 class="font-bold text-xl mt-5">Grand total:</h2>
+            <p class="text-2xl" id="paypal-amount">${{ number_format($grandTotal, 2) }}</p>
     
-            <div class="flex">
+            <div class="flex mt-5">
                 <div id="payment_options"></div>
             </div>
         </div>
@@ -35,42 +35,28 @@
 </div>
 
 @push('scripts')
-
-    <script src="https://www.paypal.com/sdk/js?client-id={{ config('paypal.' . config('paypal.mode') . '.client_id') }}&currency=USD&intent=capture"></script>
-    
     <script>
-
         paypal.Buttons({
-            createOrder: function(data, actions) {
+            createOrder: function() {
                 const grandTotal = {{ $grandTotal }};
-                // const amount = document.getElementById("paypal-amount").value;
-                // if (!grandTotal) {
-                //     alert("Please enter an amount");
-                //     throw new Error("Amount is required");
-                // }
+                if (!grandTotal) {
+                    alert("Please enter an amount");
+                    throw new Error("Amount is required");
+                }
 
-                return fetch('/create-order', {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ grandTotal: grandTotal })
-                }).then(response => response.json())
-                .then(order => order.id);
+                return fetch(`/create/${grandTotal}`)
+                    .then((response) => response.text())
+                    .then((id) => {
+                        return id;
+                    });
             },
-            onApprove: function(data, actions) {
-                return fetch('/capture-order', {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ orderID: data.orderID })
-                }).then(response => response.json())
-                .then(details => {
-                    document.getElementById("paypal-success").style.display = 'block';
-                });
+            
+            onApprove: function() {
+                return fetch("/complete", {method: "post", headers: {"X-CSRF-Token": '{{csrf_token()}}'}})
+                    .then((response) => response.json())
+                    .then((order_details) => {
+                        document.getElementById("paypal-success").style.display = 'block';
+                    });
             },
             onCancel: function(data) {
                 console.log('Payment cancelled:', data);

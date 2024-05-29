@@ -32,7 +32,6 @@ class Checkout extends Component
                         'quantity' => $item->quantity,
                     ];
                     $this->grandTotal += $item->product->price * $item->quantity;
-                    session()->put('variable', $this->grandTotal);
                 }
             }
         } else {
@@ -46,7 +45,6 @@ class Checkout extends Component
                     ];
 
                     $this->grandTotal += $product->price * $details['quantity'];
-                    session()->put('variable', $this->grandTotal);
                 }
             }
         }
