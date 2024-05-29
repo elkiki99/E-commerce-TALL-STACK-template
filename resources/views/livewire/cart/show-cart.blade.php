@@ -46,7 +46,7 @@
                 
                 @auth
                     <div class="flex mt-5">
-                        <x-primary-button wire:navigate href="{{ route('checkout.index') }}" class="sm:ml-auto">Checkout</x-primary-button>
+                        <x-primary-button wire:navigate href="{{ route('payment.index') }}" class="sm:ml-auto">Checkout</x-primary-button>
                     </div>
                 @else
                     <p class="my-5">

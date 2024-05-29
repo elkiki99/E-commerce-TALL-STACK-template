@@ -7,7 +7,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PayPalController;
 
 Route::get('/', HomeController::class)->name('home');
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
@@ -30,7 +30,11 @@ Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
-Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+
+Route::get('/payment', [PayPalController::class, 'index'])->name('payment.index');
+Route::get('/create/{amount}', [PayPalController::class, 'create'])->name('payment.create');
+Route::post('/complete', [PayPalController::class, 'complete'])->name('payment.complete');
+
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
