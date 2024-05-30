@@ -35,6 +35,8 @@
 </div>
 
 @push('scripts')
+    <script src="https://www.paypal.com/sdk/js?client-id={{ config('paypal.client_id') }}&currency=USD&intent=capture"></script>
+
     <script>
         paypal.Buttons({
             createOrder: function() {
@@ -47,7 +49,7 @@
                 return fetch(`/create/${grandTotal}`)
                     .then((response) => response.text())
                     .then((id) => {
-                        return id;zz
+                        return id;
                     });
             },
             
