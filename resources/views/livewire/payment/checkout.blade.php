@@ -11,13 +11,13 @@
                     <div class="mt-2">
                         <p class="text-xl font-bold">{{ $item['product']->name }}</p>
                         <p class="text-3xl">${{ $item['product']->price }}</p>
-                        <p class="font-normal text-lg">Quantity: <span class="font-bold">{{ $item['quantity'] }}</span></p>
-                        <p class="font-normal text-lg">Total: <span class="font-bold">{{ $item['product']->price * $item['quantity']  }}</span></p>
+                        <p class="text-lg font-normal">Quantity: <span class="font-bold">{{ $item['quantity'] }}</span></p>
+                        <p class="text-lg font-normal">Total: <span class="font-bold">{{ $item['product']->price * $item['quantity']  }}</span></p>
                     </div>
                 </div>
             @endforeach
 
-            <h2 class="font-bold text-xl mt-5">Grand total:</h2>
+            <h2 class="mt-5 text-xl font-bold">Grand total:</h2>
             <p class="text-2xl" id="paypal-amount">${{ number_format($grandTotal, 2) }}</p>
     
             <div class="flex mt-5">
@@ -47,7 +47,7 @@
                 return fetch(`/create/${grandTotal}`)
                     .then((response) => response.text())
                     .then((id) => {
-                        return id;
+                        return id;zz
                     });
             },
             

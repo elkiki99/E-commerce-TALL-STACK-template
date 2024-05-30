@@ -34,7 +34,7 @@ class PayPalController extends Controller
             ->withBody('grant_type=client_credentials')
             ->post(config('paypal.base_url') . '/v1/oauth2/token');
         
-        return json_decode($response->body())->acces_token;
+        return json_decode($response->body())->access_token;
     }
      
     public function create($grandTotal) : string
