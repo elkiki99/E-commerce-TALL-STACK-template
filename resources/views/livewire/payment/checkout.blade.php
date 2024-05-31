@@ -21,7 +21,10 @@
             <p class="text-2xl" id="paypal-amount">${{ number_format($grandTotal, 2) }}</p>
     
             <div class="flex mt-5">
-                <div id="payment_options"></div>
+                <form action="/checkout" method="POST">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <button type="submit">Checkout</button>
+                </form>
             </div>
         </div>
     @else
@@ -31,41 +34,4 @@
             </p>
         </div>
     @endif
-
 </div>
-
-@push('scripts')
-    <script src="https://www.paypal.com/sdk/js?client-id={{ config('paypal.client_id') }}&currency=USD&intent=capture"></script>
-
-    <script>
-        paypal.Buttons({
-            createOrder: function() {
-                const grandTotal = {{ $grandTotal }};
-                if (!grandTotal) {
-                    alert("Please enter an amount");
-                    throw new Error("Amount is required");
-                }
-
-                return fetch(`/create/${grandTotal}`)
-                    .then((response) => response.text())
-                    .then((id) => {
-                        return id;
-                    });
-            },
-            
-            onApprove: function() {
-                return fetch("/complete", {method: "post", headers: {"X-CSRF-Token": '{{csrf_token()}}'}})
-                    .then((response) => response.json())
-                    .then((order_details) => {
-                        document.getElementById("paypal-success").style.display = 'block';
-                    });
-            },
-            onCancel: function(data) {
-                console.log('Payment cancelled:', data);
-            },
-            onError: function(err) {
-                console.error('Error:', err);
-            }
-        }).render('#payment_options');
-    </script>
-@endpush

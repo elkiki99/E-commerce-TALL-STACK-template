@@ -7,7 +7,7 @@ use App\Http\Controllers\TagsController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
@@ -30,9 +30,9 @@ Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
-Route::get('/payment', [PayPalController::class, 'show'])->middleware('auth', 'verified')->name('payment.show');
-Route::get('/create/{grandTotal}', [PayPalController::class, 'create'])->middleware('auth', 'verified')->name('payment.create');
-Route::post('/complete', [PayPalController::class, 'complete'])->middleware('auth', 'verified')->name('payment.complete');
+Route::get('/payment', [StripeController::class, 'show'])->middleware('auth', 'verified')->name('stripe.show');
+Route::post('/checkout', [StripeController::class, 'checkout'])->middleware('auth', 'verified')->name('checkout');
+Route::get('/success', [StripeController::class, 'success'])->middleware('auth', 'verified')->name('success');
 
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
