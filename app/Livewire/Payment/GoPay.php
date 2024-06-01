@@ -65,13 +65,14 @@ class GoPay extends Component
             'cancel_url' => route('payment.show'),
         ]);
 
-        $this->createOrderAndClearCart($session->id);
+        $this->createOrder($session->id);
         return redirect()->away($session->url);
     }
 
-    public function createOrderAndClearCart($paymentId)
+    public function createOrder($paymentId)
     {
         $user = Auth::user();
+        $cart = Cart::where('user_id', auth()->user()->id);
         
         Payment::create([
             'payment_id' => $paymentId,
@@ -80,7 +81,7 @@ class GoPay extends Component
             'amount' => $this->grandTotal,
             'currency' => 'USD',
             'order_status' => 0,
-        ]);
+        ]);        
     }
 
     public function render()
