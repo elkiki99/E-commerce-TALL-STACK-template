@@ -32,7 +32,6 @@ class ShowCart extends Component
                         'quantity' => $item->quantity,
                     ];
                     $this->grandTotal += $item->product->price * $item->quantity;
-                    session()->put('variable', $this->grandTotal);
                 }
             }
         } else {
@@ -46,10 +45,10 @@ class ShowCart extends Component
                     ];
 
                     $this->grandTotal += $product->price * $details['quantity'];
-                    session()->put('variable', $this->grandTotal);
                 }
             }
         }
+        session()->put('grand_total', $this->grandTotal);
     }
 
     public function render()

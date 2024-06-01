@@ -30,9 +30,9 @@ Route::get('/tags/create', [TagsController::class, 'create'])->middleware(['auth
 Route::get('/tags/{tag}', [TagsController::class, 'show'])->name('tags.show');
 Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['auth', 'verified'])->name('tags.edit');
 
-Route::get('/payment', [StripeController::class, 'show'])->middleware('auth', 'verified')->name('stripe.show');
-Route::post('/checkout', [StripeController::class, 'checkout'])->middleware('auth', 'verified')->name('checkout');
-Route::get('/success', [StripeController::class, 'success'])->middleware('auth', 'verified')->name('success');
+Route::get('/payment', [StripeController::class, 'show'])->middleware('auth', 'verified')->name('payment.show');
+Route::post('/checkout', [StripeController::class, 'checkout'])->middleware('auth', 'verified')->name('payment.checkout');
+Route::get('/order', [StripeController::class, 'order'])->middleware('auth', 'verified')->name('payment.order');
 
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {

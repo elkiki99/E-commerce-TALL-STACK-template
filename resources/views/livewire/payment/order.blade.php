@@ -12,11 +12,6 @@
                     </div>
                 </div>
             @endforeach
-
-            <h2 class="mt-5 text-xl font-bold">Grand total:</h2>
-            <p class="text-2xl" id="paypal-amount">${{ number_format($grandTotal, 2) }}</p>
-    
-            <livewire:payment.go-pay />
         </div>
     @else
         <div>
@@ -26,3 +21,5 @@
         </div>
     @endif
 </div>
+
+// Iterate over orders where user_id === order table->user_id instead over the items in the cart
