@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('user_email');
             $table->float('amount', 10, 2);
             $table->string('currency');
-            $table->string('payment_status');
+            $table->string('order_status')->default(0);
             $table->timestamps();
         });
     }

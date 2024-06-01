@@ -34,8 +34,6 @@ class Order extends Component
         }
     }
 
-    // Create the database for managing the orders, clear the users cart and reference the user_id in order table in the DB
-
     public function render()
     {
         return view('livewire.payment.order', [

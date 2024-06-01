@@ -21,5 +21,3 @@
         </div>
     @endif
 </div>
-
-// Iterate over orders where user_id === order table->user_id instead over the items in the cart
