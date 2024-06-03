@@ -32,7 +32,9 @@ Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['au
 
 Route::get('/checkout', [StripeController::class, 'show'])->middleware('auth', 'verified')->name('payment.show');
 Route::post('/checkout', [StripeController::class, 'checkout'])->middleware('auth', 'verified')->name('payment.checkout');
-Route::get('/order', [StripeController::class, 'order'])->middleware('auth', 'verified')->name('payment.order');
+Route::get('/order', [StripeController::class, 'order'])->middleware('auth', 'verified')->name('payment.success');
+// Route::post('/order', [StripeController::class, 'cancel'])->middleware('auth', 'verified')->name('payment.cancel');
+
 
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {

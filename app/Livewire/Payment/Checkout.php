@@ -2,18 +2,18 @@
 
 namespace App\Livewire\Payment;
 
-use App\Models\Product;
+use App\Models\Cart;
 use Livewire\Component;
 
 class Checkout extends Component
 {
-    public $cart;
     public $items = [];
-    public $grandTotal = 0;
+    public $grandTotal;
+    public $cart;
 
-    public function mount($cart)
+    public function mount()
     {
-        $this->cart = $cart ?? session()->get('cart', []);
+        $this->cart = Cart::where('user_id', auth()->id())->with('items.product')->first();
         $this->loadCartItems();
     }
 
@@ -21,40 +21,20 @@ class Checkout extends Component
     {
         $this->items = [];
         $this->grandTotal = 0;
-        
-        if (auth()->check()) {
-            $cart = $this->cart;
-            
-            if(!empty($cart) && isset($cart->items)) {
-                foreach ($this->cart->items as $item) {
-                    $this->items[] = [
-                        'product' => $item->product,
-                        'quantity' => $item->quantity,
-                    ];
-                    $this->grandTotal += $item->product->price * $item->quantity;
-                }
-            }
-        } else {
-            foreach ($this->cart as $productId => $details) {
-                $product = Product::find($productId);
-    
-                if ($product) {
-                    $this->items[] = [
-                        'product' => $product,
-                        'quantity' => $details['quantity'],
-                    ];
 
-                    $this->grandTotal += $product->price * $details['quantity'];
-                }
+        if ($this->cart && $this->cart->items) {
+            foreach ($this->cart->items as $item) {
+                $this->items[] = [
+                    'product' => $item->product,
+                    'quantity' => $item->quantity,
+                ];
+                $this->grandTotal += $item->product->price * $item->quantity;
             }
         }
     }
 
     public function render()
     {
-        return view('livewire.payment.checkout', [
-            'items' => $this->items,
-            'grandTotal' => $this->grandTotal,
-        ]);
+        return view('livewire.payment.checkout');
     }
 }

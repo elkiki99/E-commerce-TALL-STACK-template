@@ -6,82 +6,70 @@ use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\Payment;
 use Livewire\Component;
-use Illuminate\Support\Facades\Auth;
 use Stripe\Checkout\Session as StripeSession;
 
 class GoPay extends Component
 {
-    public $grandTotal;
     public $items = [];
-    public $cartItems;
+    public $grandTotal;
+    public $cart;
 
     public function mount()
     {
-        $this->grandTotal = session()->get('grand_total', 0);
-        $this->cartItems = session()->get('cart', []);
+        $this->cart = Cart::where('user_id', auth()->id())->with('items.product')->first();
+        $this->loadCartItems();
     }
 
     public function loadCartItems()
     {
         $this->items = [];
         $this->grandTotal = 0;
-        
-        if (auth()->check()) {
-            $cart = $this->cart;
-            
-            if(!empty($cart) && isset($cart->items)) {
-                foreach ($this->cart->items as $item) {
-                    $this->items[] = [
-                        'product' => $item->product,
-                        'quantity' => $item->quantity,
-                    ];
-                    $this->grandTotal += $item->product->price * $item->quantity;
-                }
+
+        if ($this->cart && $this->cart->items) {
+            foreach ($this->cart->items as $item) {
+                $this->items[] = [
+                    'product' => $item->product,
+                    'quantity' => $item->quantity,
+                ];
+                $this->grandTotal += $item->product->price * $item->quantity;
             }
         }
     }
 
     public function checkout()
     {
-        $this->grandTotal = session()->get('grand_total', 0);
-
         Stripe::setApiKey(config('stripe.sk'));
 
-        $session = StripeSession::create([
-            'line_items' => [
-                [
-                    'price_data' => [
-                        'currency' => 'usd',
-                        'product_data' => [
-                            'name' => 'Complete your purchase',
-                        ],
-                        'unit_amount' => $this->grandTotal * 100,
+        $lineItems = array_map(function($item) {
+            return [
+                'price_data' => [
+                    'currency' => 'usd',
+                    'product_data' => [
+                        'name' => $item['product']->name,
                     ],
-                    'quantity' => 1,
+                    'unit_amount' => $item['product']->price * 100,
                 ],
-            ],
+                'quantity' => $item['quantity'],
+            ];
+        }, $this->items);
+
+        $session = StripeSession::create([
+            'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('payment.order'),
-            'cancel_url' => route('payment.show'),
+            'success_url' => route('payment.success', [], true),
+            'cancel_url' => route('payment.show', [], true),
         ]);
-
-        $this->createOrder($session->id);
-        return redirect()->away($session->url);
-    }
-
-    public function createOrder($paymentId)
-    {
-        $user = Auth::user();
-        $cart = Cart::where('user_id', auth()->user()->id);
         
         Payment::create([
-            'payment_id' => $paymentId,
-            'user_id' => $user->id,
-            'user_email' => $user->email,
+            'payment_id' => $session->id,
+            'user_id' => auth()->id(),
+            'user_email' =>auth()->user()->email,
             'amount' => $this->grandTotal,
             'currency' => 'USD',
-            'order_status' => 0,
-        ]);        
+            'order_status' => '0'
+        ]);
+
+        return redirect()->away($session->url);
     }
 
     public function render()

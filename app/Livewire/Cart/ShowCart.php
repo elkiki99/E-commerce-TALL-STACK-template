@@ -48,7 +48,7 @@ class ShowCart extends Component
                 }
             }
         }
-        session()->put('grand_total', $this->grandTotal);
+        // session()->put('grand_total', $this->grandTotal);
     }
 
     public function render()

@@ -2,17 +2,18 @@
 
 namespace App\Livewire\Payment;
 
+use App\Models\Cart;
 use Livewire\Component;
 
 class Order extends Component
 {
-    public $cart;
     public $items = [];
-    public $grandTotal = 0;
+    public $grandTotal;
+    public $cart;
 
-    public function mount($cart)
+    public function mount()
     {
-        $this->cart = $cart ?? session()->get('cart', []);
+        $this->cart = Cart::where('user_id', auth()->id())->with('items.product')->first();
         $this->loadCartItems();
     }
 
@@ -21,9 +22,7 @@ class Order extends Component
         $this->items = [];
         $this->grandTotal = 0;
 
-        $cart = $this->cart;
-        
-        if(!empty($cart) && isset($cart->items)) {
+        if ($this->cart && $this->cart->items) {
             foreach ($this->cart->items as $item) {
                 $this->items[] = [
                     'product' => $item->product,
@@ -34,11 +33,31 @@ class Order extends Component
         }
     }
 
+    // public function createOrder($paymentId)
+    // {
+    //     // Crear la orden si el pago fue exitoso
+        
+    //     $user = Auth::user();
+    //     $cart = Cart::where('user_id', auth()->user()->id)->first();
+        
+    //     Payment::create([
+    //         'payment_id' => $paymentId,
+    //         'user_id' => $user->id,
+    //         'user_email' => $user->email,
+    //         'amount' => $this->grandTotal,
+    //         'currency' => 'USD',
+    //         'order_status' => 0,
+    //     ]);        
+
+    //     if ($cart) {
+    //         $cart->checked_out = 1;
+    //         $cart->save();
+    //     }
+    // }
+
+
     public function render()
     {
-        return view('livewire.payment.order', [
-            'items' => $this->items,
-            'grandTotal' => $this->grandTotal,
-        ]);
+        return view('livewire.payment.order');
     }
 }
