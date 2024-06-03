@@ -2,14 +2,20 @@
 
 namespace App\Livewire\Payment;
 
+use Stripe\Stripe;
 use App\Models\Cart;
+use Stripe\Customer;
 use Livewire\Component;
+use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Order extends Component
+class Success extends Component
 {
     public $items = [];
     public $grandTotal;
     public $cart;
+    public $customer;
 
     public function mount()
     {
@@ -33,31 +39,23 @@ class Order extends Component
         }
     }
 
-    // public function createOrder($paymentId)
-    // {
-    //     // Crear la orden si el pago fue exitoso
-        
-    //     $user = Auth::user();
-    //     $cart = Cart::where('user_id', auth()->user()->id)->first();
-        
-    //     Payment::create([
-    //         'payment_id' => $paymentId,
-    //         'user_id' => $user->id,
-    //         'user_email' => $user->email,
-    //         'amount' => $this->grandTotal,
-    //         'currency' => 'USD',
-    //         'order_status' => 0,
-    //     ]);        
+    public function success(Request $request)
+    {
+        Stripe::setApiKey(config('stripe.sk'));
+        $sessionId = $request->get('session_id');
 
-    //     if ($cart) {
-    //         $cart->checked_out = 1;
-    //         $cart->save();
-    //     }
-    // }
-
+        $session = Session::retrieve($sessionId);  
+        if(!$session) {
+            throw new NotFoundHttpException;
+        }
+        
+        $this->customer = Customer::retrieve($session->customer);
+    }
 
     public function render()
     {
-        return view('livewire.payment.order');
+        return view('livewire.payment.success', [
+            'customer' => $this->customer
+        ]);
     }
 }

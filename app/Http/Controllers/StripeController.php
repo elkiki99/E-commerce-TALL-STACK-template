@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Stripe\Stripe;
 use App\Models\Cart;
+use Stripe\Customer;
+use Illuminate\Http\Request;
+use Stripe\Checkout\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StripeController extends Controller
 {
@@ -13,7 +18,7 @@ class StripeController extends Controller
 
         return view('payment.show', [
             'cart' => $cart,
-            'grandTotal' => session('grand_total', 0)
+            'grandTotal' => $grandTotal
         ]);
     }
 
@@ -25,13 +30,12 @@ class StripeController extends Controller
         ]);
     }   
 
-    public function order(Cart $cart)
+    public function success(Request $request)
     {
-        $cart = Cart::where('user_id', auth()->id())->with('items.product')->first();
-
-        return view('payment.order', [
-            'cart' => $cart,
-            'grandTotal' => session('grand_total', 0)
+        $sessionId = $request->get('session_id');
+        
+        return view('payment.success', [
+            'sessionId' => $sessionId
         ]);
     }
 }

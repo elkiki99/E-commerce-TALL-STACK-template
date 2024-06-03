@@ -1,5 +1,6 @@
 <div class="mt-10">
     {{-- @if() --}} 
+        {{-- <p>{{$customer->name}}</p> --}}
         @if(($items))
             <div class="justify-center">
                 @foreach ($items as $item)
