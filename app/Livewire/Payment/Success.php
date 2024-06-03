@@ -51,13 +51,16 @@ class Success extends Component
                 throw new NotFoundHttpException;
             }
 
-            $payment = Payment::where('payment_id', $session->id)->where('order_status', 0)->first();
+            $payment = Payment::where('payment_id', $session->id)->first();
             
             if(!$payment) {
                 throw new NotFoundHttpException;
+            }
+
+            if($payment->order_status === 0) {
+                $payment->order_status = 1;
+                $payment->save();
             } 
-            $payment->order_status = 1;
-            $payment->save();
 
         } 
         catch (\Exception $e) {
