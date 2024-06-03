@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Stripe\Stripe;
 use App\Models\Cart;
-use Stripe\Customer;
 use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StripeController extends Controller
 {

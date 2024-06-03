@@ -4,10 +4,9 @@ namespace App\Livewire\Payment;
 
 use Stripe\Stripe;
 use App\Models\Cart;
-use Stripe\Customer;
+use App\Models\Payment;
 use Livewire\Component;
-use Illuminate\Http\Request;
-use Stripe\Checkout\Session;
+use Stripe\Checkout\Session as StripeSession;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Success extends Component
@@ -16,11 +15,14 @@ class Success extends Component
     public $grandTotal;
     public $cart;
     public $customer;
+    public $sessionId;
 
-    public function mount()
+    public function mount($sessionId)
     {
+        $this->sessionId = $sessionId;
         $this->cart = Cart::where('user_id', auth()->id())->with('items.product')->first();
         $this->loadCartItems();
+        $this->loadStripeSession();
     }
 
     public function loadCartItems()
@@ -39,23 +41,32 @@ class Success extends Component
         }
     }
 
-    public function success(Request $request)
+    public function loadStripeSession()
     {
         Stripe::setApiKey(config('stripe.sk'));
-        $sessionId = $request->get('session_id');
-
-        $session = Session::retrieve($sessionId);  
-        if(!$session) {
-            throw new NotFoundHttpException;
-        }
         
-        $this->customer = Customer::retrieve($session->customer);
+        try {
+            $session = StripeSession::retrieve($this->sessionId);
+            if (!$session) {
+                throw new NotFoundHttpException;
+            }
+
+            $payment = Payment::where('payment_id', $session->id)->where('order_status', 0)->first();
+            
+            if(!$payment) {
+                throw new NotFoundHttpException;
+            } 
+            $payment->order_status = 1;
+            $payment->save();
+
+        } 
+        catch (\Exception $e) {
+            throw new NotFoundHttpException();
+        }
     }
 
     public function render()
     {
-        return view('livewire.payment.success', [
-            'customer' => $this->customer
-        ]);
+        return view('livewire.payment.success');
     }
 }

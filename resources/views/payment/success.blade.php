@@ -11,14 +11,10 @@
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1 class="my-5 text-2xl font-bold text-center">Follow your order</h1>
-                        {{-- <h2> {{$customer->name}} </h2> --}}
-    
-                        {{-- <livewire:payment.success 
-                            :customer="$customer"
-                        /> --}}
 
-                        <livewire:payment.success :sessionId="request()->get('session_id')" />
-
+                        <livewire:payment.success 
+                            :sessionId="$sessionId" 
+                        />
                     </div>
                 </div>
             </div>
