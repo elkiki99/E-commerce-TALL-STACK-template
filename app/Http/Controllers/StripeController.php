@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StripeController extends Controller
 {
+    public $sessionId;
+
     public function show(Cart $cart)
     {
         $cart = Cart::where('user_id', auth()->id())->with('items.product')->first();
@@ -66,13 +67,13 @@ class StripeController extends Controller
                 $session = $event->data->object;
                 $sessionId = $session->id;
 
-                $payment = Payment::where('payment_id', $session->id)->first();
+                $payment = Payment::where('payment_id', $sessionId)->first();
             
                 if($payment && $payment->order_status === 0) {
                     $payment->order_status = 1;
                     $payment->save();
                 } 
-                
+
             default:
                 echo 'Received unknown event type ' . $event->type;
         }
