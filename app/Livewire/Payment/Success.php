@@ -59,38 +59,19 @@ class Success extends Component
             $payment->order_status = 1;
             $payment->save();
 
+            // Send user email confirmation
+            // Mail::to(auth()->user()->email)->send(new OrderConfirmation($payment));
+            
+            // $cart = Cart::where('user_id', auth()->user()->id)->first();
+            // if ($cart) {
+            //     $cart->delete();
+            // }
         } 
         catch (\Exception $e) {
             throw new NotFoundHttpException();
         }
     }
-
-    // public function loadStripeSession()
-    // {
-    //     Stripe::setApiKey(config('stripe.sk'));
-        
-    //     try {
-    //         $session = StripeSession::retrieve($this->sessionId);
-    //         if (!$session) {
-    //             throw new NotFoundHttpException;
-    //         }
-
-    //         $payment = Payment::where('payment_id', $session->id)->first();
-            
-    //         if(!$payment) {
-    //             throw new NotFoundHttpException;
-    //         }
-
-    //         if($payment->order_status === 0) {
-    //             $payment->order_status === 1;
-    //             $payment->save();
-    //         } 
-    //     } 
-    //     catch (\Exception $e) {
-    //         throw new NotFoundHttpException();
-    //     }
-    // }
-
+    
     public function render()
     {
         return view('livewire.payment.success');

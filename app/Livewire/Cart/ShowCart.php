@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Cart;
 
+use App\Models\Payment;
 use App\Models\Product;
 use Livewire\Component;
 
@@ -10,11 +11,15 @@ class ShowCart extends Component
     public $cart;
     public $items = [];
     public $grandTotal = 0;
+    public $payment;
 
     public function mount($cart)
     {
         $this->cart = $cart ?? session()->get('cart', []);
         $this->loadCartItems();
+        if(auth()->check()) {
+            $this->payment = Payment::where('user_id', auth()->user()->id)->first();
+        }
     }
 
     public function loadCartItems()
@@ -48,7 +53,6 @@ class ShowCart extends Component
                 }
             }
         }
-        // session()->put('grand_total', $this->grandTotal);
     }
 
     public function render()
@@ -56,6 +60,7 @@ class ShowCart extends Component
         return view('livewire.cart.show-cart', [
             'items' => $this->items,
             'grandTotal' => $this->grandTotal,
+            'payment' => $this->payment
         ]);
     }
 }

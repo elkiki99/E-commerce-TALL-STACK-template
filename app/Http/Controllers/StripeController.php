@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
@@ -68,12 +69,12 @@ class StripeController extends Controller
                 $sessionId = $session->id;
 
                 $payment = Payment::where('payment_id', $sessionId)->first();
-            
+
                 if($payment && $payment->order_status === 0) {
                     $payment->order_status = 1;
                     $payment->save();
-                } 
-
+                }
+                
             default:
                 echo 'Received unknown event type ' . $event->type;
         }
