@@ -62,10 +62,10 @@
         
     <div class="mt-10">
         @auth
-            @if(isset($payment) && $payment->status == 1)
+            @if(isset($payment) && $payment->order_status === 1)
                 <a wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
             @else
-                @if(count($items) > 0 || (isset($payment) && $payment->status === 0))
+                @if(count($items) > 0)
                     <table class="w-full">
                         <thead>
                             <tr>
