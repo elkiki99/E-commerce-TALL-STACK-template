@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Payment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
@@ -33,9 +32,11 @@ class StripeController extends Controller
     public function success(Request $request)
     {
         $sessionId = $request->get('session_id');
+        $payment = Payment::where('payment_id', $sessionId)->first();
 
         return view('payment.success', [
-            'sessionId' => $sessionId
+            'sessionId' => $sessionId,
+            'payment' => $payment
         ]);
     }
 
@@ -80,5 +81,18 @@ class StripeController extends Controller
         }
 
         return response('');
+    }
+
+    public function order(Cart $cart, Request $request, Payment $payment)
+    {
+        $sessionId = $request->get('session_id');
+        $payment = Payment::where('user_id', auth()->id())->first();
+
+        return view('payment.order', [
+            'cart' => $cart,
+            'sessionId' => $sessionId,
+            'paymentId' => $payment->id
+
+        ]);
     }
 }
