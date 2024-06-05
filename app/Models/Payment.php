@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\User;
 use App\Models\PaymentItem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Payment extends Model
 {
@@ -20,7 +20,7 @@ class Payment extends Model
         'order_status',
     ];
 
-    protected $table = 'payments';
+    protected $table = 'payment';
 
     public function items()
     {

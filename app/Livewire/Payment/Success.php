@@ -62,10 +62,10 @@ class Success extends Component
             // Send user email confirmation
             // Mail::to(auth()->user()->email)->send(new OrderConfirmation($payment));
             
-            // $cart = Cart::where('user_id', auth()->user()->id)->first();
-            // if ($cart) {
-            //     $cart->delete();
-            // }
+            $cart = Cart::where('user_id', auth()->user()->id)->first();
+            if ($cart) {
+                $cart->delete();
+            }
         } 
         catch (\Exception $e) {
             throw new NotFoundHttpException();

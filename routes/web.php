@@ -6,7 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagsController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryController;    
 use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');

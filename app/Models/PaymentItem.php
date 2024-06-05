@@ -10,7 +10,12 @@ class PaymentItem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['payment_id', 'product_id'];
+    protected $fillable = [
+        'payment_id', 
+        'product_id'
+    ];
+
+    protected $table = 'payment_items';
 
     public function payment()
     {

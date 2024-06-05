@@ -6,6 +6,7 @@ use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\Payment;
 use Livewire\Component;
+use App\Models\PaymentItem;
 use Stripe\Checkout\Session as StripeSession;
 
 class GoPay extends Component
@@ -29,6 +30,7 @@ class GoPay extends Component
             foreach ($this->cart->items as $item) {
                 $this->items[] = [
                     'product' => $item->product,
+                    'product_id' => $item->product->id,
                     'quantity' => $item->quantity,
                 ];
                 $this->grandTotal += $item->product->price * $item->quantity;
@@ -60,7 +62,7 @@ class GoPay extends Component
             'cancel_url' => route('payment.show', [], true),
         ]);
 
-        Payment::create([
+        $payment = Payment::create([
             'payment_id' => $session->id,
             'user_id' => auth()->id(),
             'user_email' =>auth()->user()->email,
@@ -68,6 +70,15 @@ class GoPay extends Component
             'currency' => 'USD',
             'order_status' => '0'
         ]);
+
+        foreach ($this->items as $item) {
+            PaymentItem::create([
+                'payment_id' => $payment->id,
+                'product_id' => $item['product_id'],
+            ]); 
+        }
+
+        // We delete the cart in the Success method
 
         return redirect()->away($session->url);
     }
