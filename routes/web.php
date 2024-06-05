@@ -5,9 +5,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagsController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;    
-use App\Http\Controllers\StripeController;
 
 Route::get('/', HomeController::class)->name('home');
 Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
@@ -32,8 +33,10 @@ Route::get('/tags/edit/{tag}', [TagsController::class, 'edit'])->middleware(['au
 
 Route::get('/checkout', [StripeController::class, 'show'])->middleware('auth', 'verified')->name('payment.show');
 Route::get('/success', [StripeController::class, 'success'])->middleware('auth', 'verified')->name('payment.success');
-Route::get('/order/{payment_id}', [StripeController::class, 'order'])->middleware('auth', 'verified')->name('payment.order');
 Route::post('/webhook', [StripeController::class, 'webhook'])->middleware('auth', 'verified')->name('payment.webhook');
+
+Route::get('/orders', [OrderController::class, 'index'])->middleware('auth', 'verified')->name('orders.index');
+Route::get('/order/{payment}', [OrderController::class, 'show'])->middleware('auth', 'verified')->name('orders.show');
 
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');

@@ -1,4 +1,4 @@
-{{-- 
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
@@ -12,14 +12,10 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                         <h1 class="my-5 text-2xl font-bold text-center">Track your order</h1>
     
-                            <livewire:orders.show-order 
-                                :payment="$paymentId"
-                                :cart="$cart" 
-                                :sessionId="$sessionId" 
-                            />
+                            <livewire:orders.show-order />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout> --}}
+</x-app-layout>

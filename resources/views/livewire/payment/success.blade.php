@@ -12,11 +12,6 @@
                     </div>
                 </div>
             @endforeach
-
-            <div class="mt-5">
-                <h3 class="text-xl font-bold">Grand total:</h3>
-                <p class="text-3xl">${{ number_format($grandTotal, 2) }}</p>
-            </div>
         </div>
     @else
         <div>
