@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('payment_id');
-            $table->string('user_id');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('user_email');
             $table->float('amount', 10, 2);
             $table->string('currency');
