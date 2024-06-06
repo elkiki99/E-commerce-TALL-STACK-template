@@ -16,7 +16,7 @@
                     </div>
                     
                     @if(auth()->check() && auth()->user()->admin === 1)
-                        <div class="my-2 mt-auto">
+                        <div class="pb-5 pl-5 my-2 mt-auto">
                             <div class="flex flex-row mt-5">
                                 <a wire:navigate href="{{route('products.edit', ['product' => $product->id])}}" class="mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

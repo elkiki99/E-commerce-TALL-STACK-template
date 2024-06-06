@@ -21,4 +21,4 @@
             <a wire:navigate href="{{ route('home') }}">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
         @endif
     </div>
-</div>
+</div>  
