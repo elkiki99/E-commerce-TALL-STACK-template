@@ -12,7 +12,8 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h1 class="my-5 text-2xl font-bold text-center">Track your order</h1>
 
-                    <livewire:orders.show-order :paymentId="$payment->id" />
+                    <livewire:orders.show-order :payment="$payment" />
+
                 </div>
             </div>
         </div>

@@ -21,4 +21,10 @@ class PaymentItem extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+
 }

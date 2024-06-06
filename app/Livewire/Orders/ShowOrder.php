@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Livewire\Payment;
+namespace App\Livewire\Orders;
 
 use App\Models\Payment;
+use App\Models\Product;
 use Livewire\Component;
+use App\Models\PaymentItem;
 
 class ShowOrder extends Component
 {
-    public $payment_id;
     public $payment;
+    public $paymentItems;
 
-    public function mount($payment_id)
+    public function mount(Payment $payment)
     {
-        $this->payment_id = $payment_id;
-        $this->payment = Payment::where('payment_id', $this->payment_id)->first();
+        $this->payment = $payment;
+        $this->paymentItems = $payment->paymentItems()->with('product')->get();
     }
 
     public function render()

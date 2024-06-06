@@ -21,10 +21,10 @@ class ShowCategory extends Component
         return redirect()->route('dashboard');
     }
         
-    public function addToCart(Product $product) 
-    {
-        dd($product->id);
-    }
+    // public function addToCart(Product $product) 
+    // {
+    //     dd($product->id);
+    // }
 
     public function mount(Category $category)
     {
