@@ -75,6 +75,7 @@ class GoPay extends Component
             PaymentItem::create([
                 'payment_id' => $payment->id,
                 'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
             ]); 
         }
 

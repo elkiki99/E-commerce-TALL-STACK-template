@@ -11,11 +11,16 @@ class ShowOrder extends Component
 {
     public $payment;
     public $paymentItems;
+    public $grandTotal = 0;
 
     public function mount(Payment $payment)
     {
         $this->payment = $payment;
         $this->paymentItems = $payment->paymentItems()->with('product')->get();
+        
+        foreach ($this->paymentItems as $paymentItem) {
+            $this->grandTotal += $paymentItem->quantity * $paymentItem->product->price;
+        }
     }
 
     public function render()

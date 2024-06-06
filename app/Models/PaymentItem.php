@@ -12,7 +12,8 @@ class PaymentItem extends Model
 
     protected $fillable = [
         'payment_id', 
-        'product_id'
+        'product_id',
+        'quantity'
     ];
 
     protected $table = 'payment_items';

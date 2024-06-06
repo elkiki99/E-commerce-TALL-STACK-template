@@ -96,6 +96,10 @@
                             </x-slot>
 
                             <x-slot name="content">
+                                <x-dropdown-link :href="route('orders.index')" wire:navigate>
+                                    {{ __('My orders') }}
+                                </x-dropdown-link>
+                                
                                 <x-dropdown-link :href="route('profile')" wire:navigate>
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
@@ -177,25 +181,25 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
-            <div class="px-4">
-                <div class="text-base font-medium text-gray-800 dark:text-gray-200"
-                    x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
-                    x-on:profile-updated.window="name = $event.detail.name"></div>
-                <div class="text-sm font-medium text-gray-500">{{ auth()->user()->email }}</div>
-            </div>
+                <div class="px-4">
+                    <div class="text-base font-medium text-gray-800 dark:text-gray-200"
+                        x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name"
+                        x-on:profile-updated.window="name = $event.detail.name"></div>
+                    <div class="text-sm font-medium text-gray-500">{{ auth()->user()->email }}</div>
+                </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile')" wire:navigate>
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <button wire:click="logout" class="w-full text-start">
-                    <x-responsive-nav-link>
-                        {{ __('Log Out') }}
+                <div class="mt-3 space-y-1">                    
+                    <x-responsive-nav-link :href="route('profile')" wire:navigate>
+                        {{ __('Profile') }}
                     </x-responsive-nav-link>
-                </button>
-            </div>
+
+                    <!-- Authentication -->
+                    <button wire:click="logout" class="w-full text-start">
+                        <x-responsive-nav-link>
+                            {{ __('Log Out') }}
+                        </x-responsive-nav-link>
+                    </button>
+                </div>
             @endauth
 
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
@@ -203,18 +207,6 @@
             </x-responsive-nav-link>
 
             @guest
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
-                        {{ __('Login') }}
-                    </x-responsive-nav-link>
-                </div>
-
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')" wire:navigate>
-                        {{ __('Register') }}
-                    </x-responsive-nav-link>
-                </div>
-
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                         <div class="flex">
@@ -226,6 +218,22 @@
                                     d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                             </svg>
                         </div>
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('orders.index')" wire:navigate>
+                        {{ __('My orders') }}
+                    </x-responsive-nav-link>
+                </div>
+                
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
+                        {{ __('Login') }}
+                    </x-responsive-nav-link>
+                </div>
+
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')" wire:navigate>
+                        {{ __('Register') }}
                     </x-responsive-nav-link>
                 </div>
             @endguest
@@ -255,6 +263,10 @@
                                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                 </svg>
                             </div>
+                        </x-responsive-nav-link>
+
+                        <x-responsive-nav-link :href="route('orders.index')" wire:navigate>
+                            {{ __('My orders') }}
                         </x-responsive-nav-link>
                     @endif
                 @endauth

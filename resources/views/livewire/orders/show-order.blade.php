@@ -17,10 +17,15 @@
                         <td class="py-2"><img src="{{ $item->product->image }}" alt="{{ $item->product->name }}" class="w-16 h-16"></td>
                         <td class="py-2">{{ $item->product->name }}</td>
                         <td class="py-2">{{ $item->product->price }}</td>
-                        <td class="py-2">{{ $item->product->quanity }}</td>
+                        <td class="py-2">{{ $item->quantity }}</td>
+                        <td class="py-2">{{ $item->product->price * $item->quantity }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @endif
+
+    <div class="mx-24 mt-12 text-right sm:mt-0">
+        <p><strong>Grand total:</strong> ${{ number_format($grandTotal, 2) }}</p>
+    </div>
 </div>
