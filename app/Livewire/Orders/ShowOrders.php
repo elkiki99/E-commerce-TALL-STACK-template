@@ -13,10 +13,9 @@ class ShowOrders extends Component
     {
         $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->get();
     }
+    
     public function render()
     {
-        return view('livewire.orders.show-orders', [
-            'payments' => $this->payments
-        ]);
+        return view('livewire.orders.show-orders');
     }
 }
