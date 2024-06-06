@@ -13,10 +13,8 @@ class OrderController extends Controller
 
     public function show(Payment $payment)
     {
-        // $payment = Payment::where('user_id', auth()->user()->id)->get();
-
         return view('orders.show', [
-            'payment' => $payment,
+            'payment' => $payment
         ]);
     }
 }   

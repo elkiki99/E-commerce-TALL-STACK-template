@@ -8,7 +8,6 @@ use Livewire\Component;
 class ShowOrders extends Component
 {
     public $payments;
-    public $payment;
     
     public function mount()
     {

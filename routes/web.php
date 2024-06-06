@@ -36,8 +36,8 @@ Route::get('/success', [StripeController::class, 'success'])->middleware('auth',
 Route::post('/webhook', [StripeController::class, 'webhook'])->middleware('auth', 'verified')->name('payment.webhook');
 
 Route::get('/orders', [OrderController::class, 'index'])->middleware('auth', 'verified')->name('orders.index');
-Route::get('/order/{payment}', [OrderController::class, 'show'])->middleware('auth', 'verified')->name('orders.show');
-
+Route::get('/order/{payment_id}', [OrderController::class, 'show'])->middleware('auth', 'verified')->name('orders.show');
+    
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
     Route::view('dashboard', 'dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 
