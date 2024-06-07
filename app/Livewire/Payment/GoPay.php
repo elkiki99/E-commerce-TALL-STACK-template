@@ -32,6 +32,7 @@ class GoPay extends Component
                     'product' => $item->product,
                     'product_id' => $item->product->id,
                     'quantity' => $item->quantity,
+                    'images' => $item->product->image,
                 ];
                 $this->grandTotal += $item->product->price * $item->quantity;
             }
@@ -48,6 +49,7 @@ class GoPay extends Component
                     'currency' => 'usd',
                     'product_data' => [
                         'name' => $item['product']->name,
+                        'images' => [asset('storage/img/products/' . $item['product']->image)],
                     ],
                     'unit_amount' => $item['product']->price * 100,
                 ],

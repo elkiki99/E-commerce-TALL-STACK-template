@@ -5,42 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h3 class="text-lg font-semibold">Product Management</h3>
-                    <div class="grid grid-cols-1 gap-4 my-4">
-                        <a wire:navigate href="{{ route('products.create') }}" class="m-2">
-                            <x-primary-button>Create new product</x-primary-button>
-                        </a>
-                        <a wire:navigate href="{{ route('products.index') }}" class="m-2">
-                            <x-primary-button>View all products</x-primary-button>
-                        </a>
-                    </div>
-
-                    <h3 class="mt-6 text-lg font-semibold">Category Management</h3>
-                    <div class="grid grid-cols-1 gap-4 my-4">
-                        <a wire:navigate href="{{ route('categories.create') }}" class="m-2">
-                            <x-primary-button>Create new category</x-primary-button>
-                        </a>
-                        <a wire:navigate href="{{ route('categories.index') }}" class="m-2">
-                            <x-primary-button>View all categories</x-primary-button>
-                        </a>
-                    </div>
-
-                    <h3 class="mt-6 text-lg font-semibold">Tags Management</h3>
-                    <div class="grid grid-cols-1 gap-4 my-4">
-                        <a wire:navigate href="{{ route('tags.create') }}" class="m-2">
-                            <x-primary-button>Create new tag</x-primary-button>
-                        </a>
-                        <a wire:navigate href="{{ route('tags.index') }}" class="m-2">
-                            <x-primary-button>View all tags</x-primary-button>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+        <!-- Sidebar -->
+        {{-- <x-admin-sidebar /> --}}
 
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if (session()->has('message'))

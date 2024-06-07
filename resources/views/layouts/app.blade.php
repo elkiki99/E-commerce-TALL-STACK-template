@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'E-commerce Template') }}</title>
+        <title>{{ config('app.name') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -37,7 +37,16 @@
 
             <!-- Page Content -->
             <main>
-                {{ $slot }}
+                @if(auth()->user()->admin === 1 && isset($header))
+                    <div class="flex">
+                        <x-admin-sidebar />
+                        <div class="flex-1">
+                            {{ $slot }}
+                        </div>
+                    </div>
+                @else
+                    {{ $slot }}
+                @endif
             </main>
         </div>
         
