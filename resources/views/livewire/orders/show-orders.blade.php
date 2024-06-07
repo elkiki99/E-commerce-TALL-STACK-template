@@ -6,6 +6,11 @@
                     <a wire:navigate href="{{route('orders.show', ['payment' => $order->payment_id])}}">
                         
                         <div class="flex justify-between w-full">
+                            @if(auth()->user()->admin === 1)
+                                <p>{{$order->user_email}}</p>
+                                <p>-</p>
+                            @endif
+                            
                             <p>${{$order->amount}}</p>
                             <p>-</p>
                             <p>{{$order->currency}}</p>

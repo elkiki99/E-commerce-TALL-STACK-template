@@ -39,15 +39,19 @@
             <main>
                 @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/'))
                     <div class="flex">
-                        <x-admin-sidebar />
-                        <div class="flex-1">
+                        <div class="fixed w-64 h-full overflow-y-auto">
+                            <x-admin-sidebar />
+                        </div>
+                        <div class="flex-1 ml-64">
                             {{ $slot }}
                         </div>
                     </div>
-                @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/'))
+                @elseif(auth()->check() && auth()->user()->admin === 0 && (isset($header)))
+                // Bug
                     <div class="flex">
-                        <x-user-sidebar />
-                        <div class="flex-1">
+                        <div class="fixed w-64 h-full overflow-y-auto">
+                            <x-user-sidebar />
+                        <div class="flex-1 ml-64">
                             {{ $slot }}
                         </div>
                     </div>

@@ -11,7 +11,13 @@ class ShowOrders extends Component
     
     public function mount()
     {
-        $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->get();
+        if(auth()->user()->admin === 1) 
+        {
+            $this->payments = Payment::orderByDesc('created_at')->get();
+            return;
+        } else {    
+            $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->get();
+        }
     }
     
     public function render()
