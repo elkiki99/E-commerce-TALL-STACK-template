@@ -37,9 +37,16 @@
 
             <!-- Page Content -->
             <main>
-                @if(auth()->user()->admin === 1 && isset($header))
+                @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/'))
                     <div class="flex">
                         <x-admin-sidebar />
+                        <div class="flex-1">
+                            {{ $slot }}
+                        </div>
+                    </div>
+                @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/'))
+                    <div class="flex">
+                        <x-user-sidebar />
                         <div class="flex-1">
                             {{ $slot }}
                         </div>
