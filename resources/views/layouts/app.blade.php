@@ -46,11 +46,11 @@
                             {{ $slot }}
                         </div>
                     </div>
-                @elseif(auth()->check() && auth()->user()->admin === 0 && (isset($header)))
-                // Bug
+                @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/'))
                     <div class="flex">
                         <div class="fixed w-64 h-full overflow-y-auto">
                             <x-user-sidebar />
+                        </div>
                         <div class="flex-1 ml-64">
                             {{ $slot }}
                         </div>
