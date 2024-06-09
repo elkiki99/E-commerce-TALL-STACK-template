@@ -22,6 +22,12 @@
                     </a>
                 </div>
             @endforeach
+            
+            @if (!$payments->isEmpty())
+                <div class="justify-end w-full px-5 py-10">
+                    {{ $payments->links() }}
+                </div>
+            @endif
         @else
             <a wire:navigate href="{{ route('home') }}">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
         @endif

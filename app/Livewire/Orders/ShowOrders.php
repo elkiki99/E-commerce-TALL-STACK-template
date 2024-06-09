@@ -4,24 +4,25 @@ namespace App\Livewire\Orders;
 
 use App\Models\Payment;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowOrders extends Component
 {
-    public $payments;
-    
-    public function mount()
+    use WithPagination;
+    private $payments;
+
+    public function render()
     {
         if(auth()->user()->admin === 1) 
         {
-            $this->payments = Payment::orderByDesc('created_at')->get();
-            return;
+            $this->payments = Payment::orderByDesc('created_at')->paginate(12);
+            // return;
         } else {    
-            $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->get();
+            $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->paginate(12);
         }
-    }
-    
-    public function render()
-    {
-        return view('livewire.orders.show-orders');
+
+        return view('livewire.orders.show-orders', [
+            'payments' => $this->payments
+        ]);
     }
 }
