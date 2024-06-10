@@ -40,19 +40,19 @@
         <main class="flex-grow">
             @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/'))
                 <div class="flex">
-                    <div class="sticky flex-none w-64 h-full overflow-y-auto top-32">
+                    <div class="sticky flex-none h-full overflow-y-auto top-32">
                         <x-admin-sidebar />
                     </div>
-                    <div class="flex-1 mt-16">
+                    <div class="flex-1">
                         {{ $slot }}
                     </div>
                 </div>
             @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/'))
                 <div class="flex">
-                    <div class="sticky flex-none w-64 h-full overflow-y-auto top-32">
+                    <div class="sticky flex-none h-full overflow-y-auto top-32">
                         <x-user-sidebar />
                     </div>
-                    <div class="flex-grow">
+                    <div class="flex-1">
                         {{ $slot }}
                     </div>
                 </div>

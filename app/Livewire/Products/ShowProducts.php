@@ -22,7 +22,7 @@ class ShowProducts extends Component
 
     public function render()
     {
-        $products = Product::latest()->paginate(24);
+        $products = Product::latest()->paginate(60);
         return view('livewire.products.show-products', [
             'products' => $products
         ]);

@@ -1,4 +1,4 @@
-<footer class="bg-gradient-to-r from-emerald-300 to-emerald-100 dark:bg-gray-800">
+<footer class="px-5 bg-gradient-to-r from-emerald-300 to-emerald-100 dark:bg-gray-800">
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex flex-col justify-between md:flex-row">
             <!-- Column 1 -->
@@ -10,7 +10,7 @@
             </div>
             <!-- Column 2 -->
             <div class="flex flex-col space-y-4 md:space-y-6">
-                <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Quick Links</h2>
+                <h2 class="mt-5 text-lg font-semibold text-gray-900 md:mt-0 dark:text-gray-100">Quick Links</h2>
                 <ul class="mt-2 space-y-2">
                     <li>
                         <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">About us</a>
@@ -25,7 +25,7 @@
             </div>
             <!-- Column 3 -->
             <div class="flex flex-col space-y-4 md:space-y-6">
-                <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Resources</h2>
+                <h2 class="mt-5 text-lg font-semibold text-gray-900 md:mt-0 dark:text-gray-100">Resources</h2>
                 <ul class="mt-2 space-y-2">
                     <li>
                         <a href="#" class="text-base text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Blog</a>

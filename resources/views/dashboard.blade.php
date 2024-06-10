@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="flex bg-gray-100 dark:bg-gray-900">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if (session()->has('message'))
             <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
