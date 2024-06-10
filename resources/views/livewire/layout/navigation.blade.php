@@ -52,7 +52,9 @@
 
                             <x-slot name="content">
                                 @foreach (App\Models\Category::orderBy('category', 'desc')->get() as $category)
-                                <x-dropdown-link wire:navigate
+                                <x-dropdown-link 
+                                    wire:navigate
+                                    class="relative z-50"
                                     href="{{route('categories.show', ['category' => $category->id])}}">{{
                                     $category->category }}
                                 </x-dropdown-link>
