@@ -10,7 +10,7 @@
 @push('scripts')
     <script>
         document.addEventListener('livewire:initialized', () => {  
-            @this.on('addToCartSuccess', () => {
+            Livewire.on('addToCartSuccess', () => {
                 Swal.fire({
                     title: '¡Product added successfully!',
                     text: 'Your product was added to your shopping cart.',
@@ -19,17 +19,17 @@
                     footer: '<a href="{{ route("cart.show") }}">Go to cart</a>',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        Livewire.emit('refreshCartComponent');
+                        Livewire.dispatch('refreshCartComponent');
                     }
                 });
 
                 setTimeout(() => {
                     Swal.close();
-                    Livewire.emit('refreshCartComponent');
+                    Livewire.dispatch('refreshCartComponent');
                 }, 2500);
             });
 
-            @this.on('addToCartError', () => {
+            Livewire.on('addToCartError', () => {
                 Swal.fire({
                     title: 'Error',
                     text: 'Please add a valid amount',

@@ -16,7 +16,6 @@ class ShowOrders extends Component
         if(auth()->user()->admin === 1) 
         {
             $this->payments = Payment::orderByDesc('created_at')->paginate(12);
-            // return;
         } else {    
             $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->paginate(12);
         }

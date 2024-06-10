@@ -49,12 +49,10 @@
     </div>
 </div>
 
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
-
+@script
     <script>
         document.addEventListener('livewire:initialized', () => {
-                @this.on('showAlert', (productId) => {
+                Livewire.on('showAlert', (productId) => {
                     Swal.fire({
                         title: 'Are you sure?',
                         text: 'This action cannot be restored',
@@ -78,11 +76,9 @@
                     })
                 });
             });
-    </script>
-
-    <script>
+            
         document.addEventListener('livewire:initialized', () => {  
-            @this.on('showAddToCart', (productId) => {
+            Livewire.on('showAddToCart', (productId) => {
                 Swal.fire({
                     title: '¡Product added successfully!',
                     text: 'Your product was added to your shopping cart.',
@@ -96,4 +92,4 @@
             });
         }); 
     </script> 
-@endpush
+@endscript

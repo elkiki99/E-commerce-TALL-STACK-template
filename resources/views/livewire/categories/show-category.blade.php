@@ -36,7 +36,7 @@
                         </div>
                     @else
                         <div class="px-6 py-2 mt-auto">
-                            @livewire('cart.add-to-cart', ['productId' => $product->id])
+                            <livewire:cart.add-to-cart :productId="$product->id" />
                         </div>
                     @endif
                 </div>
@@ -45,40 +45,36 @@
     </ul>
 </div>
 
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
-
+@script
     <script>
-        document.addEventListener('livewire:initialized', () => {  
-            @this.on('showAlert', (productId) => {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'This action cannot be restored',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'The product was deleted',
-                            'Deleted succesfully',
-                            'success'
-                        );
-                        window.setTimeout(() => {
-                            @this.call('deleteProduct', productId);
-                        }, 1500);
-                    }
-                })
+        document.addEventListener('livewire:initialized', () => {
+                Livewire.on('showAlert', (productId) => {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'This action cannot be restored',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire(
+                                'The product was deleted',
+                                'Deleted succesfully',
+                                'success'
+                            );
+                            window.setTimeout(() => {
+                                @this.call('deleteProduct', productId);
+                            }, 1500);
+                        }
+                    })
+                });
             });
-        });
-    </script>
 
-    <script>
         document.addEventListener('livewire:initialized', () => {  
-            @this.on('showAddToCart', (productId) => {
+            Livewire.on('showAddToCart', (productId) => {
                 Swal.fire({
                     title: '¡Product added successfully!',
                     text: 'Your product was added to your shopping cart.',
@@ -92,4 +88,4 @@
             });
         }); 
     </script> 
-@endpush
+@endscript
