@@ -1,6 +1,6 @@
 <form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='createTag'>
     <div class="mt-4">
-        <x-input-label for="tag" :value="__('tag name')" />
+        <x-input-label for="tag" :value="__('Tag name')" />
         <x-text-input id="tag" class="block w-full mt-1" type="text" wire:model="tag" :value="old('tag')"
             placeholder="Ex.:Black" />
 
