@@ -29,7 +29,7 @@
 
             <!-- Page Heading -->
             @if (isset($header))
-                <header class="bg-white shadow dark:bg-gray-800">
+                <header class="bg-white shadow dark:bg-gray-800 sticky top-16 z-50">
                     <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
@@ -40,19 +40,19 @@
             <main>
                 @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/'))
                     <div class="flex">
-                        <div class="fixed w-64 h-full overflow-y-auto">
+                        <div class="flex-none w-64 h-full overflow-y-auto sticky top-32">
                             <x-admin-sidebar />
                         </div>
-                        <div class="flex-1 ml-64">
+                        <div class="flex-1 mt-16">
                             {{ $slot }}
                         </div>
                     </div>
                 @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/'))
                     <div class="flex">
-                        <div class="fixed w-64 h-full overflow-y-auto">
+                        <div class="flex-none w-64 h-full overflow-y-auto sticky top-32">
                             <x-user-sidebar />
                         </div>
-                        <div class="flex-1 ml-64">
+                        <div class="flex-1">
                             {{ $slot }}
                         </div>
                     </div>
@@ -60,6 +60,11 @@
                     {{ $slot }}
                 @endif
             </main>
+
+            <!-- Footer -->
+            <div>
+                <x-footer />
+            </div>
         </div>
         
         @livewireScripts

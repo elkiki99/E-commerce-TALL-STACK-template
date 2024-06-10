@@ -1,4 +1,4 @@
-<nav class="flex justify-end flex-1 -mx-3">
+{{-- <nav class="flex justify-end flex-1 -mx-3">
     @auth
         <a
             href="{{ url('/dashboard') }}"
@@ -23,4 +23,4 @@
             </a>
         @endif
     @endauth
-</nav>
+</nav> --}}
