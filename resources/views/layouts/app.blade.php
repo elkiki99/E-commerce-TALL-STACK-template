@@ -23,9 +23,11 @@
     @stack('styles')
 </head>
 <body class="font-sans antialiased">
-    <div class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="flex flex-col bg-gray-100 dark:bg-gray-900">
         <!-- Navigation -->
-        <livewire:layout.navigation />
+        <div class="z-50">
+            <livewire:layout.navigation />
+        </div>
 
         <!-- Page Heading -->
         @if (isset($header))
