@@ -3,11 +3,9 @@
 </div>
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
         document.addEventListener('livewire:initialized', () => {
-            @this.on('cartUpdatedSuccess', () => {
+            Livewire.on('cartUpdatedSuccess', () => {
                 const timer = setTimeout(() => {
                     location.reload();
                 }, 2500);
@@ -25,7 +23,7 @@
                 });
             });
 
-            @this.on('cartUpdatedError', () => {
+            Livewire.on('cartUpdatedError', () => {
                 Swal.fire({
                     title: 'Error',
                     text: 'No changes were made',
@@ -39,7 +37,7 @@
                 }, 1500);
             });
 
-            @this.on('addToCartError', () => {
+            Livewire.on('addToCartError', () => {
                 Swal.fire({
                     title: 'Error',
                     text: 'Please add a valid amount',

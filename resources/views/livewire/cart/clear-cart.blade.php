@@ -3,11 +3,9 @@
 </div>
 
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
         document.addEventListener('livewire:initialized', () => {
-            @this.on('clearingCart', () => {
+            Livewire.on('clearingCart', () => {
                 Swal.fire({
                     title: "Clear cart?",
                     text: "You won't be able to revert this!",
@@ -23,7 +21,7 @@
                 });
             });
 
-            @this.on('cartCleared', () => {
+            Livewire.on('cartCleared', () => {
                 const timer = setTimeout(() => {
                     location.reload();
                 }, 1500);
