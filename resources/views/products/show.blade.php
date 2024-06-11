@@ -7,7 +7,7 @@
     </x-slot>
     
     <div class="flex justify-center py-10">
-        <div class="w-full bg-white rounded-lg shadow-md sm:w-3/4 xl:w-1/2">
+        <div class="w-full bg-white rounded-lg shadow-md sm:w-3/4 xl:w-2/3">
             <livewire:products.show-product :$product />
         </div>
     </div>

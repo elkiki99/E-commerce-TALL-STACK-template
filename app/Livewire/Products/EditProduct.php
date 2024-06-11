@@ -27,7 +27,7 @@ class EditProduct extends Component
         'name' => 'required|string|max:98',
         'price' => 'required|numeric|min:0',
         'description' => 'required|string',
-        'new_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        'new_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:8192',
         'stock' => 'required|numeric|min:0',
         'category' => 'required|exists:categories,id',
         'tagId' => 'required|array|exists:tags,id'

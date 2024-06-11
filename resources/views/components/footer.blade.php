@@ -1,4 +1,4 @@
-<footer class="px-5 bg-gradient-to-r from-emerald-300 to-emerald-100 dark:bg-gray-800">
+<footer class="px-5 bg-gradient-to-r from-sky-300 to-emerald-200 dark:bg-gray-800">
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex flex-col justify-between md:flex-row">
             <!-- Column 1 -->

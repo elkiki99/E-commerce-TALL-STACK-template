@@ -14,7 +14,7 @@
             <tbody>
                 @foreach ($items as $item)
                     <tr class="border-t-2">
-                        <td class="py-2"><img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="w-16 h-16"></td>
+                        <td class="py-2"><img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="w-24 h-24"></td>
                         <td class="py-2">{{ $item['product']->name }}</td>
                         <td class="py-2">{{ $item['product']->price }}</td>
                         <td class="py-2"><livewire:cart.counter :productId="$item['product']->id" /></td>
