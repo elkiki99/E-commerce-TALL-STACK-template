@@ -17,7 +17,7 @@
         }
     }; ?>
 
-<nav x-data="{ open: false }" class="sticky top-0 z-50 bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
+<nav x-data="{ open: false }" class=" bg-white border-b border-gray-100 dark:bg-gray-800 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -29,7 +29,7 @@
                         </a>
                     </div>
                 </div>
-
+                
                 <!-- Navigation Links -->
                 <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex">
                     <div class="flex items-center justify-center">
@@ -54,7 +54,6 @@
                                 @foreach (App\Models\Category::orderBy('category', 'desc')->get() as $category)
                                 <x-dropdown-link 
                                     wire:navigate
-                                    class="relative z-40"
                                     href="{{route('categories.show', ['category' => $category->id])}}">{{
                                     $category->category }}
                                 </x-dropdown-link>
@@ -141,7 +140,13 @@
                                     <x-dropdown-link :href="route('profile')" wire:navigate>
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
-
+                                    
+                                    <div class="block lg:hidden">
+                                        <x-dropdown-link :href="route('orders.index')" wire:navigate>
+                                            {{ __('My orders') }}
+                                        </x-dropdown-link>
+                                    </div>
+                                    
                                     <!-- Authentication -->
                                     <button wire:click="logout" class="w-full text-start">
                                         <x-dropdown-link>
@@ -217,7 +222,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="z-50 hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @guest
                 <div class="pt-2 pb-3 space-y-1">
