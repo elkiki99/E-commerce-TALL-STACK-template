@@ -79,7 +79,7 @@
                 <!-- Settings Dropdown -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     @auth
-                        <x-dropdown align="right" width="48">
+                        <x-dropdown align="right" width="48 ">
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
@@ -99,7 +99,7 @@
 
                             <x-slot name="content">
                                 @if(auth()->user()->admin === 1)
-                                    <div class="block lg:hidden">
+                                    <div class="block lg:hidden ">
                                         <x-dropdown-link :href="route('profile')" wire:navigate>
                                             {{ __('Profile') }}
                                         </x-dropdown-link>
@@ -223,7 +223,7 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden max-h-screen overflow-y-auto sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @guest
                 <div class="pt-2 pb-3 space-y-1">
@@ -254,7 +254,7 @@
             @endguest
             
             @auth
-                <div class="pt-2 space-y-1">
+                <div class="pt-2 space-y-1 ">
                     @if(auth()->user()->admin === 1)
                         <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('profile')" wire:navigate>
                             <div class="flex">

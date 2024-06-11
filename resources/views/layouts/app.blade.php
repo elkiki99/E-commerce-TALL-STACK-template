@@ -25,7 +25,7 @@
 <body class="font-sans antialiased">
     <div class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
         <!-- Navigation -->
-        <div class="">
+        <div class="sticky top-0 z-50">
             <livewire:layout.navigation />
         </div>
 
