@@ -5,6 +5,7 @@ namespace App\Livewire\Payment;
 use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\Payment;
+use App\Models\Product;
 use Livewire\Component;
 use Stripe\Checkout\Session as StripeSession;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -62,6 +63,13 @@ class Success extends Component
             $cart = Cart::where('user_id', auth()->user()->id)->first();
             if ($cart) {
                 $cart->delete();
+            }
+
+            // foreach product and quantity purchased, we substract it from the products table in stock column
+            foreach ($this->items as $item) {
+                $product = Product::find($item['product']['id']);
+                $product->stock -= $item['quantity'];
+                $product->save();
             }
             
             // Send user email confirmation

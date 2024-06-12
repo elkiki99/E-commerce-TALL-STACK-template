@@ -42,6 +42,20 @@ class GoPay extends Component
 
     public function checkout()
     {
+        $stockError = false;
+
+        foreach ($this->items as $item) {
+            $product = Product::find($item['product_id']);
+            if ($product->stock < $item['quantity']) {
+                session()->flash('error', "The product {$product->name} does not have enough stock.");
+                $stockError = true;
+            }
+        }
+
+        if ($stockError) {
+            return; // Si hubo algún error de stock, no continuar con el proceso de pago
+        }
+
         Stripe::setApiKey(config('stripe.sk'));
 
         $lineItems = array_map(function($item) {
@@ -81,14 +95,6 @@ class GoPay extends Component
                 'quantity' => $item['quantity'],
             ]); 
         }
-
-        // foreach product and quantity purchased, we substract it from the products table in stock column
-        foreach ($this->items as $item) {
-            $product = Product::find($item['product_id']);
-            $product->stock = $product->stock - $item['quantity'];
-            $product->save();
-        }
-
 
         // We delete the cart in the Success method
 
