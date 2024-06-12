@@ -1,3 +1,24 @@
+<?php
+    use Carbon\Carbon;
+    use App\Models\PaymentItem;
+    use App\Models\Product;
+
+    $startOfMonth = Carbon::now()->startOfMonth();
+    $endOfMonth = Carbon::now()->endOfMonth();
+
+    $mostSoldProduct = PaymentItem::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                                ->select('product_id', \DB::raw('count(*) as total'))
+                                ->groupBy('product_id')
+                                ->orderBy('total', 'desc')
+                                ->first();
+    $productOfTheMonth = null;
+    $productSalesCount = 0;
+    if ($mostSoldProduct) {
+        $productOfTheMonth = Product::find($mostSoldProduct->product_id);
+        $productSalesCount = $mostSoldProduct->total;
+    }
+?>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
@@ -18,15 +39,20 @@
                 <div class="overflow-hidden bg-white rounded-lg shadow-sm">
                     <a href="#" class="block p-6">
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Total Sales</span>
-                        <span class="block mt-2 text-gray-600 dark:text-gray-400">$500,000</span>
+                        <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ number_format(App\Models\Payment::sum('amount'), 2) }}</span>
                     </a>
                 </div>
-
-                <!-- Sales Analysis -->
+                
+                <!-- Product of the Month -->
                 <div class="overflow-hidden bg-white rounded-lg shadow-sm">
                     <a href="#" class="block p-6">
-                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Top 5 Products</span>
-                        <span class="block mt-2 text-gray-600 dark:text-gray-400">See Details</span>
+                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Product of the Month</span>
+                        @if($productOfTheMonth)
+                            <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ $productOfTheMonth->name }}</span>
+                            <span class="block mt-2 text-gray-600 dark:text-gray-400">Sales: {{ $productSalesCount }}</span>
+                        @else
+                            <span class="block mt-2 text-gray-600 dark:text-gray-400">No sales this month</span>
+                        @endif
                     </a>
                 </div>
 
@@ -34,7 +60,7 @@
                 <div class="overflow-hidden bg-white rounded-lg shadow-sm">
                     <a href="#" class="block p-6">
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Products in Stock</span>
-                        <span class="block mt-2 text-gray-600 dark:text-gray-400">980 available</span>
+                        <span class="block mt-2 text-gray-600 dark:text-gray-400">{{App\Models\Product::where('stock', '>', 0)->count() }}</span>
                     </a>
                 </div>
 
@@ -50,7 +76,7 @@
                 <div class="overflow-hidden bg-white rounded-lg shadow-sm">
                     <a href="#" class="block p-6">
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Registered Customers</span>
-                        <span class="block mt-2 text-gray-600 dark:text-gray-400">1,500 customers</span>
+                        <span class="block mt-2 text-gray-600 dark:text-gray-400">{{App\Models\User::all()->count()}}</span>
                     </a>
                 </div>
 

@@ -61,13 +61,42 @@
                                 @endforeach
                             </x-slot>
                         </x-dropdown>
+
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button
+                                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
+                                    {{ __('Tags') }}
+
+                                    <div class="">
+                                        <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
+
+                            <x-slot name="content">
+                                @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
+                                <x-dropdown-link 
+                                    wire:navigate
+                                    class="z-50"
+                                    href="{{route('tags.show', ['tag' => $tag->id])}}">{{
+                                    $tag->tag }}
+                                </x-dropdown-link>
+                                @endforeach
+                            </x-slot>
+                        </x-dropdown>
                     </div>
 
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
                             {{ __('About') }}
                         </x-nav-link>
-                    </div>
+                    </div> --}}
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
@@ -322,6 +351,15 @@
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link wire:navigate href="{{route('categories.show', ['category' => $category->id])}}">
                     {{ $category->category }}
+                </x-responsive-nav-link>
+            </div>
+            @endforeach
+        </div>
+        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+            @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link wire:navigate href="{{route('tags.show', ['tag' => $tag->id])}}">
+                    {{ $tag->tag }}
                 </x-responsive-nav-link>
             </div>
             @endforeach

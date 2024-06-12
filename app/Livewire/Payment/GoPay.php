@@ -5,6 +5,7 @@ namespace App\Livewire\Payment;
 use Stripe\Stripe;
 use App\Models\Cart;
 use App\Models\Payment;
+use App\Models\Product;
 use Livewire\Component;
 use App\Models\PaymentItem;
 use Stripe\Checkout\Session as StripeSession;
@@ -80,6 +81,14 @@ class GoPay extends Component
                 'quantity' => $item['quantity'],
             ]); 
         }
+
+        // foreach product and quantity purchased, we substract it from the products table in stock column
+        foreach ($this->items as $item) {
+            $product = Product::find($item['product_id']);
+            $product->stock = $product->stock - $item['quantity'];
+            $product->save();
+        }
+
 
         // We delete the cart in the Success method
 
