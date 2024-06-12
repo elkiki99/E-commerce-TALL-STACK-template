@@ -7,27 +7,17 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\CartItem;
 
-class AddToCart extends Component
-{   
-    protected $listeners = ['addToCart', 'countUpdated'];
+class NewAddToCart extends Component
+{
+    protected $listeners = ['newAddToCart'];
 
     public $productId;
-    public $quantity;
-
-    public function mount($productId)
+    public $quantity = 0;
+    
+    public function newAddToCart($quantity)
     {
-        $this->productId = $productId;
-    }
-
-    public function countUpdated($productId, $quantity)
-    {
-        if ($this->productId == $productId) {
-            $this->quantity = $quantity;
-        }
-    }
-
-    public function addToCart()
-    {
+        $this->quantity = $quantity;
+    
         if (auth()->check()) {
             if ($this->quantity > 0) {
                 $cart = Cart::firstOrCreate(['user_id' => auth()->user()->id]);
@@ -37,7 +27,7 @@ class AddToCart extends Component
                     ->first();
 
                 if ($cartItem) {
-                    $cartItem->quantity = $this->quantity;
+                    $cartItem->quantity += $this->quantity;
                     $cartItem->save();
                 } else {
                     CartItem::create([
@@ -57,7 +47,7 @@ class AddToCart extends Component
                 $cart = session()->get('cart', []);
 
                 if (isset($cart[$this->productId])) {
-                    $cart[$this->productId]['quantity'] = $this->quantity;
+                    $cart[$this->productId]['quantity'] += $this->quantity;
                 } else {
                     $cart[$this->productId] = [
                         "name" => $product->name,
@@ -66,7 +56,6 @@ class AddToCart extends Component
                         "image" => $product->image
                     ];
                 }
-
                 session()->put('cart', $cart);
                 $this->dispatch('addToCartSuccess');
             } else {
@@ -77,6 +66,6 @@ class AddToCart extends Component
 
     public function render()
     {
-        return view('livewire.cart.add-to-cart');
+        return view('livewire.cart.new-add-to-cart');
     }
 }

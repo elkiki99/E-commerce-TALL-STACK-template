@@ -1,5 +1,5 @@
 <div class="mt-10">
-    @if(count($items) > 0)
+    @if(count($products) > 0)
         <table class="w-full">
             <thead>
                 <tr>
@@ -12,26 +12,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($items as $item)
-                    <tr class="border-t-2">
-                        <td class="py-2"><img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="w-24 h-24"></td>
-                        <td class="py-2">{{ $item['product']->name }}</td>
-                        <td class="py-2">{{ $item['product']->price }}</td>
-                        <td class="py-2"><livewire:cart.counter :productId="$item['product']->id" /></td>
-                        <td class="py-2">{{ $item['product']->price * $item['quantity']  }}</td>
-                        <td class="py-2"><livewire:cart.delete-cart-product :productId="$item['product']->id" /></td>
-                    </tr>
+                @foreach ($products as $product)
+                    <x-cart-counter :product="$product"/>
                 @endforeach
             </tbody>
         </table>
 
         <div class="mt-5 sm:flex">
             <div class="">
-                @if(!empty($items))
-                    <livewire:cart.update-cart :productId="$items[0]['product']->id" />
+                @if(!empty($products))
+                    <livewire:cart.update-cart :productId="$products[0]['product']->id" />
                 @endif
                 
-                <livewire:cart.clear-cart :productId="$items[0]['product']->id" />
+                <livewire:cart.clear-cart :productId="$products[0]['product']->id" />
             </div>
             
             <div class="sm:mx-20 sm:ml-auto">

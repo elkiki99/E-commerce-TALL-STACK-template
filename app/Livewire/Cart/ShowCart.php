@@ -9,34 +9,34 @@ use Livewire\Component;
 class ShowCart extends Component
 {
     public $cart;
-    public $items = [];
+    public $products = [];
     public $grandTotal = 0;
     public $payment;
 
     public function mount($cart)
     {
         $this->cart = $cart ?? session()->get('cart', []);
-        $this->loadCartItems();
+        $this->loadCartProducts();
         if(auth()->check()) {
             $this->payment = Payment::where('user_id', auth()->user()->id)->first();
         }
     }
 
-    public function loadCartItems()
+    public function loadCartProducts()
     {
-        $this->items = [];
+        $this->products = [];
         $this->grandTotal = 0;
         
         if (auth()->check()) {
             $cart = $this->cart;
             
             if(!empty($cart) && isset($cart->items)) {
-                foreach ($this->cart->items as $item) {
-                    $this->items[] = [
-                        'product' => $item->product,
-                        'quantity' => $item->quantity,
+                foreach ($this->cart->items as $product) {
+                    $this->products[] = [
+                        'product' => $product->product,
+                        'quantity' => $product->quantity,
                     ];
-                    $this->grandTotal += $item->product->price * $item->quantity;
+                    $this->grandTotal += $product->product->price * $product->quantity;
                 }
             }
         } else {
@@ -44,7 +44,7 @@ class ShowCart extends Component
                 $product = Product::find($productId);
     
                 if ($product) {
-                    $this->items[] = [
+                    $this->products[] = [
                         'product' => $product,
                         'quantity' => $details['quantity'],
                     ];
@@ -58,7 +58,7 @@ class ShowCart extends Component
     public function render()
     {
         return view('livewire.cart.show-cart', [
-            'items' => $this->items,
+            'products' => $this->products,
             'grandTotal' => $this->grandTotal,
             'payment' => $this->payment
         ]);
