@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Cart;
 
-use App\Models\Cart;
-use App\Models\Payment;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\CartItem;
@@ -15,7 +13,6 @@ class ShowCart extends Component
 
     public function mount()
     {
-        $this->cart = Cart::where('user_id', auth()->id())->first();
         $this->loadCartProducts();
     }
 
@@ -24,20 +21,22 @@ class ShowCart extends Component
         $this->products = [];
         
         if (auth()->check()) {
-            $cart = $this->cart;
-            
-            if(!empty($cart) && isset($cart->items)) {
-                foreach ($this->cart->items as $product) {
+            $this->cart = auth()->user()->cart;
+
+            if ($this->cart && isset($this->cart->items)) {
+                foreach ($this->cart->items as $item) {
                     $this->products[] = [
-                        'product' => $product->product,
-                        'quantity' => $product->quantity,
+                        'product' => $item->product,
+                        'quantity' => $item->quantity,
                     ];
                 }
             }
         } else {
-            foreach ($this->cart as $productId => $details) {
+            $cart = session()->get('cart', []);
+
+            foreach ($cart as $productId => $details) {
                 $product = Product::find($productId);
-    
+
                 if ($product) {
                     $this->products[] = [
                         'product' => $product,
@@ -51,20 +50,17 @@ class ShowCart extends Component
     public function remove($productId)
     {
         if (auth()->check()) {
-            $item = CartItem::where('cart_id', $this->cart->id)
+            $productId = CartItem::where('cart_id', $this->cart->id)
                             ->where('product_id', $productId)
                             ->first();
-
-            if ($item) {
-                $item->delete();
+            if ($productId) {
+                $productId->delete();
             }
         } else {
             $cart = session()->get('cart', []);
             unset($cart[$productId]);
             session()->put('cart', $cart);
         }
-
-        // Reload cart products after removal
         $this->loadCartProducts();
     }
 
