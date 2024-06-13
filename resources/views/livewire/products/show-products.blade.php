@@ -51,9 +51,7 @@
                         <div class="mx-5 mb-4">
                             <p class="text-3xl font-semibold text-gray-900">${{ $product->price }}</p>
                             @if(!$product->stock < 1)
-                                @livewire('cart.new-add-to-cart', ['productId' => $product->id
-                                // , 'quantity' => $product->quantity
-                                ])
+                                @livewire('cart.add-to-cart', ['productId' => $product->id])
                             @endif
                         </div>
                     @endif
@@ -67,47 +65,3 @@
     </div>
 </div>
 
-@script
-    <script>
-        document.addEventListener('livewire:initialized', () => {
-                Livewire.on('showAlert', (productId) => {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: 'This action cannot be restored',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete',
-                        cancelButtonText: 'Cancel'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'The product was deleted',
-                                'Deleted succesfully',
-                                'success'
-                            );
-                            window.setTimeout(() => {
-                                @this.call('deleteProduct', productId);
-                            }, 1500);
-                        }
-                    })
-                });
-            });
-            
-        document.addEventListener('livewire:initialized', () => {  
-            Livewire.on('showAddToCart', (productId) => {
-                Swal.fire({
-                    title: '¡Product added successfully!',
-                    text: 'Your product was added to your shopping cart.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-
-                window.setTimeout(() => {
-                    @this.call('addToCart', productId);
-                }, 500);
-            });
-        }); 
-    </script> 
-@endscript

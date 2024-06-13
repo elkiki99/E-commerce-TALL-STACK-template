@@ -12,31 +12,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $product)
-                    <x-cart-counter :product="$product"/>
-                @endforeach
+                <x-cart-counter :products="$products"/>
             </tbody>
         </table>
 
         <div class="mt-5 sm:flex">
-            <div class="">
-                @if(!empty($products))
-                    <livewire:cart.update-cart :productId="$products[0]['product']->id" />
-                @endif
-                
-                <livewire:cart.clear-cart :productId="$products[0]['product']->id" />
+            <div>
+                <livewire:cart.clear-cart :productId="$products[0]['product']->id" /> 
             </div>
             
             <div class="sm:mx-20 sm:ml-auto">
-                <table class="flex mt-10 sm:mt-0">
-                    <thead>
-                        <tr>
-                            <th>Grand total:</th>
-                            <td>${{ number_format($grandTotal, 2) }}</td>
-                        </tr>
-                    </thead>
-                </table>
-                
                 @guest
                     <p class="my-5">
                         <a class="text-violet-500" href="{{ route('login') }}">Log in</a>

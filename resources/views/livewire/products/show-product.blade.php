@@ -49,7 +49,7 @@
                 @else
                     <div class="px-6 py-2 mt-5">
                         @if($product->stock > 0)
-                            @include('livewire.cart.new-add-to-cart', ['productId' => $product->id])
+                            @livewire('cart.add-to-cart', ['productId' => $product->id])
                         @endif
                     </div>
                 @endif
