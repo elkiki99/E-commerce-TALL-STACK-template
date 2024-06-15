@@ -1,12 +1,16 @@
 <div class="flex flex-col justify-between w-full p-10">
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+    
     @foreach ($tags as $index => $tag)
         <p class="{{ $index % 2 == 0 ? 'bg-white text-black' : 'bg-gray-900 text-white' }} p-4 m-0.5 rounded flex w-full">
             
         <a href="{{route('tags.show', ['tag' => $tag->id])}}">{{$tag->tag}}</a>
             
-            <a wire:navigate href="
-            {{route('tags.edit', ['tag' => $tag->id])}}
-            " class="ml-auto">
+            <a wire:navigate href="{{route('tags.edit', ['tag' => $tag->id])}}" class="ml-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                 </svg>              
@@ -25,34 +29,30 @@
     </div>
 </div>
 
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
-    
+@script
     <script>    
-        document.addEventListener('livewire:initialized', () => {
-            @this.on('showAlert', (tagId) => {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'This action cannot be restored',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'The tag was deleted',
-                            'Deleted succesfully',
-                            'success'
-                        );
-                        window.setTimeout(() => {
-                            @this.call('deleteTag', tagId);
-                        }, 1500);
-                    }
-                })
-            });
+        Livewire.on('showAlert', (tagId) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be restored',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'The tag was deleted',
+                        'Deleted succesfully',
+                        'success'
+                    );
+                    window.setTimeout(() => {
+                        @this.call('deleteTag', tagId);
+                    }, 1500);
+                }
+            })
         });
     </script>
-@endpush
+@endscript

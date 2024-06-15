@@ -33,7 +33,7 @@ class EditTag extends Component
         $tag->save();
         
         session()->flash('message', 'Tag updated successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('tags.index');
     }
 
     public function render()

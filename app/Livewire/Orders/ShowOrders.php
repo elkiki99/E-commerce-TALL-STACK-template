@@ -11,6 +11,16 @@ class ShowOrders extends Component
     use WithPagination;
     private $payments;
 
+    protected $listeners = ['completeOrder'];
+
+    public function completeOrder(Payment $payment)
+    {
+        $payment->delete();
+
+        session()->flash('message', 'Order completed succesfully.');
+        // return redirect()->route('dashboard');
+    }
+
     public function render()
     {
         if(auth()->user()->admin === 1) 

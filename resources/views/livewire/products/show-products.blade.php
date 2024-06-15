@@ -1,4 +1,10 @@
 <div class="mt-5 md:flex-wrap md:p-5 md:flex">
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+    
     <ul class="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         @foreach ($products as $product)
             <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">

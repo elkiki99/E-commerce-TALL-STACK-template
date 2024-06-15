@@ -66,7 +66,7 @@ class EditProduct extends Component
         $product->save();
         $product->tags()->sync(array_unique($data['tagId']));
         session()->flash('message', 'Product updated successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('products.index');
     }
 
     #[Computed()]

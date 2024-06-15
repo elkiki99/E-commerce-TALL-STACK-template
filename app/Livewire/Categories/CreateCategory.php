@@ -22,7 +22,6 @@ class CreateCategory extends Component
         ]);
         
         session()->flash('message', 'Category created successfully');
-        return redirect()->route('dashboard');
     }
 
     public function render()

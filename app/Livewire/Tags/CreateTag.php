@@ -25,7 +25,6 @@ class CreateTag extends Component
         ]);
         
         session()->flash('message', 'Tag created successfully');
-        return redirect()->route('dashboard');
     }
 
     public function render()

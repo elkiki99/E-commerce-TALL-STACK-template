@@ -1,5 +1,11 @@
 
 <form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='createCategory'>
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+    
     <div class="mt-4">
         <x-input-label for="category" :value="__('Category name')" />
         <x-text-input 

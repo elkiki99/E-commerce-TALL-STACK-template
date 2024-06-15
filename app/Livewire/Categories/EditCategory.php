@@ -29,7 +29,7 @@ class EditCategory extends Component
         $category->save();
         
         session()->flash('message', 'Category updated successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('categories.index');
     }
 
     public function render()

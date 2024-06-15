@@ -1,4 +1,10 @@
 <div class="flex flex-col justify-between w-full p-10">
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+
     @foreach ($categories as $index => $category)
         <p class="{{ $index % 2 == 0 ? 'bg-white text-black' : 'bg-gray-900 text-white' }} p-4 m-0.5 rounded flex w-full">
             
@@ -23,34 +29,30 @@
     </div>
 </div>
 
-@push('scripts')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
-    
+@script
     <script>    
-        document.addEventListener('livewire:initialized', () => {
-            @this.on('showAlert', (categoryId) => {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: 'This action cannot be restored',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete',
-                    cancelButtonText: 'Cancel'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        Swal.fire(
-                            'The category was deleted',
-                            'Deleted succesfully',
-                            'success'
-                        );
-                        window.setTimeout(() => {
-                            @this.call('deleteCategory', categoryId);
-                        }, 1500);
-                    }
-                })
-            });
+        Livewire.on('showAlert', (categoryId) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This action cannot be restored',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'The category was deleted',
+                        'Deleted succesfully',
+                        'success'
+                    );
+                    window.setTimeout(() => {
+                        @this.call('deleteCategory', categoryId);
+                    }, 1500);
+                }
+            })
         });
     </script>
-@endpush
+@endscript

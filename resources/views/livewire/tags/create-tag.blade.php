@@ -1,4 +1,10 @@
 <form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='createTag'>
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+        
     <div class="mt-4">
         <x-input-label for="tag" :value="__('Tag name')" />
         <x-text-input id="tag" class="block w-full mt-1" type="text" wire:model="tag" :value="old('tag')"
