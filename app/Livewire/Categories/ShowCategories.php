@@ -16,7 +16,7 @@ class ShowCategories extends Component
         $category->delete();
 
         session()->flash('message', 'Category deleted successfully and products reassigned.');
-        return redirect()->route('dashboard');
+        return redirect()->route('categories.index');
     }
 
     public function render()

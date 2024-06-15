@@ -33,7 +33,7 @@
     <script>    
         Livewire.on('showAlert', (tagId) => {
             Swal.fire({
-                title: 'Are you sure?',
+                title: 'Delete this tag?',
                 text: 'This action cannot be restored',
                 icon: 'warning',
                 showCancelButton: true,

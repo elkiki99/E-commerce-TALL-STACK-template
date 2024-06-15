@@ -7,8 +7,7 @@ use Livewire\Component;
 
 class ShowProducts extends Component
 {
-    protected $listeners = [
-        'deleteProduct'];
+    protected $listeners = ['deleteProduct'];
 
     public $product;
 
@@ -17,7 +16,7 @@ class ShowProducts extends Component
         $product->delete();
         $product->tags()->detach();
         session()->flash('message', 'Product deleted successfully');
-        return redirect()->route('home');
+        return redirect()->route('products.index');
     }
 
     public function render()

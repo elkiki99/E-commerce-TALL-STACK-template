@@ -14,7 +14,7 @@ class ShowTags extends Component
         $tag->products()->detach();
         $tag->delete();
         session()->flash('message', 'Tag deleted successfully.');
-        return redirect()->route('dashboard');
+        return redirect()->route('tags.index');
     }
 
     public function render()

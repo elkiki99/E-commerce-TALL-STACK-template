@@ -71,3 +71,45 @@
     </div>
 </div>
 
+@script
+    <script>
+        Livewire.on('showAlert', (productId) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                title: 'Delete this product?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'The product was deleted',
+                        'Deleted succesfully',
+                        'success'
+                    );
+                    window.setTimeout(() => {
+                        @this.call('deleteProduct', productId);
+                    }, 1500);
+                }
+            })
+        });
+    </script>
+
+    <script>
+        Livewire.on('showAddToCart', (productId) => {
+            Swal.fire({
+                title: '¡Product added successfully!',
+                text: 'Your product was added to your shopping cart.',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+
+            window.setTimeout(() => {
+                @this.call('addToCart', productId);
+            }, 500);
+        });
+    </script> 
+@endscript
