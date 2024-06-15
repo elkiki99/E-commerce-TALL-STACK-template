@@ -15,7 +15,6 @@ class ShowCart extends Component
     public function mount()
     {
         $this->loadCartProducts();
-        // $this->calculateGrandTotal();
     }
 
     public function loadCartProducts()
@@ -63,7 +62,6 @@ class ShowCart extends Component
             $cart[$productId]['quantity'] = $quantity;
             session()->put('cart', $cart);
         }
-        // $this->calculateGrandTotal();
     }
 
     public function remove($productId)
@@ -81,27 +79,10 @@ class ShowCart extends Component
             session()->put('cart', $cart);
         }
         $this->loadCartProducts();
-        // $this->calculateGrandTotal();
 
     }
-
-    // public function calculateGrandTotal()
-    // {
-    //     $total = 0;
-
-    //     foreach ($this->products as $product) {
-    //         $total += $product['product']->price * $product['quantity'];
-    //     }
-
-    //     $this->grandTotal = $total;
-    // }
-
     public function render()
     {
-        // $grandTotal = $this->calculateGrandTotal();
-
-        return view('livewire.cart.show-cart', [
-            // 'grandTotal' => $grandTotal,
-        ]);    
+        return view('livewire.cart.show-cart');    
     }
 }
