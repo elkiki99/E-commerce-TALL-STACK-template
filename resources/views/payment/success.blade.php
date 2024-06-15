@@ -29,7 +29,7 @@
         <script>
             setTimeout(function() {
                 window.location.href = "/order/{{ $payment->payment_id }}";
-            }, 5000);
+            }, 3000);
         </script>
     @endif
 </x-app-layout>
