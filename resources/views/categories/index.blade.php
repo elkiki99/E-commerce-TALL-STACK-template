@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="flex p-10 mx-auto">
+    <div class="flex p-10 mx-auto md:w-3/4">
         <div class="w-full overflow-hidden bg-white rounded-lg shadow-md ">
             <h1 class="mt-10 text-2xl font-bold text-center">Manage categories</h1>
 

@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\CartItem;
-use Livewire\Attributes\On;
+// use Livewire\Attributes\On;
 
 class AddToCart extends Component
 {
@@ -15,7 +15,7 @@ class AddToCart extends Component
     public $productId;
     public $quantity = 1;
 
-    #[On('showAddToCart')]
+    // #[On('showAddToCart')]
     public function AddToCart()
     {
         if (auth()->check()) {

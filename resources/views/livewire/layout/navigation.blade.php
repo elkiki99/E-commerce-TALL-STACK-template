@@ -92,12 +92,6 @@
                         </x-dropdown>
                     </div>
 
-                    {{-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
-                            {{ __('About') }}
-                        </x-nav-link>
-                    </div> --}}
-
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
                             {{ __('FAQ') }}
@@ -202,6 +196,9 @@
                         </div>
 
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            {{-- @foreach(App\Models\CartItem::all() as $items)
+                                <p>{{$items->count()}}</p>
+                            @endforeach --}}
                             <x-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -231,6 +228,14 @@
                                     </svg>
                                 </x-nav-link>
                             </div>
+                            @php
+                                $cart = App\Models\Cart::where('user_id', Auth::id())->first();
+                                $itemCount = $cart ? App\Models\CartItem::where('cart_id', $cart->id)->count() : 0;
+                            @endphp
+                            
+                            @if($itemCount > 0)
+                                <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full">{{ $itemCount }}</span>
+                            @endif
                         @endif
                     @endauth
                 </div>

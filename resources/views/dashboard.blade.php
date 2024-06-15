@@ -66,9 +66,9 @@
 
                 <!-- Order Management -->
                 <div class="overflow-hidden bg-white rounded-lg shadow-sm">
-                    <a href="#" class="block p-6">
+                    <a href="{{ route('orders.index') }}" class="block p-6">
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Pending Orders</span>
-                        <span class="block mt-2 text-gray-600 dark:text-gray-400">3 pending to ship</span>
+                        <span class="block mt-2 text-gray-600 dark:text-gray-400">{{App\Models\Payment::all()->count()}} pending to ship</span>
                     </a>
                 </div>
 
