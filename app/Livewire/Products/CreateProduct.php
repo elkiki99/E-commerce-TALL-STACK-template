@@ -49,6 +49,7 @@ class CreateProduct extends Component
         
         $product->tags()->sync(array_unique($data['tagId']));
         session()->flash('message', 'Product created successfully');
+        return redirect()->route('products.index');
     }
 
     #[Computed()]

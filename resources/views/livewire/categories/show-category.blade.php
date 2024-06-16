@@ -1,4 +1,4 @@
-<div class="flex flex-wrap p-10">
+<div class="mt-5 md:flex-wrap md:p-5 md:flex">
     <ul class="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         @foreach ($products as $product)
             <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
@@ -10,7 +10,7 @@
                     @endif
                     <div class="flex items-center justify-center">
                         <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                            <img class="object-cover w-64 h-64 pt-5" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                            <img class="object-cover w-64 h-64 pt-5 " loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                         </a>
                     </div>
                     <div class="mx-5">
@@ -59,6 +59,12 @@
             </li>
         @endforeach
     </ul>
+
+    @if($this->products->count() > 24)
+        <div class="justify-end w-full px-5 py-5">
+            {{ $products->links() }}
+        </div>
+    @endif
 </div>
 
 @script

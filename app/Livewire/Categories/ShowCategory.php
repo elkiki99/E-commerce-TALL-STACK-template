@@ -18,13 +18,8 @@ class ShowCategory extends Component
         $product->delete();
         $product->tags()->detach();
         session()->flash('message', 'Product deleted successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('products.index');
     }
-        
-    // public function addToCart(Product $product) 
-    // {
-    //     dd($product->id);
-    // }
 
     public function mount(Category $category)
     {

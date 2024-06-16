@@ -10,7 +10,7 @@
     <div class="relative">
         <div class="lg:flex">
             <div class="relative flex items-center justify-center p-4 lg:w-1/2">
-                <img class="object-contain w-full h-full max-h-96 lg:object-cover" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
+                <img class="object-contain w-full h-full max-h-96" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
             </div>
             
             <div class="flex flex-col justify-between p-4 lg:w-1/2">

@@ -10,7 +10,7 @@
                     @endif
                     <div class="flex items-center justify-center">
                         <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                            <img class="object-cover w-64 h-64 pt-5" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                            <img class="object-cover w-64 h-64 pt-5 " loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                         </a>
                     </div>
                     <div class="mx-5">
@@ -59,6 +59,12 @@
             </li>
         @endforeach
     </ul>
+    
+    @if($this->products->count() > 24)
+        <div class="justify-end w-full px-5 py-5">
+            {{ $products->links() }}
+        </div>
+    @endif
 </div>
 
 @script

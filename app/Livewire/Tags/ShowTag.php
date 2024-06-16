@@ -18,7 +18,7 @@ class ShowTag extends Component
         $product->delete();
         $product->tags()->detach();
         session()->flash('message', 'Product deleted successfully');
-        return redirect()->route('dashboard');
+        return redirect()->route('products.index');
     }
             
     public function addToCart(Product $product) 
@@ -34,13 +34,11 @@ class ShowTag extends Component
 
     public function render()
     {
-        {
-            if($this->products->count() > 24) {
-                $this->products = $this->tag->products()->paginate(24);
-            }
-            return view('livewire.tags.show-tag', [
-                'products' => $this->products
-            ]);
-        } 
+        if($this->products->count() > 24) {
+            $this->products = $this->tag->products()->paginate(24);
+        }
+        return view('livewire.tags.show-tag', [
+            'products' => $this->products
+        ]);
     }
 }
