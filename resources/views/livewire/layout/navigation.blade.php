@@ -51,14 +51,16 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                @foreach (App\Models\Category::orderBy('category', 'desc')->get() as $category)
-                                <x-dropdown-link 
-                                    wire:navigate
-                                    class="z-50"
-                                    href="{{route('categories.show', ['category' => $category->id])}}">{{
-                                    $category->category }}
-                                </x-dropdown-link>
-                                @endforeach
+                                @if(Schema::hasTable('categories') && App\Models\Category::count() > 0)
+                                    @foreach (App\Models\Category::orderBy('category', 'desc')->get() as $category)
+                                        <x-dropdown-link 
+                                            wire:navigate
+                                            class="z-50"
+                                            href="{{route('categories.show', ['category' => $category->id])}}">{{
+                                            $category->category }}
+                                        </x-dropdown-link>
+                                    @endforeach
+                                @endif
                             </x-slot>
                         </x-dropdown>
 
@@ -80,14 +82,16 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
-                                <x-dropdown-link 
-                                    wire:navigate
-                                    class="z-50"
-                                    href="{{route('tags.show', ['tag' => $tag->id])}}">{{
-                                    $tag->tag }}
-                                </x-dropdown-link>
-                                @endforeach
+                                @if (Schema::hasTable('tags') && App\Models\Tag::count() > 0)
+                                    @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
+                                    <x-dropdown-link 
+                                        wire:navigate
+                                        class="z-50"
+                                        href="{{route('tags.show', ['tag' => $tag->id])}}">{{
+                                        $tag->tag }}
+                                    </x-dropdown-link>
+                                    @endforeach
+                                @endif
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -229,10 +233,16 @@
                                 </x-nav-link>
                             </div>
                             @php
-                                $cart = App\Models\Cart::where('user_id', Auth::id())->first();
-                                $itemCount = $cart ? App\Models\CartItem::where('cart_id', $cart->id)->count() : 0;
+                                $authUser = auth()->check();
+                                if ($authUser) {
+                                    $cart = App\Models\Cart::where('user_id', Auth::id())->first();
+                                    $itemCount = $cart ? App\Models\CartItem::where('cart_id', $cart->id)->count() : 0;
+                                } else {
+                                    $cart = session()->get('cart', []);
+                                    $itemCount = count($cart);
+                                }
                             @endphp
-                            
+
                             @if($itemCount > 0)
                                 <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full">{{ $itemCount }}</span>
                             @endif
@@ -352,22 +362,27 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            @foreach (App\Models\Category::orderBy('category', 'desc')->get() as $category)
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link wire:navigate href="{{route('categories.show', ['category' => $category->id])}}">
-                    {{ $category->category }}
-                </x-responsive-nav-link>
-            </div>
-            @endforeach
+            @if (Schema::hasTable('categories') && App\Models\Category::count() > 0)
+                @foreach (App\Models\Category::orderBy('category', 'desc')->get() as $category)
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link wire:navigate href="{{route('categories.show', ['category' => $category->id])}}">
+                        {{ $category->category }}
+                    </x-responsive-nav-link>
+                </div>
+                @endforeach
+            @endif
+            
         </div>
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link wire:navigate href="{{route('tags.show', ['tag' => $tag->id])}}">
-                    {{ $tag->tag }}
-                </x-responsive-nav-link>
-            </div>
-            @endforeach
+            @if (Schema::hasTable('tags') && App\Models\Tag::count() > 0)
+                @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link wire:navigate href="{{route('tags.show', ['tag' => $tag->id])}}">
+                        {{ $tag->tag }}
+                    </x-responsive-nav-link>
+                </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </nav>

@@ -27,7 +27,7 @@ class EditProduct extends Component
         'name' => 'required|string|max:98',
         'price' => 'required|numeric|min:0',
         'description' => 'required|string',
-        'new_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:4096',
+        'new_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:16384',
         'stock' => 'required|numeric|min:0',
         'category' => 'required|exists:categories,id',
         'tagId' => 'required|array|exists:tags,id'
@@ -67,6 +67,7 @@ class EditProduct extends Component
         $product->tags()->sync(array_unique($data['tagId']));
         session()->flash('message', 'Product updated successfully');
         return redirect()->route('products.index');
+        
     }
 
     #[Computed()]
