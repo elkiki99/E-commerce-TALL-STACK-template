@@ -43,9 +43,9 @@ class ShowProducts extends Component
     public function render()
     {
         $products = Product::with('category')
-        ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%'. $this->searchProduct .'%')) 
-        ->when($this->searchCategory > 0, fn(Builder $query) => $query->where('category_id', $this->searchCategory)) 
-        ->paginate(24);
+            ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%'. $this->searchProduct .'%')) 
+            ->when($this->searchCategory > 0, fn(Builder $query) => $query->where('category_id', $this->searchCategory)) 
+            ->paginate(24);
 
         return view('livewire.products.show-products', [
             'products' => $products

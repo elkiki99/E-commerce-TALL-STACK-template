@@ -10,7 +10,7 @@
         <x-input-label for="name" :value="__('Product name')" />
         <x-text-input 
             id="name" 
-            class="block w-full mt-1"
+            class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
             type="text"
             wire:model="name"
             :value="old('name')"
@@ -23,7 +23,7 @@
     <div class="mt-4">
         <x-input-label for="price" :value="__('Price')" />
         <x-text-input 
-            class="block w-full mt-1"
+            class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
             type="number"
             wire:model="price"
             :value="old('price')"
@@ -39,7 +39,7 @@
             id="description"
             wire:model="description"
             placeholder="Your product description"
-            class="block w-full h-24 px-3 py-2 mt-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5"></textarea>
+            class="block w-full h-24 px-3 py-2 mt-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"></textarea>
 
         <x-input-error :messages="$errors->get('description')" class="mt-2" />
     </div>
@@ -50,7 +50,7 @@
             id="image"
             wire:model="image"
             type="file"
-            class="block w-full mt-1"
+            class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
             accept="image/*"
         />
 
@@ -68,7 +68,7 @@
         <x-input-label for="stock" :value="__('Stock')" />
         <x-text-input 
             id="stock" 
-            class="block w-full mt-1"
+            class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
             type="number"
             wire:model="stock"
             :value="old('stock')"
@@ -82,8 +82,8 @@
         <x-input-label for="category" :value="__('Category')" />
         <x-select
             id="category" 
-            wire:model.fill="category"
-            class="block w-full mt-1"
+            wire:model="category"
+            class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
         >
             <option selected disabled>-- Select category --</option>
             @foreach ($categories as $category)
@@ -102,7 +102,7 @@
                 id="tags"
                 multiple
                 wire:model="tagId"
-                class="block w-full mt-1"
+                class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
             >
                 @foreach ($this->tags as $tag)
                     <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
@@ -117,7 +117,13 @@
         {{ __('Create product') }}
     </x-primary-button>
 
+
     <style>
+        /* .select2-results {
+            color: white;
+            background-color: #4a5568;
+        } */
+         
         .select2-search--inline {
             margin: 2rem 0rem 0rem 0rem;
         }
@@ -133,7 +139,8 @@
             $('#tags').select2({
                 theme: 'classic',
                 placeholder: "-- Select tag --",
-                allowClear: true
+                allowClear: true,
+                // dropdownCssClass: 'dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600'
             });
             $('#tags').on('change', function(){
                 let data = $(this).val();
