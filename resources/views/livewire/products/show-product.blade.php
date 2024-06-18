@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="px-6 py-2 mt-5">
+                    <div class="py-2 mt-5 mr-auto ">
                         @if($product->stock > 0)
                             @livewire('cart.add-to-cart', ['productId' => $product->id])
                         @endif
