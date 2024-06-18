@@ -39,7 +39,7 @@
             id="description"
             wire:model="description"
             placeholder="Your product description"
-            class="block w-full h-24 px-3 py-2 mt-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"></textarea>
+            class="block w-full h-24 px-3 py-2 mt-1 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none dark:placeholder-gray-400 focus:outline-none focus:ring-blue focus:border-blue-300 sm:text-sm sm:leading-5 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600"></textarea>
 
         <x-input-error :messages="$errors->get('description')" class="mt-2" />
     </div>
@@ -57,7 +57,7 @@
         <div class="my-5 w-96">
             @if($image)
                 Image:
-                <img src="{{ $image->temporaryUrl() }}" alt="">
+                <img class="dark:bg-gray-300" src="{{ $image->temporaryUrl() }}" alt="">
             @endif
         </div>
 
@@ -108,7 +108,7 @@
                     <option value="{{ $tag->id }}">{{ $tag->tag }}</option>
                 @endforeach
             </select>
-
+    
             <x-input-error :messages="$errors->get('tagId')" class="mt-2" />
         </div>
     </div>
@@ -120,14 +120,16 @@
 
     <style>
         /* .select2-results {
-            color: white;
+            color: black;
             background-color: #4a5568;
         } */
          
         .select2-search--inline {
+            /* color: black; */
             margin: 2rem 0rem 0rem 0rem;
         }
         .select2-selection {
+            /* color: black; */
             height: 2.5rem;
         }
     </style>    

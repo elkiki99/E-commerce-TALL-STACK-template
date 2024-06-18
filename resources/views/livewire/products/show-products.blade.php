@@ -1,4 +1,4 @@
-<div class="mt-5 md:flex-wrap md:p-5 md:flex">
+<div class="mt-5 md:flex-wrap md:p-5">
     @if (session()->has('message'))
         <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
             {{ session('message') }}
@@ -18,12 +18,12 @@
                     </svg>
                 </div>
                 <input wire:model.live="searchProduct" type="text" id="simple-search"
-                    class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="Search product..." required="">
             </div>
         </form>
         <div>
-            <select wire:model.live="searchCategory" class="py-2.5 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200"> 
+            <select wire:model.live="searchCategory" class=" dark:bg-gray-900 dark:text-gray-200 dark:border-gray-600 py-2.5 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 hover:cursor-pointer focus:outline-none focus:ring-0 focus:border-gray-200"> 
                 <option value="0">Select category</option>
                 @foreach($categories as $id => $category)
                     <option value="{{ $id }}"> {{ $category }} </option>
@@ -35,15 +35,15 @@
     <ul class="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         @foreach ($products as $product)
             <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
-                <div class="relative flex flex-col h-full overflow-hidden bg-white shadow-md rounded-2xl dark:bg-gray-800">
+                <div class="relative flex flex-col h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
                     @if($product->stock < 1)
                         <div class="top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
                             <span class="text-lg font-semibold text-white">NO STOCK</span>
                         </div>
                     @endif
-                    <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">
                         <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                            <img class="object-cover w-64 h-64 pt-5" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                            <img class="object-cover w-64 h-64" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                         </a>
                     </div>
                     <div class="mx-5">

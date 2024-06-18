@@ -1,13 +1,7 @@
-<div class="flex flex-col justify-between w-full p-10">
-    @if (session()->has('message'))
-        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
-            {{ session('message') }}
-        </div>
-    @endif
-        
+<div class="flex flex-col justify-between w-full p-10">    
     @if (!$payments->isEmpty())
         @foreach ($payments as $index => $order)
-            <div class="{{ $index % 2 == 0 ? 'bg-gray-900 text-white' : 'bg-white text-black' }} p-4 m-0.5 rounded">
+            <div class="{{ $index % 2 == 0 ? 'bg-white text-black dark:bg-gray-300 dark:text-gray-800' : 'bg-gray-900 text-white dark:bg-gray-800' }} p-4 m-0.5 rounded">
                 <div class="flex justify-between w-full">
                     @if(auth()->user()->admin === 1)
                         <p>{{ $order->user_email }}</p>

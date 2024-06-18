@@ -9,8 +9,8 @@
 
     <div class="relative">
         <div class="lg:flex">
-            <div class="relative flex items-center justify-center p-4 lg:w-1/2">
-                <img class="object-contain w-full h-full max-h-96" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
+            <div class="relative flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-300 lg:w-1/2">
+                <img class="object-contain w-full h-full lg:object-cover max-h-96" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
             </div>
             
             <div class="flex flex-col justify-between p-4 lg:w-1/2">

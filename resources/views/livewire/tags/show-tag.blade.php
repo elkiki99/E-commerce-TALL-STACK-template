@@ -2,15 +2,15 @@
     <ul class="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         @foreach ($products as $product)
             <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
-                <div class="relative flex flex-col h-full overflow-hidden bg-white shadow-md rounded-2xl dark:bg-gray-800">
+                <div class="relative flex flex-col h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
                     @if($product->stock < 1)
                         <div class="top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
                             <span class="text-lg font-semibold text-white">NO STOCK</span>
                         </div>
                     @endif
-                    <div class="flex items-center justify-center">
+                    <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">
                         <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                            <img class="object-cover w-64 h-64 pt-5" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                            <img class="object-cover w-64 h-64" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                         </a>
                     </div>
                     <div class="mx-5">

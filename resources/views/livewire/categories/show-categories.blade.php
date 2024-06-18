@@ -6,7 +6,7 @@
     @endif
 
     @foreach ($categories as $index => $category)
-        <p class="{{ $index % 2 == 0 ? 'bg-white text-black' : 'bg-gray-900 text-white' }} p-4 m-0.5 rounded flex w-full">
+        <p class="{{ $index % 2 == 0 ? 'bg-white text-black dark:bg-gray-300 dark:text-gray-900' : 'bg-gray-800 text-white dark:bg-gray-800' }} p-4 m-0.5 rounded flex w-full">
             
         <a href="{{route('categories.show', ['category' => $category->id])}}">{{$category->category}}</a>
             

@@ -16,9 +16,6 @@ class ShowOrders extends Component
     public function completeOrder(Payment $payment)
     {
         $payment->delete();
-
-        session()->flash('message', 'Order completed succesfully.');
-        // return redirect()->route('dashboard');
     }
 
     public function render()

@@ -10,7 +10,6 @@
             <h1 class="mt-10 text-2xl font-bold text-center dark:text-gray-100">Manage categories</h1>
 
             <livewire:categories.show-categories />
-
         </div>
     </div>
 </x-app-layout>
