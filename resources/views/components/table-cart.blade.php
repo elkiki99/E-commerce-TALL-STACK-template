@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th class="py-2 text-left">Image</th>
-                <th class="py-2 text-left">Product</th>
+                <th class="hidden px-4 py-2 text-left sm:table-cell">Product</th>
                 <th class="py-2 text-left">Price</th>
                 <th class="py-2 text-left">Quantity</th>
                 <th class="py-2 text-left">Total</th>
@@ -15,10 +15,10 @@
             @foreach ($products as $product)
                 <tr class="border-t-2" x-data="{ quantity: {{ $product['quantity'] }}, price: {{ $product['product']->price }}, total: {{ $product['product']->price * $product['quantity'] }} }" wire:key="product-{{ $product['product']->id }}">
                     <td class="py-2">
-                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="w-24 h-24">
+                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="w-24 h-24 bg-gray-200 dark:bg-gray-300">
                     </td>
-                    <td class="py-2">{{ $product['product']->name }}</td>
-                    <td class="py-2">{{ $product['product']->price }}</td>
+                    <td class="hidden py-2 sm:table-cell">{{ $product['product']->name }}</td>
+                    <td class="py-2">${{ $product['product']->price }}</td>
                     <td>
                         <div class="flex flex-grow mt-2">
                             <div>
@@ -31,7 +31,7 @@
                                     </svg>              
                                 </button>
                             </div>
-                            <div class="w-16 text-xl font-bold text-center">
+                            <div class="w-8 text-xl font-bold text-center">
                                 <span x-text="quantity"></span>
                             </div>
                             <div>
@@ -64,13 +64,13 @@
         </tbody>
     </table>
     
-    <div class="mx-5 mt-5">
+    <div>
         @guest
-            <div class="flex items-center justify-between">
+            <div class="items-center justify-between block md:flex">
                 <div class="flex-1">
                     <livewire:cart.clear-cart :productId="$products[0]['product']->id"/>     
                 </div>
-                <div class="flex-1 my-5 text-right">
+                <div class="flex-1 my-5 md:text-right">
                     <a class="text-violet-500" href="{{ route('login') }}">Log in</a>
                     or
                     <a class="text-violet-500" href="{{ route('register') }}">register</a>
@@ -80,10 +80,10 @@
         @endguest
     
         @auth
-            <div class="mx-5 mt-5 sm:flex sm:justify-end">
+            <div class="mt-5 sm:flex sm:justify-end">
                 <livewire:cart.clear-cart :productId="$products[0]['product']->id"/> 
             
-                <div class="flex mx-2 mt-5">
+                <div class="flex mt-5">
                     <x-primary-button 
                         wire:click="update({{ $product['product']->id }}, quantity)"
                         x-data="{ quantity: {{ $product['quantity'] }}"

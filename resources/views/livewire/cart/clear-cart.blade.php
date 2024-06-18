@@ -1,9 +1,9 @@
 <div>
-    <x-primary-button class="mx-2 mt-5" type="button" wire:click="clearingCart">Clear cart
+    <x-secondary-button class="mt-5 mr-4" type="button" wire:click="clearingCart">Clear cart
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
           </svg>
-    </x-primary-button>
+    </x-secondary-button>
 </div>
 
 @push('scripts')

@@ -97,10 +97,10 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
+                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
                             {{ __('FAQ') }}
-                        </x-nav-link>
-                    </div>
+                        </a>
+                    </div>  
                 </div>
 
                 <!-- Settings Dropdown -->
@@ -200,9 +200,11 @@
                         </div>
 
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            {{-- @foreach(App\Models\CartItem::all() as $items)
-                                <p>{{$items->count()}}</p>
-                            @endforeach --}}
+                            @php
+                                $cart = session()->get('cart', []);
+                                $itemCount = count($cart);
+                            @endphp
+                            
                             <x-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -211,6 +213,9 @@
                                 </svg>
                             </x-nav-link>
                         </div>
+                        @if($itemCount > 0)
+                                <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full  dark:text-gray-900 dark:bg-gray-300">{{ $itemCount }}</span>
+                            @endif
                     @endguest
 
                     @auth
@@ -232,19 +237,15 @@
                                     </svg>
                                 </x-nav-link>
                             </div>
-                            @php
-                                $authUser = auth()->check();
-                                if ($authUser) {
-                                    $cart = App\Models\Cart::where('user_id', Auth::id())->first();
-                                    $itemCount = $cart ? App\Models\CartItem::where('cart_id', $cart->id)->count() : 0;
-                                } else {
-                                    $cart = session()->get('cart', []);
-                                    $itemCount = count($cart);
-                                }
-                            @endphp
-
+                                @auth
+                                    @php
+                                        $cart = App\Models\Cart::where('user_id', Auth::id())->first();
+                                        $itemCount = $cart ? App\Models\CartItem::where('cart_id', $cart->id)->count() : 0;
+                                    @endphp
+                                @endauth
+                                
                             @if($itemCount > 0)
-                                <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full">{{ $itemCount }}</span>
+                                <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full dark:text-gray-900 dark:bg-gray-300">{{ $itemCount }}</span>
                             @endif
                         @endif
                     @endauth

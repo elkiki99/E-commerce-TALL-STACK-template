@@ -14,7 +14,7 @@
             <tbody>
                 @foreach ($paymentItems as $item)
                     <tr class="border-t border-gray-200 dark:border-gray-600">
-                        <td class="px-4 py-2"><img src="{{ asset('storage/img/products/' . $item->product->image ) }}" alt="{{ $item->product->name }}" class="object-contain w-16 h-16"></td>
+                        <td class="px-4 py-2"><img src="{{ asset('storage/img/products/' . $item->product->image ) }}" alt="{{ $item->product->name }}" class="object-contain w-16 h-16 bg-gray-200 dark:bg-gray-300"></td>
                         <td class="px-4 py-2">{{ $item->product->name }}</td>
                         <td class="px-4 py-2">${{ number_format($item->product->price, 2) }}</td>
                         <td class="px-4 py-2">{{ $item->quantity }}</td>

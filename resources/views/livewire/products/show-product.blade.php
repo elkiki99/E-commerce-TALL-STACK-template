@@ -84,19 +84,4 @@
             })
         });
     </script>
-
-    <script>
-        Livewire.on('showAddToCart', (productId) => {
-            Swal.fire({
-                title: '¡Product added successfully!',
-                text: 'Your product was added to your shopping cart.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-
-            window.setTimeout(() => {
-                @this.call('addToCart', productId);
-            }, 500);
-        });
-    </script> 
 @endscript

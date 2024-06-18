@@ -1,8 +1,8 @@
 <div class="mt-5 md:flex-wrap md:p-5 md:flex">
-    <ul class="grid w-full gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+    <ul class="grid w-auto gap-4 mx-5 md:mx-0 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
         @foreach ($products as $product)
             <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
-                <div class="relative flex flex-col h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
+                <div class="relative flex flex-col flex-grow h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
                     @if($product->stock < 1)
                         <div class="top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
                             <span class="text-lg font-semibold text-white">NO STOCK</span>
@@ -20,13 +20,13 @@
                     </div>
                         
                     @if(auth()->check() && auth()->user()->admin === 1)
-                        <div class="flex flex-row mx-5 mb-4">
+                        <div class="flex flex-1 mx-5 mb-4">
                             <div class="flex flex-col flex-grow">
-                                <p class="mt-2 text-4xl text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
+                                <p class="mt-2 text-2xl text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
                             </div>
                             
                             <div class="flex">
-                                <div class="flex items-center ">
+                                <div class="flex items-center ml-2">
                                     <a wire:navigate href="{{route('products.edit', ['product' => $product->id])}}" class="mr-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" 
                                             stroke-width="1.5"
@@ -48,8 +48,8 @@
                             </div>
                         </div>
                     @else
-                        <div class="mx-5 mb-4">
-                            <p class="text-3xl font-semibold text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
+                        <div class="flex items-center flex-1 mx-5 mb-4">
+                            <p class="text-2xl font-semibold text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
                             @if(!$product->stock < 1)
                                 @livewire('cart.add-to-cart', ['productId' => $product->id])
                             @endif
@@ -69,45 +69,28 @@
 
 @script
     <script>
-        document.addEventListener('livewire:initialized', () => {
-                Livewire.on('showAlert', (productId) => {
-                    Swal.fire({
-                        title: 'Are you sure?',
-                        text: 'This action cannot be restored',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes, delete',
-                        cancelButtonText: 'Cancel'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.fire(
-                                'The product was deleted',
-                                'Deleted succesfully',
-                                'success'
-                            );
-                            window.setTimeout(() => {
-                                @this.call('deleteProduct', productId);
-                            }, 1500);
-                        }
-                    })
-                });
-            });
-            
-        document.addEventListener('livewire:initialized', () => {  
-            Livewire.on('showAddToCart', (productId) => {
-                Swal.fire({
-                    title: '¡Product added successfully!',
-                    text: 'Your product was added to your shopping cart.',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-
-                window.setTimeout(() => {
-                    @this.call('addToCart', productId);
-                }, 500);
-            });
-        }); 
-    </script> 
+        Livewire.on('showAlert', (productId) => {
+            Swal.fire({
+                title: 'Are you sure?',
+                title: 'Delete this product?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'The product was deleted',
+                        'Deleted succesfully',
+                        'success'
+                    );
+                    window.setTimeout(() => {
+                        @this.call('deleteProduct', productId);
+                    }, 1500);
+                }
+            })
+        });
+    </script>
 @endscript

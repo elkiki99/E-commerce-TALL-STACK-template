@@ -1,6 +1,5 @@
-<div class="flex flex-row">
-    <x-add-to-cart-counter :productId="$productId" />
-</div>
+
+<x-add-to-cart-counter :productId="$productId" />
 
 @script    
     <script>
