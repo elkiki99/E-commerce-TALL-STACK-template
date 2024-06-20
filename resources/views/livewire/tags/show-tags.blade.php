@@ -6,7 +6,7 @@
     @endif
     
     @foreach ($tags as $index => $tag)
-        <p class="{{ $index % 2 == 0 ? 'bg-white text-black dark:bg-gray-300 dark:text-gray-900' : 'bg-gray-800 text-white dark:bg-gray-800' }} p-4 m-0.5 rounded flex w-full">
+        <p class="p-4 m-0.5 rounded flex w-full {{ $index % 2 == 1 ? 'bg-white text-black dark:bg-gray-800 dark:text-white' : 'bg-gray-800 text-white dark:bg-gray-300 dark:text-gray-900' }}">
             
         <a href="{{route('tags.show', ['tag' => $tag->id])}}">{{$tag->tag}}</a>
             
