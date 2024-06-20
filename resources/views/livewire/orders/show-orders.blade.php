@@ -36,7 +36,8 @@
             </div>
         @endforeach
         
-        <div class="justify-end w-full px-5 py-10">
+        
+        <div class="justify-end w-full px-5 py-5">
             {{ $payments->links() }}
         </div>
     @else

@@ -22,7 +22,7 @@
             </a>
         </li>
         <li>
-            <a wire:navigate href="{{ route('products.index') }}" class=" block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('products') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
+            <a wire:navigate href="{{ route('products.index') }}" class=" block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('products*') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
                 Edit products
             </a>
         </li>
@@ -32,7 +32,7 @@
             </a>
         </li>
         <li>
-            <a wire:navigate href="{{ route('categories.index') }}" class=" block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('categories') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
+            <a wire:navigate href="{{ route('categories.index') }}" class=" block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('categories*') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
                 Edit categories
             </a>
         </li>
@@ -42,7 +42,7 @@
             </a>
         </li>
         <li>
-            <a wire:navigate href="{{ route('tags.index') }}" class=" block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('tags') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
+            <a wire:navigate href="{{ route('tags.index') }}" class=" block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('tags*') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
                 Edit tags
             </a>
         </li>
