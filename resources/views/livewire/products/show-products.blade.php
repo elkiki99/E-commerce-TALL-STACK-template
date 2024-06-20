@@ -5,7 +5,7 @@
         </div>
     @endif
 
-    <div class="flex py-5 ">
+    <div class="flex px-5 mb-5 md:px-0">
         <form class="flex items-center ">
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">

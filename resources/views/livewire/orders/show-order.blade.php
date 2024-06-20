@@ -1,4 +1,4 @@
-<div class="flex flex-col mt-10">
+<div class="flex flex-col mt-10">    
     @if (isset($payment))
         <table class="w-full">
             <thead>
@@ -17,7 +17,7 @@
                         <td class="py-2"><img src="{{ asset('storage/img/products/' . $item->product->image ) }}" alt="{{ $item->product->name }}" class="object-contain w-24 h-24 bg-gray-200 dark:bg-gray-300"></td>
                         <td class="hidden sm:table-cell">{{ $item->product->name }}</td>
                         <td class="">${{ number_format($item->product->price, 2) }}</td>
-                        <td class="text-xl font-bold">{{ $item->quantity }}</td>
+                        <td class="text-xl font-bold text-center sm:text-start">{{ $item->quantity }}</td>
                         <td class="text-xl font-bold">${{ number_format($item->product->price * $item->quantity, 2) }}</td>
                     </tr>
                 @endforeach

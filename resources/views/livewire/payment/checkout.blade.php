@@ -18,7 +18,7 @@
             <livewire:payment.go-pay />
         </div>
     @else
-        <div>
+        <div class="">
             <p>There's no products yet!
                 <a class="text-violet-500" href="{{ route('home') }}"> Go shopping!</a>
             </p>

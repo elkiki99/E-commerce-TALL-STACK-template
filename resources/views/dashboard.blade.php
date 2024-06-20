@@ -40,16 +40,16 @@
 
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <!-- Sales Summary -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                    <a href="#" class="block p-6">
+                <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                    {{-- <a href="#" class="block p-6"> --}}
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Total Sales</span>
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">${{ number_format(App\Models\Payment::sum('amount'), 2) }}</span>
-                    </a>
+                    {{-- </a> --}}
                 </div>
 
                 <!-- Product of the Month -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                    <a href="#" class="block p-6">
+                <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                    {{-- <a href="#" class="block p-6"> --}}
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Product of the Month</span>
                         @if($productOfTheMonth)
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ $productOfTheMonth->name }}</span>
@@ -57,19 +57,19 @@
                         @else
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">No sales this month</span>
                         @endif
-                    </a>
+                    {{-- </a> --}}
                 </div>
 
                 <!-- Inventory and Products -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                    <a href="#" class="block p-6">
+                <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                    {{-- <a href="#" class="block p-6"> --}}
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Products in Stock</span>
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ App\Models\Product::where('stock', '>', 0)->count() }}</span>
-                    </a>
+                    {{-- </a> --}}
                 </div>
 
                 <!-- Order Management -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                <div class="overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800 ">
                     <a href="{{ route('orders.index') }}" class="block p-6">
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Pending Orders</span>
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ App\Models\Payment::all()->count() }} pending to ship</span>
@@ -77,11 +77,11 @@
                 </div>
 
                 <!-- Customer Information -->
-                <div class="overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
-                    <a href="#" class="block p-6">
+                <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                    {{-- <a href="#" class="block p-6"> --}}
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Registered Customers</span>
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ App\Models\User::where('admin', 0)->count() }}</span>
-                    </a>
+                    {{-- </a> --}}
                 </div>
 
                 <!-- Marketing Metrics -->

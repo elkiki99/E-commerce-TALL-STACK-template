@@ -2,10 +2,10 @@
     <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="flex flex-col justify-between md:flex-row">
             <!-- Column 1 -->
-            <div class="flex flex-col space-y-4 md:space-y-6">
+            <div class="flex flex-col space-y-4 md:w-1/2 md:space-y-6">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Company</h2>
                 <p class="text-base text-gray-800 dark:text-gray-300">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sports company is a leading sports equipment and apparel retailer. We offer a wide range of products for all your sports needs.
                 </p>
             </div>
             <!-- Column 2 -->

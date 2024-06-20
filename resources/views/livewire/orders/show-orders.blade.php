@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between w-full p-10">    
+<div class="flex flex-col justify-between w-full md:p-10">
     @if (!$payments->isEmpty())
         @foreach ($payments as $index => $order)
             <div class="{{ $index % 2 == 0 ? 'bg-white text-black dark:bg-gray-300 dark:text-gray-800' : 'bg-gray-900 text-white dark:bg-gray-800' }} p-4 m-0.5 rounded">
@@ -6,20 +6,15 @@
                     @if(auth()->user()->admin === 1)
                         <p>{{ $order->user_email }}</p>
                         <p>-</p>
-                    @endif
-                    
-                    @if(auth()->user()->admin === 1)
+                        <p>${{ $order->amount }} {{ $order->currency }}</p>
+                        <p class="hidden sm:table-cell">-</p>
+                        <p class="hidden sm:table-cell">{{ $order->created_at }}</p>
+                    @else
                         <p>${{ $order->amount }} {{ $order->currency }}</p>
                         <p>-</p>
-                        <p>{{ $order->created_at }}</p>
-                    @else
-                        <p>${{ $order->amount }}</p>
-                        <p>-</p>
-                        <p>{{ $order->currency }}</p>
-                        <p>-</p>
                         <p>{{ \Carbon\Carbon::parse($order->created_at)->diffForHumans() }}</p>
-                        <p>-</p>
-                        <p>{{ $order->created_at }}</p>
+                        <p class="hidden sm:table-cell">-</p>
+                        <p class="hidden sm:table-cell">{{ $order->created_at }}</p>
                     @endif
                     
                     <div class="flex">
@@ -46,9 +41,9 @@
         </div>
     @else
         @if (auth()->user()->admin === 1)
-            <p class="dark:text-white">No active orders</p>
+            <p class="my-5 dark:text-gray-400">No active orders</p>
         @else
-            <a wire:navigate href="{{ route('home') }}" class="dark:text-white">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
+            <a wire:navigate href="{{ route('home') }}" class="my-5 dark:text-gray-400">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
         @endif
     @endif
 </div>

@@ -17,8 +17,6 @@
                         <p>You will be redirected to your order details in a few seconds... 
                             <i class="fas fa-spinner fa-spin"></i>
                         </p>
-                        
-                        <x-primary-button class="mt-5" wire:navigate href="/order/{{ $payment->payment_id }}">Follow your order</x-primary-button>
                     @endif
                 </div>
             </div>
@@ -29,7 +27,7 @@
         <script>
             setTimeout(function() {
                 window.location.href = "/order/{{ $payment->payment_id }}";
-            }, 3000);
+            }, 2000);
         </script>
     @endif
 </x-app-layout>
