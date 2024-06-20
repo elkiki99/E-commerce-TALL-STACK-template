@@ -13,6 +13,8 @@ class OrderController extends Controller
 
     public function show(Payment $payment)
     {
+        $this->authorize('viewAny', Payment::class);
+
         return view('orders.show', [
             'payment' => $payment
         ]);

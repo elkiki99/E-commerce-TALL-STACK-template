@@ -72,7 +72,7 @@
                 </div>
                 <div class="flex-1 my-5 md:text-right">
                     <a class="text-violet-500" href="{{ route('login') }}">Log in</a>
-                    or}
+                    or
                     <a class="text-violet-500" href="{{ route('register') }}">register</a>
                     to complete your purchase
                 </div>

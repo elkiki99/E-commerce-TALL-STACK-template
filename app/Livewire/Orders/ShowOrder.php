@@ -3,9 +3,7 @@
 namespace App\Livewire\Orders;
 
 use App\Models\Payment;
-use App\Models\Product;
 use Livewire\Component;
-use App\Models\PaymentItem;
 
 class ShowOrder extends Component
 {

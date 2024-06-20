@@ -53,7 +53,7 @@ class GoPay extends Component
         }
 
         if ($stockError) {
-            return; // Si hubo algún error de stock, no continuar con el proceso de pago
+            return;
         }
 
         Stripe::setApiKey(config('stripe.sk'));
@@ -95,7 +95,6 @@ class GoPay extends Component
                 'quantity' => $item['quantity'],
             ]); 
         }
-
         // We delete the cart in the Success method
 
         return redirect()->away($session->url);

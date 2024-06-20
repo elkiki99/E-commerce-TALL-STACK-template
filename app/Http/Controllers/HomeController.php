@@ -10,12 +10,12 @@ class HomeController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
-        $products = Product::paginate('24');
+        // $products = Product::paginate('24');
         
         return view('home.index', [
-            'products' => $products
+            // 'products' => $products
         ]);
     }
 }

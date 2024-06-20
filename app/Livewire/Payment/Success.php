@@ -7,6 +7,8 @@ use App\Models\Cart;
 use App\Models\Payment;
 use App\Models\Product;
 use Livewire\Component;
+use App\Mail\OrderPurchased;
+use Illuminate\Support\Facades\Mail;
 use Stripe\Checkout\Session as StripeSession;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -65,15 +67,13 @@ class Success extends Component
                 $cart->delete();
             }
 
-            // foreach product and quantity purchased, we substract it from the products table in stock column
             foreach ($this->items as $item) {
                 $product = Product::find($item['product']['id']);
                 $product->stock -= $item['quantity'];
                 $product->save();
             }
-            
-            // Send user email confirmation
-            // Mail::to(auth()->user()->email)->send(new OrderConfirmation($payment));
+
+            // Mail::to(auth()->user()->email)->queue(new OrderPurchased($payment));
         } 
         catch (\Exception $e) {
             throw new NotFoundHttpException();

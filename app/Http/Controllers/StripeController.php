@@ -82,16 +82,4 @@ class StripeController extends Controller
 
         return response('');
     }
-
-    // public function order(Cart $cart, Request $request, $payment_id)
-    // {
-    //     $sessionId = $request->get('session_id');
-    //     $payment = Payment::where('user_id', auth()->user()->id)->where('payment_id', $payment_id)->firstOrFail();
-
-    //     return view('payment.order', [
-    //         'cart' => $cart,
-    //         'sessionId' => $sessionId,
-    //         'paymentId' => $payment->id
-    //     ]);
-    // }
 }

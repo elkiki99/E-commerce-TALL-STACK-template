@@ -46,9 +46,9 @@
         </div>
     @else
         @if (auth()->user()->admin === 1)
-            <p class="text-white">No active orders</p>
+            <p class="dark:text-white">No active orders</p>
         @else
-            <a wire:navigate href="{{ route('home') }}" class="text-white">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
+            <a wire:navigate href="{{ route('home') }}" class="dark:text-white">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
         @endif
     @endif
 </div>

@@ -3,6 +3,10 @@
     use App\Models\PaymentItem;
     use App\Models\Product;
 
+    if (! Gate::allows('dashboard')) {
+            abort(403);
+        }
+
     $startOfMonth = Carbon::now()->startOfMonth();
     $endOfMonth = Carbon::now()->endOfMonth();
 
