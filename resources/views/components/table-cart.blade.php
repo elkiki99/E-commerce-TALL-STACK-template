@@ -81,7 +81,7 @@
     
         @auth
             <div class="mt-5 sm:flex sm:justify-end">
-                <livewire:cart.clear-cart :productId="$products[0]['product']->id"/> 
+                <livewire:cart.clear-cart :productId="$products[0]['product']->id"/>
             
                 <div class="flex mt-5">
                     <x-primary-button 

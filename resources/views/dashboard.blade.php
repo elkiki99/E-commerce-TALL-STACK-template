@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- Product of the Month -->
-                <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
+                <div class="block w-full p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
                     {{-- <a href="#" class="block p-6"> --}}
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Product of the Month</span>
                         @if($productOfTheMonth)
