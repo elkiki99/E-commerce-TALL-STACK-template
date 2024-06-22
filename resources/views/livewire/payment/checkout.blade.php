@@ -1,4 +1,4 @@
-<div class="mt-10">
+<div class="flex flex-col justify-between w-full sm:p-10">
     @if(($items))
         <div class="justify-center">
             @foreach ($items as $item)
@@ -18,10 +18,6 @@
             <livewire:payment.go-pay />
         </div>
     @else
-        <div class="">
-            <p>There's no products yet!
-                <a class="text-violet-500" href="{{ route('home') }}"> Go shopping!</a>
-            </p>
-        </div>
+        <a class="my-5 dark:text-gray-400" wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
     @endif
 </div>
