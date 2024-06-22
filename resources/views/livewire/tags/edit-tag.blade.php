@@ -1,4 +1,4 @@
-<form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='updateTag'>
+<form class="pb-10 space-y-5 md:w-1/2" novalidate wire:submit.prevent='updateTag'>
     <div class="mt-4">
         <x-input-label for="tag" :value="__('tag name')" />
         <x-text-input id="tag" class="block w-full mt-1" type="text" wire:model.fill="tag" :value="old('tag')"

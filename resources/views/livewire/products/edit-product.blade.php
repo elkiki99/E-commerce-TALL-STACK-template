@@ -1,5 +1,5 @@
 
-<form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='editProduct'>  
+<form class="pb-10 space-y-5 md:w-1/2" novalidate wire:submit.prevent='editProduct'>  
     <div class="mt-4">
         <x-input-label for="name" :value="__('Product name')" />
         <x-text-input 
@@ -118,10 +118,14 @@
     <x-primary-button>
         {{ __('Edit product') }}
     </x-primary-button>
-    
+
     <style>
         .select2-search--inline {
+            color: black;
             margin: 2rem 0rem 0rem 0rem;
+        }
+        .select2-selection__choice {
+            color: black;
         }
         .select2-selection {
             height: 2.5rem;

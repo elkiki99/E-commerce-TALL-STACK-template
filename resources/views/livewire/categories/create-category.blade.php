@@ -1,5 +1,5 @@
 
-<form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='createCategory'>
+<form class="pb-10 space-y-5 md:w-1/2" novalidate wire:submit.prevent='createCategory'>
     @if (session()->has('message'))
         <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
             {{ session('message') }}

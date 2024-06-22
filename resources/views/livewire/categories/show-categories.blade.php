@@ -5,7 +5,7 @@
         </div>
     @endif
 
-    <div class="flex px-5 mb-5 md:px-0">
+    <div class="flex mb-5 md:px-0">
         <form class="flex items-center ">
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
@@ -18,7 +18,7 @@
                     </svg>
                 </div>
                 <input wire:model.live="searchCategory" type="text" id="simple-search"
-                    class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    class="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600"
                     placeholder="Search category..." required="">
             </div>
         </form>

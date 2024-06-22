@@ -1,5 +1,5 @@
 
-<form class="space-y-5 md:w-1/2" novalidate wire:submit.prevent='createProduct'>
+<form class="pb-10 space-y-5 md:w-1/2" novalidate wire:submit.prevent='createProduct'>
     @if (session()->has('message'))
         <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
             {{ session('message') }}
@@ -117,22 +117,18 @@
         {{ __('Create product') }}
     </x-primary-button>
 
-
     <style>
-        /* .select2-results {
-            color: black;
-            background-color: #4a5568;
-        } */
-         
         .select2-search--inline {
-            /* color: black; */
+            color: black;
             margin: 2rem 0rem 0rem 0rem;
         }
+        .select2-selection__choice {
+            color: black;
+        }
         .select2-selection {
-            /* color: black; */
             height: 2.5rem;
         }
-    </style>    
+    </style>
 </form>
 
 @script()
