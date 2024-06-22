@@ -4,9 +4,14 @@ namespace App\Livewire\Tags;
 
 use App\Models\Tag;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Database\Eloquent\Builder;
 
 class ShowTags extends Component
 {
+    use WithPagination;
+    public $searchTag = '';
+
     protected $listeners = ['deleteTag'];
 
     public function deleteTag(Tag $tag)
@@ -17,9 +22,18 @@ class ShowTags extends Component
         return redirect()->route('tags.index');
     }
 
+    public function updating($key)
+    {
+        if ($key === 'searchTag') {
+            $this->resetPage();
+        }
+    }
+
     public function render()
     {
-        $tags = Tag::latest()->paginate(24);
+        $tags = Tag::latest()
+        ->when($this->searchTag !== '', fn(Builder $query) => $query->where('tag', 'like', '%' . $this->searchTag . '%'))
+        ->paginate(24);
 
         return view('livewire.tags.show-tags', [
             'tags' => $tags

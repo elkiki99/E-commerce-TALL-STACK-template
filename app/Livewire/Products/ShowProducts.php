@@ -13,7 +13,6 @@ class ShowProducts extends Component
 {
     use WithPagination;
 
-    public $search = '';
     public string $searchProduct = '';
     public int $searchCategory = 0;
     public Collection $categories;
@@ -43,7 +42,7 @@ class ShowProducts extends Component
     public function render()
     {
         $products = Product::with('category')
-            ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchProduct . '%')) 
+            ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchProduct . '%'))
             ->when($this->searchCategory > 0, fn(Builder $query) => $query->where('category_id', $this->searchCategory)) 
             ->paginate(24);
 

@@ -60,11 +60,9 @@
         @endforeach
     </ul>
 
-    @if($this->products->count() > 24)
-        <div class="justify-end w-full px-5 py-5">
-            {{ $products->links() }}
-        </div>
-    @endif
+    <div class="justify-end w-full px-5 py-5">
+        {{ $products->links() }}
+    </div>
 </div>
 
 @script

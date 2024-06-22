@@ -5,12 +5,12 @@ namespace App\Livewire\Categories;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use Livewire\WithPagination;
 
 class ShowCategory extends Component
 {
+    use WithPagination;
     public $category;
-    public $products;
-
     protected $listeners = ['deleteProduct', 'addToCart'];
 
     public function deleteProduct(Product $product)
@@ -24,16 +24,14 @@ class ShowCategory extends Component
     public function mount(Category $category)
     {
         $this->category = $category;
-        $this->products = Product::where('category_id', $category->id)->get();
     }
 
     public function render()
     {
-        if($this->products->count() > 24) {
-            $this->products = Product::where('category_id', $this->category->id)->paginate(24);
-        }
+        $products = Product::where('category_id', $this->category->id)->paginate(24);
+
         return view('livewire.categories.show-category', [
-            'products' => $this->products
+            'products' => $products
         ]);
     }
 }

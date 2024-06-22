@@ -62,6 +62,8 @@ class Success extends Component
             $payment->order_status = 1;
             $payment->save();
             
+            Mail::to(auth()->user())->queue(new OrderPurchased($payment));
+
             $cart = Cart::where('user_id', auth()->user()->id)->first();
             if ($cart) {
                 $cart->delete();
@@ -72,8 +74,6 @@ class Success extends Component
                 $product->stock -= $item['quantity'];
                 $product->save();
             }
-
-            // Mail::to(auth()->user()->email)->queue(new OrderPurchased($payment));
         } 
         catch (\Exception $e) {
             throw new NotFoundHttpException();

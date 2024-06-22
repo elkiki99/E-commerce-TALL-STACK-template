@@ -85,9 +85,9 @@
             wire:model="category"
             class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
         >
-            <option selected disabled>-- Select category --</option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->category }}</option>
+            <option selected>-- Select category --</option>
+            @foreach ($categories as $id => $category)
+                <option value="{{ $category }}">{{ $category->category }}</option>
             @endforeach
         </x-select>
 

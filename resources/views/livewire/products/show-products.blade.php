@@ -96,7 +96,7 @@
     <div class="justify-end w-full px-5 py-5">
         {{ $products->links() }}
     </div>
-</div> 
+</div>
 
 @script
     <script>
