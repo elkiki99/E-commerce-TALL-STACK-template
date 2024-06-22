@@ -29,6 +29,10 @@ class OrderPurchased extends Mailable
     {
         return new Envelope(
             subject: 'Order Purchased',
+            tags: ['purchased'],
+            metadata: [
+                'payment_id' => $this->payment->payment_id,
+            ],
         );
     }
 
@@ -37,8 +41,13 @@ class OrderPurchased extends Mailable
      */
     public function content(): Content
     {
+        $url = route('orders.show', ['payment' => $this->payment->payment_id]);
+
         return new Content(
-            view: 'emails.order-purchased',
+            markdown: 'mail.orders.purchased',
+            with: [
+                'url' => $url,
+            ],
         );
     }
 
