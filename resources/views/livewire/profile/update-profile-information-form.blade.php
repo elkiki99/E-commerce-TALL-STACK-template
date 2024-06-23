@@ -73,7 +73,7 @@ new class extends Component
         </p>
     </header>
 
-    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6" novalidate>
+    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6 md:w-1/2" novalidate>
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input wire:model="name" id="name" name="name" type="text" class="block w-full mt-1" required autofocus autocomplete="name" />

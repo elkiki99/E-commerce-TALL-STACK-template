@@ -138,7 +138,6 @@
                 theme: 'classic',
                 placeholder: "-- Select tag --",
                 allowClear: true,
-                // dropdownCssClass: 'dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600'
             });
             $('#tags').on('change', function(){
                 let data = $(this).val();

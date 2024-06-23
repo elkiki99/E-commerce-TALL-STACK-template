@@ -49,7 +49,7 @@ new class extends Component
         </p>
     </header>
 
-    <form wire:submit="updatePassword" class="mt-6 space-y-6" novalidate>
+    <form wire:submit="updatePassword" class="mt-6 space-y-6 md:w-1/2" novalidate>
         <div>
             <x-input-label for="update_password_current_password" :value="__('Current Password')" />
             <x-text-input wire:model="current_password" id="update_password_current_password" name="current_password" type="password" class="block w-full mt-1" autocomplete="current-password" />

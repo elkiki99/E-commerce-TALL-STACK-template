@@ -31,7 +31,8 @@
     </x-slot>
 
     <div class="w-full pb-10 mx-auto mt-16 lg:w-10/12 md:px-10">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="w-full">
+            
             @if (session()->has('message'))
             <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
                 {{ session('message') }}

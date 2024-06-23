@@ -5,11 +5,15 @@ namespace App\Livewire\Orders;
 use App\Models\Payment;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class ShowOrders extends Component
 {
     use WithPagination;
-    private $payments;
+
+    public $searchOrders = '';
+    public $searchDate = '';
 
     protected $listeners = ['completeOrder'];
 
@@ -18,17 +22,37 @@ class ShowOrders extends Component
         $payment->delete();
     }
 
+    public function updating($key)
+    {
+        if ($key === 'searchOrders' || $key === 'searchDate') {
+            $this->resetPage();
+        }
+    }
+
     public function render()
     {
-        if(auth()->user()->admin === 1) 
-        {
-            $this->payments = Payment::orderByDesc('created_at')->paginate(12);
-        } else {    
-            $this->payments = Payment::where('user_id', auth()->user()->id)->orderByDesc('created_at')->paginate(12);
+        $query = Payment::latest();
+
+        if (auth()->user()->admin === 1) {
+            $query->latest()
+                ->when($this->searchOrders !== '', fn(Builder $query) => $query->where('user_email', 'like', '%' . $this->searchOrders . '%'));
+        } else {
+            $query->where('user_id', auth()->user()->id)->orderByDesc('created_at');
+        }
+
+        if ($this->searchDate) {
+            $query->whereDate('created_at', $this->searchDate);
+        }
+
+        $payments = $query->paginate(12);
+        $dates = collect();
+        for ($i = 0; $i < 14; $i++) {
+            $dates->push(Carbon::today()->subDays($i)->format('Y-m-d'));
         }
 
         return view('livewire.orders.show-orders', [
-            'payments' => $this->payments
+            'payments' => $payments,
+            'dates' => $dates,
         ]);
     }
 }
