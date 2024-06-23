@@ -64,7 +64,7 @@ class GoPay extends Component
                     'currency' => 'usd',
                     'product_data' => [
                         'name' => $item['product']->name,
-                        'images' => [asset('storage/img/products/' . $item['product']->image)],
+                        // 'images' => [asset( $item['product']->image)],
                     ],
                     'unit_amount' => $item['product']->price * 100,
                 ],

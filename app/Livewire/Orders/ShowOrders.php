@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Orders;
 
+use Carbon\Carbon;
 use App\Models\Payment;
 use Livewire\Component;
+use App\Mail\OrderDelivered;
 use Livewire\WithPagination;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Builder;
 
 class ShowOrders extends Component
@@ -19,6 +21,7 @@ class ShowOrders extends Component
 
     public function completeOrder(Payment $payment)
     {
+        Mail::to(auth()->user())->queue(new OrderDelivered($payment));
         $payment->delete();
     }
 

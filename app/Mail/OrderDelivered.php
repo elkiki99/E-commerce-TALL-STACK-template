@@ -10,7 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class OrderPurchased extends Mailable
+class OrderDelivered extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,8 +28,8 @@ class OrderPurchased extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Order purchased',
-            tags: ['purchased'],
+            subject: 'Order delivered',
+            tags: ['delivered'],
             metadata: [
                 'payment_id' => $this->payment->payment_id,
             ],
@@ -41,13 +41,8 @@ class OrderPurchased extends Mailable
      */
     public function content(): Content
     {
-        $url = route('orders.show', ['payment' => $this->payment->payment_id]);
-
         return new Content(
-            markdown: 'mail.orders.purchased',
-            with: [
-                'url' => $url,
-            ],
+            markdown: 'mail.orders.delivered',
         );
     }
 

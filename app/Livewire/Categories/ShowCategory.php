@@ -38,7 +38,7 @@ class ShowCategory extends Component
 
     public function render()
     {
-        $products = Product::where('category_id', $this->category->id)
+        $products = $this->category->products()
             ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchProduct . '%'))
             ->paginate(24);
 

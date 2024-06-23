@@ -1,12 +1,12 @@
 <x-mail::message>
-# Order Purchased
+# Order Delivered
 
 <x-mail::panel>
-    Congratulations!
+    Delivered!
 </x-mail::panel>
 
 <p>Dear {{ $payment->user->name }},</p>
-<p>Thank you for your purchase! Your order has been received and is now being processed. Your order details are as follows:</p>
+<p>Your order has been delivered. Your order details are as follows:</p>
 <ul>
     <li>Order Number: {{ $payment->payment_id }}</li>
     <li>Order Date: {{ $payment->created_at->format('F d, Y') }}</li>
@@ -22,12 +22,7 @@
 
 <p>Total Amount: ${{ number_format($payment->amount, 2) }}</p>
 
-<p>We will notify you when your order has been shipped.</p>
 <p>If you have any questions or concerns, please contact us at ecommercetemplate@support.com.</p>
 <p>Thank you for shopping with us!</p>
-
-<x-mail::button :url="$url" color="success">
-    View Order
-</x-mail::button>
 
 </x-mail::message>
