@@ -1,4 +1,4 @@
-<div class="flex flex-col p-10 mt-10 text-gray-900 dark:text-gray-100">    
+<div class="flex flex-col p-10 text-gray-900 dark:text-gray-100">    
     @if (isset($payment))
         <table class="w-full">
             <thead>

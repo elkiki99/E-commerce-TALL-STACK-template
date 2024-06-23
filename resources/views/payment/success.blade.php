@@ -5,21 +5,17 @@
         </h2>
     </x-slot>
 
-    <div class="mb-10 md:p-10 xl:mx-24 md:mb-0">
-        <div class="sm:px-5"> 
-            <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <h1 class="my-5 text-2xl font-bold text-center sm:my-0 sm:mt-5">Your payment was successful</h1>
+    <div class="w-full pb-10 mx-auto mt-16 lg:w-10/12 md:px-10">
+        <div class="w-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <h1 class="mt-10 text-2xl font-bold text-center dark:text-gray-100">Your payment was successful</h1>
 
-                    <livewire:payment.success :sessionId="$sessionId" />
+            <livewire:payment.success :sessionId="$sessionId" />
 
-                    @if($payment->payment_id)
-                        <p>You will be redirected to your order details in a few seconds... 
-                            <i class="fas fa-spinner fa-spin"></i>
-                        </p>
-                    @endif
-                </div>
-            </div>
+            @if($payment->payment_id)
+                <p class="px-10 pb-5 dark:text-gray-300">You will be redirected to your order details in a few seconds... 
+                    <i class="dark:text-gray-300 fas fa-spinner fa-spin"></i>
+                </p>
+            @endif
         </div>
     </div>
 

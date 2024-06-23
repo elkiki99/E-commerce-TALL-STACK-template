@@ -5,22 +5,22 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="mx-auto space-y-6 max-w-7xl sm:px-6 lg:px-8">
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
+    <div class="">
+        <div class="w-full pb-10 mx-auto mt-16 space-y-6 lg:w-10/12 md:px-10">
+            <div class="w-full bg-white rounded-lg shadow-md last:overflow-hidden dark:bg-gray-800">
+                <div class="p-10 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                     <livewire:profile.update-profile-information-form />
                 </div>
             </div>
 
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
+            <div class="w-full bg-white rounded-lg shadow-md last:overflow-hidden dark:bg-gray-800">
+                <div class="p-10 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                     <livewire:profile.update-password-form />
                 </div>
             </div>
 
-            <div class="p-4 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
-                <div class="max-w-xl">
+            <div class="w-full bg-white rounded-lg shadow-md last:overflow-hidden dark:bg-gray-800">
+                <div class="p-10 bg-white shadow sm:p-8 dark:bg-gray-800 sm:rounded-lg">
                     <livewire:profile.delete-user-form />
                 </div>
             </div>
