@@ -30,7 +30,7 @@
         </h2>
     </x-slot>
 
-    <div class="flex my-10 bg-gray-100 dark:bg-gray-900">
+    <div class="w-full pb-10 mx-auto mt-16 lg:w-10/12 md:px-10">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if (session()->has('message'))
             <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
@@ -38,7 +38,7 @@
             </div>
             @endif
 
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4">
                 <!-- Sales Summary -->
                 <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
                     {{-- <a href="#" class="block p-6"> --}}
