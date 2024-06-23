@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between w-full sm:p-10">
+<div class="flex flex-col justify-between w-full p-10">
     @if (!$payments->isEmpty())
         @foreach ($payments as $index => $order)
             <div class="p-4 m-0.5 rounded flex w-full {{ $index % 2 == 1 ? 'bg-white text-black dark:bg-gray-800 dark:text-white' : 'bg-gray-800 text-white dark:bg-gray-300 dark:text-gray-900' }}">
