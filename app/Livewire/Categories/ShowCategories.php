@@ -16,12 +16,19 @@ class ShowCategories extends Component
 
     public function deleteCategory(Category $category)
     {
-        $uncategorizedCategory = Category::firstOrCreate(['category' => 'uncategorized']);
-        $category->products()->update(['category_id' => $uncategorizedCategory->id]);
-        $category->delete();
+        if($category->products->count() === 0) {
+            $category->delete();
+            session()->flash('message', 'Category deleted successfully.');
+            return redirect()->route('categories.index');
 
-        session()->flash('message', 'Category deleted successfully and products reassigned.');
-        return redirect()->route('categories.index');
+        } else {
+            $uncategorizedCategory = Category::firstOrCreate(['category' => 'Uncategorized']);
+            $category->products()->update(['category_id' => $uncategorizedCategory->id]);
+            $category->delete();
+
+            session()->flash('message', 'Category deleted successfully.');
+            return redirect()->route('categories.index');
+        }
     }
 
     public function updating($key)
@@ -35,7 +42,7 @@ class ShowCategories extends Component
     {
         $categories = Category::latest()
             ->when($this->searchCategory !== '', fn(Builder $query) => $query->where('category', 'like', '%' . $this->searchCategory . '%'))
-            ->paginate(24);
+            ->paginate(12);
 
         return view('livewire.categories.show-categories', [
             'categories' => $categories

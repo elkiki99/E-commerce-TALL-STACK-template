@@ -25,7 +25,7 @@
         </table>
     @endif
 
-    <div class="mx-10 ml-auto">
+    <div class="mt-5">
         <p class="text-2xl font-bold dark:text-gray-100"><strong class="text-xl dark:text-gray-400">Grand total:</strong> ${{ number_format($grandTotal, 2) }}</p>
     </div>
 </div>

@@ -33,7 +33,7 @@ class ShowTags extends Component
     {
         $tags = Tag::latest()
         ->when($this->searchTag !== '', fn(Builder $query) => $query->where('tag', 'like', '%' . $this->searchTag . '%'))
-        ->paginate(24);
+        ->paginate(12);
 
         return view('livewire.tags.show-tags', [
             'tags' => $tags

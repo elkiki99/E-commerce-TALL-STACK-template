@@ -5,8 +5,9 @@
         </h2>
     </x-slot>
     
-    <div class="flex justify-center py-10 mt-5">
-        <div class="w-full bg-white rounded-lg shadow-md lg:mx-5 md:w-3/4 lg:w-full xl:w-3/4 dark:bg-gray-800 dark:text-gray-200">
+    
+    <div class="flex w-full pb-10 mx-auto mt-16 xl:w-10/12 md:px-10">
+        <div class="w-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200">
             <livewire:products.show-product :$product />
         </div>
     </div>

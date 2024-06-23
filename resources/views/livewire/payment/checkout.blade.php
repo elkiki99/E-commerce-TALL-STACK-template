@@ -13,7 +13,7 @@
                 </div>
             @endforeach
 
-            <p class="mx-1 mt-5 text-2xl font-bold" id="paypal-amount">Grand total: ${{ number_format($grandTotal, 2) }}</p>
+            <p class="mt-5 text-2xl font-bold" id="paypal-amount">Grand total: ${{ number_format($grandTotal, 2) }}</p>
             
             <livewire:payment.go-pay />
         </div>
