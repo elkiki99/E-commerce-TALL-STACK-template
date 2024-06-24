@@ -86,7 +86,7 @@
                         <div class="flex items-center flex-1 mx-5 mb-4">
                             <p class="text-2xl font-semibold text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
                             @if(!$product->stock < 1)
-                                @livewire('cart.add-to-cart', ['productId' => $product->id])
+                                @livewire('cart.add-to-cart-secondary', ['productId' => $product->id])
                             @endif
                         </div>
                     @endif

@@ -7,7 +7,7 @@ use App\Models\Product;
 use Livewire\Component;
 use App\Models\CartItem;
 
-class AddToCart extends Component
+class AddToCartSecondary extends Component
 {
     public $productId;
     public $quantity = 1;
@@ -56,6 +56,6 @@ class AddToCart extends Component
 
     public function render()
     {
-        return view('livewire.cart.add-to-cart');
+        return view('livewire.cart.add-to-cart-secondary');
     }
 }

@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 @else
-                    <div class="py-2 mt-5 mr-auto ">
+                    <div class="my-5">
                         @if($product->stock > 0)
                             @livewire('cart.add-to-cart', ['productId' => $product->id])
                         @endif
