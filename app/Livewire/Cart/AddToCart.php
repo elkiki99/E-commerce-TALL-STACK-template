@@ -15,7 +15,7 @@ class AddToCart extends Component
     public $productId;
     public $quantity = 1;
 
-    // #[On('showAddToCart')]
+    #[On('showAddToCart')]
     public function AddToCart()
     {
         if (auth()->check()) {
