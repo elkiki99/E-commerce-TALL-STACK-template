@@ -6,6 +6,7 @@
         </h2>
     </x-slot>
 
-    <livewire:products.show-products />
-    
+    <div>
+        <livewire:products.show-products />
+    </div>
 </x-app-layout>

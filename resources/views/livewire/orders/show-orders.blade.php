@@ -1,7 +1,7 @@
 
 <div class="flex flex-col justify-between w-full p-10">
     @if(auth()->user()->admin === 1)
-        <div class="flex px-5 mb-5 md:px-0">
+        <div class="flex justify-between w-full mb-5 md:justify-normal md:w-auto md:ml-auto">
             <form class="flex items-center">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
@@ -77,7 +77,6 @@
         @endif
     @endif
 </div>
-
 
 @script
     <script> 

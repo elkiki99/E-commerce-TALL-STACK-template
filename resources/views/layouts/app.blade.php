@@ -39,10 +39,10 @@
         @endif
 
         <!-- Page Content -->
-        <main class="flex-grow">
+        <main class="flex-grow ">
             @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/'))
-                <div class="flex">
-                    <div class="sticky flex-none h-full overflow-y-auto top-16">
+                <div class="flex min-h-screen">
+                    <div class="sticky h-full overflow-y-auto top-16">
                         <x-admin-sidebar />
                     </div>
                     <div class="flex-1">
@@ -50,8 +50,8 @@
                     </div>
                 </div>
             @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/'))
-                <div class="flex">
-                    <div class="sticky flex-none h-full overflow-y-auto top-16">
+                <div class="flex min-h-screen">
+                    <div class="sticky h-full overflow-y-auto top-16">
                         <x-user-sidebar />
                     </div>
                     <div class="flex-1">

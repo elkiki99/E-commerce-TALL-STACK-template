@@ -66,14 +66,14 @@
     
     <div>
         @guest
-            <div class="items-center justify-between block md:flex">
-                <div class="flex-1">
+            <div class="w-full gap-2 mt-5 md:flex flex-col-2 md:flex-row md:justify-end">
+                <div class="w-full mt-5 md:w-auto md:mr-4">
                     <livewire:cart.clear-cart :productId="$products[0]['product']->id"/>     
                 </div>
-                <div class="flex-1 my-5 md:text-right">
-                    <a class="text-violet-500" href="{{ route('login') }}">Log in</a>
-                    or
-                    <a class="text-violet-500" href="{{ route('register') }}">register</a>
+                <div class="w-full mt-5 md:flex md:items-center md:w-auto">
+                    <a class="mx-1 text-violet-500" href="{{ route('login') }}">Log in</a>
+                    <p>or</p>
+                    <a class="mx-1 text-violet-500" href="{{ route('register') }}">register</a>
                     to complete your purchase
                 </div>
             </div>

@@ -3,9 +3,9 @@
         <div class="flex flex-col justify-between md:flex-row">
             <!-- Column 1 -->
             <div class="flex flex-col space-y-4 md:w-1/2 md:space-y-6">
-                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">Company</h2>
+                <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">E-commerce Template</h2>
                 <p class="text-base text-gray-800 dark:text-gray-300">
-                    Sports company is a leading sports equipment and apparel retailer. We offer a wide range of products for all your sports needs.
+                    E-commerce Template is a leading sports equipment and apparel retailer. We offer a wide range of products for all your sports needs.
                 </p>
             </div>
             <!-- Column 2 -->

@@ -11,11 +11,13 @@
                 stroke="currentColor" class="mr-2 size-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
             </svg>
-            Back to categories</button>
+            Back to categories
+        </button>
         <div class="w-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
             <h1 class="mt-10 text-2xl font-bold text-center dark:text-gray-100">Update category</h1>
             <div class="p-5 md:flex md:justify-center">
                 <livewire:categories.edit-category :$category />
             </div>
         </div>
+    </div>
 </x-app-layout>

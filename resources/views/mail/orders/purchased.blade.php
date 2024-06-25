@@ -22,7 +22,7 @@
 
 <p>Total Amount: ${{ number_format($payment->amount, 2) }}</p>
 
-<p>We will notify you when your order has been shipped.</p>
+<p>We will notify you when your order has arrived.</p>
 <p>If you have any questions or concerns, please contact us at ecommercetemplate@support.com.</p>
 <p>Thank you for shopping with us!</p>
 
