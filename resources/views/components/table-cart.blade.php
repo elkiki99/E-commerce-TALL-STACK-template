@@ -80,18 +80,20 @@
         @endguest
     
         @auth
-            <div class="mt-5 sm:flex sm:justify-end">
-                <livewire:cart.clear-cart :productId="$products[0]['product']->id"/>
-            
-                <div class="flex mt-5">
+            <div class="flex w-full gap-2 mt-5 flex-col-2 md:flex-row md:justify-end">
+                <div class="w-full mt-5 md:w-auto md:mr-4">
+                    <livewire:cart.clear-cart :productId="$products[0]['product']->id"/>
+                </div>
+
+                <div class="w-full mt-5 md:w-auto">
                     <x-primary-button 
                         wire:click="update({{ $product['product']->id }}, quantity)"
-                        x-data="{ quantity: {{ $product['quantity'] }}"
+                        x-data="{ quantity: {{ $product['quantity'] }}}"
                         href="{{ route('payment.show') }}" 
                         wire:navigate
-                        class="rounded-md sm:ml-auto"
+                        class="flex items-center justify-center w-full text-center rounded-md md:w-auto sm:ml-auto"
                         type="submit"
-                    >Go to checkout
+                    >Go checkout
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                       </svg>                      
