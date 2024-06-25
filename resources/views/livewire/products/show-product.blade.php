@@ -2,7 +2,7 @@
     <div>
         @if($product->stock < 1)
             <div class="relative top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
-                <span class="font-semibold text-white text-md">NO STOCK</span>
+                <span class="p-1 font-semibold text-white text-md">NO STOCK</span>
             </div>
         @endif
     </div>

@@ -31,7 +31,7 @@ class ShowProducts extends Component
 
     public function render()
     {
-        $products = Product::with('category')
+        $products = Product::latest()
             ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchProduct . '%'))
             ->paginate(24);
 
