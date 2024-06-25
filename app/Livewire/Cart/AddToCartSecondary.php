@@ -11,7 +11,7 @@ class AddToCartSecondary extends Component
 {
     public $productId;
     public $quantity = 1;
-
+    
     public function addToCart($quantity)
     {
         $this->quantity = $quantity;

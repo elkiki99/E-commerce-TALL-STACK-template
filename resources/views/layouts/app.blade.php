@@ -39,7 +39,7 @@
         @endif
 
         <!-- Page Content -->
-        <main class="flex-grow ">
+        <main class="flex-grow min-h-screen">
             @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/'))
                 <div class="flex min-h-screen">
                     <div class="sticky h-full overflow-y-auto top-16">

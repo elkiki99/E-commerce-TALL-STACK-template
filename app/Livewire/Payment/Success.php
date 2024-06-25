@@ -74,6 +74,8 @@ class Success extends Component
                 $product->stock -= $item['quantity'];
                 $product->save();
             }
+            session()->flash('message', 'Order purchased succesfully! Check your email to see the order details.');
+
         } 
         catch (\Exception $e) {
             throw new NotFoundHttpException();

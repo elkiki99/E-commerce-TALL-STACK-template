@@ -33,8 +33,6 @@ class AddToCart extends Component
                     'quantity' => $this->quantity
                 ]);
             }
-            $this->dispatch('cartUpdated');
-
         } else {
             $product = Product::find($this->productId);
             $cart = session()->get('cart', []);

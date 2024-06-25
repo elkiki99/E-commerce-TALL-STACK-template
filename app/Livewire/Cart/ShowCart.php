@@ -12,6 +12,8 @@ class ShowCart extends Component
     public $products = [];
     public $grandTotal = 0;
 
+    protected $listeners = ['cartUpdated' => 'loadCartProducts'];
+
     public function mount()
     {
         $this->loadCartProducts();
@@ -79,8 +81,9 @@ class ShowCart extends Component
             session()->put('cart', $cart);
         }
         $this->loadCartProducts();
-
+        $this->dispatch('cartUpdated');
     }
+    
     public function render()
     {
         return view('livewire.cart.show-cart');    

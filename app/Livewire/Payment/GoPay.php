@@ -96,7 +96,6 @@ class GoPay extends Component
             ]); 
         }
         // We delete the cart in the Success method
-
         return redirect()->away($session->url);
     }
 

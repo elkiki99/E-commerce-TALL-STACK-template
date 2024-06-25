@@ -1,4 +1,4 @@
-    <?php
+        <?php
 
     use App\Livewire\Actions\Logout;
     use Livewire\Volt\Component;
@@ -200,11 +200,6 @@
                         </div>
 
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                            @php
-                                $cart = session()->get('cart', []);
-                                $itemCount = count($cart);
-                            @endphp
-                            
                             <x-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
@@ -212,10 +207,9 @@
                                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                 </svg>
                             </x-nav-link>
+
+                            <livewire:cart-counter />
                         </div>
-                        @if($itemCount > 0)
-                                <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full  dark:text-gray-900 dark:bg-gray-300">{{ $itemCount }}</span>
-                            @endif
                     @endguest
 
                     @auth
@@ -228,7 +222,7 @@
                                 </svg>
                             </x-nav-link>
                         @else
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="hidden space-x-2 sm:-my-px sm:ms-10 sm:flex">
                                 <x-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                         stroke="currentColor" class="w-6 h-6">
@@ -236,17 +230,9 @@
                                             d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                     </svg>
                                 </x-nav-link>
-                            </div>
-                                @auth
-                                    @php
-                                        $cart = App\Models\Cart::where('user_id', Auth::id())->first();
-                                        $itemCount = $cart ? App\Models\CartItem::where('cart_id', $cart->id)->count() : 0;
-                                    @endphp
-                                @endauth
                                 
-                            @if($itemCount > 0)
-                                <span class="px-2 py-1 ml-1 text-xs font-bold text-white bg-red-500 rounded-full dark:text-gray-900 dark:bg-gray-300">{{ $itemCount }}</span>
-                            @endif
+                                <livewire:cart-counter />
+                            </div>
                         @endif
                     @endauth
                 </div>
@@ -312,24 +298,31 @@
                                 </svg>
                             </div>
                         </x-responsive-nav-link>
+
                         <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')" wire:navigate>
                             {{ __('Manage orders') }}
                         </x-responsive-nav-link>
+
                         <x-responsive-nav-link :href="route('products.create')" :active="request()->routeIs('products.create')" wire:navigate>
                             {{ __('Create new product') }}
                         </x-responsive-nav-link>
+                        
                         <x-responsive-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')" wire:navigate>
                             {{ __('Edit products') }}
                         </x-responsive-nav-link>
+                        
                         <x-responsive-nav-link :href="route('categories.create')" :active="request()->routeIs('categories.create')" wire:navigate>
                             {{ __('Create new category') }}
                         </x-responsive-nav-link>
+                        
                         <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')" wire:navigate>
                             {{ __('Edit categories') }}
                         </x-responsive-nav-link>
+
                         <x-responsive-nav-link :href="route('tags.create')" :active="request()->routeIs('tags.create')" wire:navigate>
                             {{ __('Create new tag') }}
                         </x-responsive-nav-link>
+                            
                         <x-responsive-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')" wire:navigate>
                             {{ __('Edit tags') }}
                         </x-responsive-nav-link>
@@ -337,6 +330,7 @@
                         <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')" wire:navigate>
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
+                        
                         <x-responsive-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                             <div class="flex">
                                 <p>My cart</p>
@@ -346,11 +340,17 @@
                                     <path stroke-linecap="round" stroke-linejoin="round"
                                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                                 </svg>
+                                
+                                <div class="ml-2">
+                                    <livewire:cart-counter />
+                                </div>
                             </div>
                         </x-responsive-nav-link>
+
                         <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')" wire:navigate>
                             {{ __('My orders') }}
                         </x-responsive-nav-link>
+                        
                         <button wire:click="logout" class="w-full text-start">
                             <x-responsive-nav-link>
                                 {{ __('Log Out') }}
@@ -372,8 +372,8 @@
                 </div>
                 @endforeach
             @endif
-            
         </div>
+        
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             @if (Schema::hasTable('tags') && App\Models\Tag::count() > 0)
                 @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)

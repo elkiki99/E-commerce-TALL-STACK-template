@@ -1,4 +1,10 @@
-<div class="flex flex-col p-10 text-gray-900 dark:text-gray-100">    
+<div class="flex flex-col p-10 text-gray-900 dark:text-gray-100">   
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif 
+    
     @if (isset($payment))
         <table class="w-full">
             <thead>

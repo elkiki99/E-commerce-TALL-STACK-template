@@ -9,7 +9,7 @@
     </div>
 </div>
 
-@script    
+@script   
     <script>
         Livewire.on('cartUpdated', () => {
             Swal.fire({
@@ -18,15 +18,9 @@
                 icon: 'success',
                 confirmButtonText: 'OK',
                 footer: '<a href="{{ route("cart.show") }}">Go to cart</a>',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.dispatch('refreshCartComponent');
-                }
             });
-
             setTimeout(() => {
                 Swal.close();
-                Livewire.dispatch('refreshCartComponent');
             }, 2500);
         });
     </script>

@@ -12,7 +12,7 @@
             <livewire:payment.success :sessionId="$sessionId" />
 
             @if($payment->payment_id)
-                <p class="px-10 pb-5 dark:text-gray-300">You will be redirected to your order details in a few seconds... 
+                <p class="px-10 pb-10 dark:text-gray-300">You will be redirected to your order details in a few seconds... 
                     <i class="dark:text-gray-300 fas fa-spinner fa-spin"></i>
                 </p>
             @endif
