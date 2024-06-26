@@ -13,6 +13,7 @@ class ShowProduct extends Component
     public $product;
     public $category;
     public $tags;
+    public $relatedProducts;
 
     public function mount(Product $product)
     {
@@ -31,6 +32,13 @@ class ShowProduct extends Component
 
     public function render()
     {   
-        return view('livewire.products.show-product');
+        $this->relatedProducts = Product::where('category_id', $this->product->category_id)
+                                        ->where('id', '!=', $this->product->id)
+                                        ->latest()
+                                        ->get();
+
+        return view('livewire.products.show-product', [
+            'relatedProducts' => $this->relatedProducts
+        ]);
     }
 }

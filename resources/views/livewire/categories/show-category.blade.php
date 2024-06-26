@@ -32,7 +32,7 @@
                         @endif
                         <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">
                             <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                                <img class="object-cover w-64 h-64" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                                <img class="transform transition-transform duration-200 hover:scale-105 object-cover w-64 h-64" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="mx-5">
