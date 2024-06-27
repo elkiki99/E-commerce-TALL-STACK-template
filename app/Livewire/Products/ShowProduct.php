@@ -34,7 +34,6 @@ class ShowProduct extends Component
     {   
         $this->relatedProducts = Product::where('category_id', $this->product->category_id)
                                         ->where('id', '!=', $this->product->id)
-                                        ->latest()
                                         ->get();
 
         return view('livewire.products.show-product', [

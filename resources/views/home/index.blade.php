@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-carousel />
+    <x-header-carousel />
     
     <livewire:products.show-products />
 </x-app-layout>

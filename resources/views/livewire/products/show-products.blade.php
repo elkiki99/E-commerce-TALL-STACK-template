@@ -41,7 +41,7 @@
                     <div class="relative flex flex-col flex-grow h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
                         @if($product->stock < 1)
                             <div class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-12 bg-red-500 bg-opacity-75">
-                                <span class="text-lg font-semibold text-white">NO STOCK</span>
+                                <span class="text-lg font-semibold text-white">SOLD OUT</span>
                             </div>
                         @endif
                         <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">

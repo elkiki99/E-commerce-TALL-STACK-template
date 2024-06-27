@@ -2,7 +2,7 @@
     <div>
         @if($product->stock < 1)
             <div class="relative top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
-                <span class="p-1 font-semibold text-white text-md">NO STOCK</span>
+                <span class="p-1 font-semibold text-white text-md">SOLD OUT</span>
             </div>
         @endif
     </div>
@@ -81,15 +81,66 @@
         </div>
     </div>
 
-    <div class="w-full h-auto bg-green-500 p-10">
-        <h1 class="p-2 text-center text-2xl font-bold">Related products</h1>
-        @foreach ($relatedProducts as $relatedProduct)
-            {{$relatedProduct->name}}
-        @endforeach
-    </div>
-</div>
-    
+    @if($relatedProducts->count() > 0)
+        <div class="bg-gradient-to-b from-white to-gray-100">
+            <h1 class="pt-16 text-center text-2xl font-bold">Related products</h1>
+            
+            <div class="w-full h-auto pb-24 swiper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div class="swiper-wrapper">
+                    @foreach($relatedProducts as $relatedProduct)
+                    <div class="swiper-slide">
+                        <a href="{{ route('products.show', ['product' => $relatedProduct->id]) }}">
+                            <img class="transform transition-transform duration-200 hover:scale-95 object-contain w-full h-48" src="{{ asset('storage/img/products/' . $relatedProduct->image) }}" alt="{{ $relatedProduct->name }}">
+                            <h2 class="text-center text-lg font-semibold">{{ $relatedProduct->name }}</h2>
+                            <p class="text-center text-gray-500">${{ $relatedProduct->price }}</p>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    @endif
+
 @script
+    <script>
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+            slidesPerView: 1,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2, // grid-cols-2 for sm
+                },
+                768: {
+                    slidesPerView: 3, // grid-cols-3 for md
+                },
+                1024: {
+                    slidesPerView: 4, // grid-cols-4 for lg and above
+                },
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // And if we need scrollbar
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+        });
+    </script>
+
     <script>
         Livewire.on('showAlert', (productId) => {
             Swal.fire({
