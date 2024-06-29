@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-between w-full px-10 md:flex-wrap">
+<div class="flex flex-col justify-between w-full px-0 sm:px-10 md:flex-wrap">
     @if (session()->has('message'))
         <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
             {{ session('message') }}
@@ -7,7 +7,7 @@
     
     <div class="flex items-center">
         @if(auth()->check() && auth()->user()->admin === 1)
-            <button href="{{route('dashboard')}}" class="flex items-center justify-center pt-5 dark:text-gray-500" wire:navigate>
+            <button href="{{route('dashboard')}}" class="flex items-center justify-center px-5 pt-5 dark:text-gray-500" wire:navigate>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-2 size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
                 </svg>
@@ -35,7 +35,7 @@
     </div>
     
     @if (!$products->isEmpty())
-        <ul class="grid w-auto gap-4 mx-5 mt-5 md:mx-0 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+        <ul class="grid gap-4 mx-5 mt-5 md:mx-0 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             @foreach ($products as $product)
                 <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
                     <div class="relative flex flex-col flex-grow h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
@@ -46,7 +46,7 @@
                         @endif
                         <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">
                             <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                                <img class="transform transition-transform duration-200 hover:scale-105 object-cover w-64 h-64" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                                <img class="object-cover w-64 h-64 transition-transform duration-200 transform hover:scale-105" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="mx-5">
@@ -105,7 +105,6 @@
         {{ $products->links() }}
     </div>
 </div>
-
 
 @script
     <script>

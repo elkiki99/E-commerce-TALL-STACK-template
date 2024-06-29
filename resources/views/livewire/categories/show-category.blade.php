@@ -1,7 +1,21 @@
-<div class="mt-5 md:flex-wrap md:p-5">
-    @if(auth()->check() && auth()->user()->admin === 1)
-        <div class="flex px-5 mb-5 md:px-0">
-            <form class="flex items-center ml-auto">
+<div class="flex flex-col justify-between w-full px-0 sm:px-10 md:flex-wrap">
+    @if (session()->has('message'))
+        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+    
+    <div class="flex items-center">
+        @if(auth()->check() && auth()->user()->admin === 1)
+            <button href="{{route('dashboard')}}" class="flex items-center justify-center px-5 pt-5 dark:text-gray-500" wire:navigate>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mr-2 size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+                </svg>
+                Back to dashboard
+            </button>  
+        @endif
+        <div class="flex ml-auto">
+            <form class="flex items-center px-5 pt-5 sm:px-0">
                 <label for="simple-search" class="sr-only">Search</label>
                 <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -18,21 +32,21 @@
                 </div>
             </form>
         </div>
-    @endif
+    </div>
     
-    <ul class="grid w-auto gap-4 mx-5 md:mx-0 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-        @if (!$products->isEmpty())
+    @if (!$products->isEmpty())
+        <ul class="grid w-auto gap-4 mx-5 mt-5 md:mx-0 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
             @foreach ($products as $product)
                 <li wire:key="{{ $product->id }}" class="flex flex-col mb-4">
                     <div class="relative flex flex-col flex-grow h-full overflow-hidden shadow-md rounded-2xl dark:bg-gray-800">
                         @if($product->stock < 1)
                             <div class="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-12 bg-red-500 bg-opacity-75">
-                                <span class="text-lg font-semibold text-white">NO STOCK</span>
+                                <span class="text-lg font-semibold text-white">SOLD OUT</span>
                             </div>
                         @endif
                         <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">
                             <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                                <img class="transform transition-transform duration-200 hover:scale-105 object-cover w-64 h-64" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                                <img class="object-cover w-64 h-64 transition-transform duration-200 transform hover:scale-105" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="mx-5">
@@ -73,17 +87,19 @@
                             <div class="flex items-center flex-1 mx-5 mb-4">
                                 <p class="text-2xl font-semibold text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
                                 @if(!$product->stock < 1)
-                                @livewire('cart.add-to-cart-secondary', ['productId' => $product->id])
+                                    @livewire('cart.add-to-cart-secondary', ['productId' => $product->id])
                                 @endif
                             </div>
                         @endif
                     </div>
                 </li>
             @endforeach
-        @else
-            <p class="m-10 my-5 text-gray-500">No products found</p>
-        @endif
-    </ul>
+        </ul>
+    @else
+        <div class="m-8 my-5 mt-16 text-gray-500">
+            <p>No products found</p>
+        </div>
+    @endif
 
     <div class="justify-end w-full px-5 py-5">
         {{ $products->links() }}

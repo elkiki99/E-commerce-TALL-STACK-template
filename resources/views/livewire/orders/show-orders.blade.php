@@ -34,13 +34,17 @@
             <div class="p-4 m-0.5 rounded flex w-full {{ $index % 2 == 1 ? 'bg-white text-black dark:bg-gray-800 dark:text-white' : 'bg-gray-800 text-white dark:bg-gray-300 dark:text-gray-900' }}">
                 <div class="flex justify-between w-full">
                     @if(auth()->user()->admin === 1)
-                        <p>{{ $order->user_email }}</p>
-                        <p>-</p>
-                        <p>${{ $order->amount }} {{ $order->currency }}</p>
+                        <p class="hidden sm:table-cell">{{ $order->user_email }}</p>
                         <p class="hidden sm:table-cell">-</p>
-                        <p class="hidden sm:table-cell">{{ $order->created_at }}</p>
+                        <p>{{ \Carbon\Carbon::parse($order->created_at)->diffForHumans() }}</p>
+                        <p>-</p>
+                        <p>${{ $order->amount }}</p>
+                        <p class="hidden sm:table-cell"">{{ $order->currency }}</p>
+                        <p class="hidden xl:table-cell">-</p>
+                        <p class="hidden xl:table-cell">{{ $order->created_at }}</p>
                     @else
-                        <p>${{ $order->amount }} {{ $order->currency }}</p>
+                        <p>${{ $order->amount }}</p>
+                        <p class="hidden sm:table-cell"">{{ $order->currency }}</p>
                         <p>-</p>
                         <p>{{ \Carbon\Carbon::parse($order->created_at)->diffForHumans() }}</p>
                         <p class="hidden sm:table-cell">-</p>

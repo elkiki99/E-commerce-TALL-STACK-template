@@ -4,12 +4,22 @@ namespace App\Livewire\Orders;
 
 use App\Models\Payment;
 use Livewire\Component;
+use App\Mail\OrderDelivered;
+use Illuminate\Support\Facades\Mail;
 
 class ShowOrder extends Component
 {
     public $payment;
     public $paymentItems;
     public $grandTotal = 0;
+    
+    protected $listeners = ['completeOrder'];
+
+    public function completeOrder(Payment $payment)
+    {
+        Mail::to(auth()->user())->queue(new OrderDelivered($payment));
+        $payment->delete();
+    }
 
     public function mount(Payment $payment)
     {
