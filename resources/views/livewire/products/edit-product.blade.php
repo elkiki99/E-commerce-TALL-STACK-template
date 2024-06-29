@@ -51,13 +51,13 @@
         
         <div class="my-5 w-96">
             <x-input-label :value="__('Actual image')" class="" />
-            <img loading="lazy" src="{{ asset('storage/img/products/' . $image ) }}" alt="{{ $name }}" class="w-full h-full mb-4 bg-gray-100 dark:bg-gray-300">
+            <img loading="lazy" src="{{ asset('storage/img/products/' . $image ) }}" alt="{{ $name }}" class="w-full h-full mb-4">
         </div>
 
         <div class="my-5 w-96">
             @if($new_image)
-                Image:
-                <img class="dark:bg-gray-300" src="{{ $new_image->temporaryUrl() }}">
+                <p class="block text-sm font-medium text-gray-700 dark:text-gray-300">New image</p>
+                <img class="w-full h-full mb-4" src="{{ $new_image->temporaryUrl() }}">
             @endif
         </div>
 

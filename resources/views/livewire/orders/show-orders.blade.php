@@ -1,5 +1,11 @@
 
 <div class="flex flex-col justify-between w-full p-10">
+    @if (session()->has('message'))
+        <div class="p-2 m-2 text-sm text-green-600 dark:text-green-400">
+            {{ session('message') }}
+        </div>
+    @endif
+
     @if(auth()->user()->admin === 1)
         <div class="flex justify-between w-full mb-5 md:justify-normal md:w-auto md:ml-auto">
             <form class="flex items-center">
@@ -38,13 +44,11 @@
                         <p class="hidden sm:table-cell">-</p>
                         <p>{{ \Carbon\Carbon::parse($order->created_at)->diffForHumans() }}</p>
                         <p>-</p>
-                        <p>${{ $order->amount }}</p>
-                        <p class="hidden sm:table-cell"">{{ $order->currency }}</p>
+                        <span class="flex">${{ $order->amount }}<p class="hidden sm:mx-1 sm:table-cell">{{ $order->currency }}</p></span>
                         <p class="hidden xl:table-cell">-</p>
                         <p class="hidden xl:table-cell">{{ $order->created_at }}</p>
                     @else
-                        <p>${{ $order->amount }}</p>
-                        <p class="hidden sm:table-cell"">{{ $order->currency }}</p>
+                        <span class="flex">${{ $order->amount }}<p class="hidden sm:mx-1 sm:table-cell">{{ $order->currency }}</p></span>
                         <p>-</p>
                         <p>{{ \Carbon\Carbon::parse($order->created_at)->diffForHumans() }}</p>
                         <p class="hidden sm:table-cell">-</p>

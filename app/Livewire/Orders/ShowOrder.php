@@ -19,6 +19,8 @@ class ShowOrder extends Component
     {
         Mail::to(auth()->user())->queue(new OrderDelivered($payment));
         $payment->delete();
+        session()->flash('message', 'Order delivered successfully');
+        return redirect()->route('orders.index');
     }
 
     public function mount(Payment $payment)

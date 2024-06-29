@@ -23,6 +23,7 @@ class ShowOrders extends Component
     {
         Mail::to(auth()->user())->queue(new OrderDelivered($payment));
         $payment->delete();
+        session()->flash('message', 'Order delivered successfully');
     }
 
     public function updating($key)

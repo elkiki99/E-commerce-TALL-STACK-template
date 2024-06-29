@@ -15,7 +15,7 @@
             @foreach ($products as $product)
                 <tr class="border-t-2 border-gray-200 dark:border-gray-600" x-data="{ quantity: {{ $product['quantity'] }}, price: {{ $product['product']->price }}, total: {{ $product['product']->price * $product['quantity'] }} }" wire:key="product-{{ $product['product']->id }}">
                     <td class="py-2">
-                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="w-24 h-24 bg-gray-200 dark:bg-gray-300">
+                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="w-24 h-24">
                     </td>
                     <td class="py-2">{{ $product['product']->name }}</td>
                     <td class="py-2">${{ $product['product']->price }}</td>
@@ -72,7 +72,7 @@
                         x-data="{ quantity: {{ $product['quantity'] }}, price: {{ $product['product']->price }}, total: ({{ $product['product']->price }} * {{ $product['quantity'] }}).toFixed(2) }"
                         wire:key="product-mobile-{{ $product['product']->id }}">
                         
-                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="m-2 bg-gray-200 h-36 w-36 dark:bg-gray-300"></img>
+                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="m-2 h-36 w-36"></img>
                         <div class="mt-2">
                             <p class="font-bold dark:text-gray-300">{{ $product['product']->name }}</p>
                             <p class="text-2xl">${{ $product['product']->price }}</p>

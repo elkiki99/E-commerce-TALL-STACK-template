@@ -3,7 +3,7 @@
         <div class="justify-center">
             @foreach ($items as $item)
                 <div class="flex border-t-2 border-gray-200 dark:border-gray-600 col-2">
-                    <img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="m-2 bg-gray-200 h-36 w-36 lg:h-32 lg:w-32 dark:bg-gray-300"></img>
+                    <img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="m-2 h-36 w-36 lg:h-32 lg:w-32"></img>
                     <div class="mt-2">
                         <p class="font-bold lg:text-xl dark:text-gray-300">{{ $item['product']->name }}</p>
                         <p class="text-2xl lg:text-3xl">${{ $item['product']->price }}</p>

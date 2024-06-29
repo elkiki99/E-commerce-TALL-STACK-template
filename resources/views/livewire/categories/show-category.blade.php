@@ -1,6 +1,6 @@
 <div class="flex flex-col justify-between w-full px-0 sm:px-10 md:flex-wrap">
     @if (session()->has('message'))
-        <div class="p-2 my-2 text-sm text-green-600 dark:text-green-400">
+        <div class="p-2 m-2 text-sm text-green-600 dark:text-green-400">
             {{ session('message') }}
         </div>
     @endif

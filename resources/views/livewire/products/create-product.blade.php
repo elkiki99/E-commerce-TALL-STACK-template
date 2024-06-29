@@ -56,8 +56,8 @@
 
         <div class="my-5 w-96">
             @if($image)
-                Image:
-                <img class="dark:bg-gray-300" src="{{ $image->temporaryUrl() }}" alt="">
+                <p class="block text-sm font-medium text-gray-700 dark:text-gray-300">Image</p>
+                <img class="w-full h-full mb-4" src="{{ $image->temporaryUrl() }}" alt="">
             @endif
         </div>
 
@@ -86,8 +86,8 @@
             class="block w-full mt-1 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600"
         >
             <option selected>-- Select category --</option>
-            @foreach ($categories as $id => $category)
-                <option value="{{ $category }}">{{ $category->category }}</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->category }}</option>
             @endforeach
         </x-select>
 

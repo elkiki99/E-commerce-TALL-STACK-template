@@ -19,7 +19,7 @@ class CreateProduct extends Component
     public $image;
     public $stock;
     public $category;
-    public $tagId;
+    public $tagId = [];
 
     protected $rules = [
         'name' => 'required|string|max:98',
@@ -45,8 +45,8 @@ class CreateProduct extends Component
             'image' => $data['image'],
             'stock' => $data['stock'],
             'category_id' => $data['category']
-        ]); 
-        
+        ]);
+
         $product->tags()->sync(array_unique($data['tagId']));
         session()->flash('message', 'Product created successfully');
         return redirect()->route('products.index');
@@ -63,7 +63,8 @@ class CreateProduct extends Component
         $categories = Category::all();
 
         return view('livewire.products.create-product', [
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $this->tags()
         ]);
     }
 }
