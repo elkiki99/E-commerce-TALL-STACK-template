@@ -200,7 +200,7 @@
                         </div>
 
                         <div class="hidden space-x-2 sm:-my-px sm:ms-5 sm:flex">
-                            <x-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
+                            <x-nav-link :href="route('cart.show')" wire:navigate>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                     stroke="currentColor" class="w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -353,7 +353,7 @@
                             {{ __('Profile') }}
                         </x-responsive-nav-link>
 
-                        <x-responsive-nav-link :href="route('likes.index')" wire:navigate>
+                        <x-responsive-nav-link :href="route('likes.index')" :active="request()->routeIs('likes.index')" wire:navigate>
                             <div class="flex">
                                 <p>My likes</p>
 
@@ -367,7 +367,7 @@
                             </div>
                         </x-responsive-nav-link>
                         
-                        <x-responsive-nav-link :href="route('cart.show')" wire:navigate>
+                        <x-responsive-nav-link :href="route('cart.show')" :active="request()->routeIs('cart.show')" wire:navigate>
                             <div class="flex">
                                 <p>My cart</p>
 

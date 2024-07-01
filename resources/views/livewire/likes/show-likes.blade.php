@@ -1,7 +1,7 @@
 <div class="w-full pb-10 mx-auto mt-16 xl:w-10/12 md:px-10 ">
     @if(!$likes->isEmpty())
         @foreach($likes as $product)
-            <div class="w-full mb-2 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200"> 
+            <div class="w-full overflow-hidden bg-white border-b-4 rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200"> 
                 <div>
                     @if($product->stock < 1)
                         <div class="relative top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
