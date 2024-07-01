@@ -20,11 +20,11 @@
             <tbody>
                 @foreach ($paymentItems as $item)
                     <tr class="border-t-2 border-gray-200 dark:border-gray-600">
-                        <td class="py-2"><img src="{{ asset('storage/img/products/' . $item->product->image ) }}" alt="{{ $item->product->name }}" class="object-contain w-20 h-20 bg-gray-200 md:h-24 md:w-24 dark:bg-gray-300"></td>
+                        <td class="py-2"><img src="{{ asset('storage/img/products/' . $item->product->image ) }}" alt="{{ $item->product->name }}" class="object-contain w-20 h-20 md:h-24 md:w-24"></td>
                         <td class="hidden sm:table-cell">{{ $item->product->name }}</td>
-                        <td class="font-bold ">${{ number_format($item->product->price, 2) }}</td>
+                        <td>${{ number_format($item->product->price, 2) }}</td>
                         <td class="text-center sm:text-start">{{ $item->quantity }}</td>
-                        <td class="font-bold text-end sm:text-left">${{ number_format($item->product->price * $item->quantity, 2) }}</td>
+                        <td class="font-semibold text-end sm:text-left">${{ number_format($item->product->price * $item->quantity, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>

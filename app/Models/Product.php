@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Tag;
+use App\Models\Like;
 use App\Models\CartItem;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,15 @@ class Product extends Model
         return $this->belongsToMany(Tag::class, 'tag_product');
     }
 
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function likedByUsers()
+    {
+        return $this->belongsToMany(User::class, 'likes');
+    }
     // public function items()
     // {
     //     return $this->hasMany(CartItem::class);

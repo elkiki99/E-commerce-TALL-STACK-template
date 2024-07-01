@@ -15,13 +15,13 @@
             title: 'Unleash Your Potential',
             description: 'Gear up with the latest technology for your best performance yet.',            
         },                
-        {                    
+        {{-- {                    
             type: 'video',
             src: '{{ asset("storage/img/bodybuilder.mp4") }}',                   
             alt: 'Bodybuilder Training With Barbell In A Gym.',    
             title: 'Elevate Your Game',
             description: 'Achieve greatness with our cutting-edge sports accessories.',       
-        },            
+        },             --}}
     ],           
     currentSlideIndex: 1,
     isPaused: false,

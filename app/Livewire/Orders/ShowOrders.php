@@ -35,7 +35,7 @@ class ShowOrders extends Component
 
     public function render()
     {
-        $query = Payment::latest();
+        $query = Payment::where('order_status', '1')->latest();
 
         if (auth()->user()->admin === 1) {
             $query->latest()

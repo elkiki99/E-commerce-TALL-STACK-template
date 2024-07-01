@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StripeController;
@@ -14,6 +15,7 @@ Route::view('dashboard', 'dashboard')->middleware('auth', 'verified')->name('das
 Route::view('profile', 'profile')->middleware('auth', 'verified')->name('profile');
 
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
+Route::get('/likes', [LikeController::class, 'index'])->name('likes.index');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');

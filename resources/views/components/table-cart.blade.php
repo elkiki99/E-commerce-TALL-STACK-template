@@ -15,9 +15,14 @@
             @foreach ($products as $product)
                 <tr class="border-t-2 border-gray-200 dark:border-gray-600" x-data="{ quantity: {{ $product['quantity'] }}, price: {{ $product['product']->price }}, total: {{ $product['product']->price * $product['quantity'] }} }" wire:key="product-{{ $product['product']->id }}">
                     <td class="py-2">
-                        <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="w-24 h-24">
+                        <a href="{{ route('products.show', ['product' => $product['product']->id]) }}">
+                            <img src="{{ asset('storage/img/products/' . $product['product']->image ) }}" alt="{{ $product['product']->name }}" class="w-24 h-24 transition-transform duration-200 transform hover:scale-105">
+                        </a>
                     </td>
-                    <td class="py-2">{{ $product['product']->name }}</td>
+                    <td class="py-2">
+                        <a href="{{ route('products.show', ['product' => $product['product']->id]) }}">
+                            {{ $product['product']->name }}</a>
+                    </td>
                     <td class="py-2">${{ $product['product']->price }}</td>
                     <td>
                         <div class="flex flex-grow mt-2">
