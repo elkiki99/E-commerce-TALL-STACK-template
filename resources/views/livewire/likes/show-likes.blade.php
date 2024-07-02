@@ -1,11 +1,11 @@
-<div class="w-full pb-10 mx-auto mt-16 xl:w-8/12 md:px-10">
+<div class="flex flex-col p-10 text-gray-900 dark:text-gray-100">
     @if(!$likes->isEmpty())
         @foreach($likes as $product)
             <div 
                 wire:key="like-{{ $product->id }}" 
                 wire:loading.class="opacity-50"
                 wire:target="removeFromLikes({{ $product->id }})"
-                class="w-full mb-5 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200"
+                class="w-full mb-5 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800 dark:text-gray-200"
             > 
                 <div>
                     @if($product->stock < 1)
@@ -71,8 +71,8 @@
             </div>
         @endforeach
     @else
-        <div class="m-8 my-5 mt-16 text-gray-500">
-            <p>No liked products</p>
+        <div class="justify-end w-full px-5 py-5">
+            <a wire:navigate href="{{ route('home') }}" class="my-5 text-gray-500">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
         </div>
     @endif
 </div>

@@ -63,8 +63,8 @@
             <div x-cloak x-show="currentSlideIndex == index + 1" class="absolute inset-0" x-transition.opacity.duration.1000ms>
                 
                 <!-- Title And Description -->
-                <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-center text-white lg:px-32">
-                    <h3 class="text-4xl font-bold lg:text-5xl" x-text="slide.title"></h3>
+                <div class="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 px-6 text-white sm:text-center text-start lg:px-32">
+                    <h3 class="text-6xl font-bold lg:text-8xl" x-text="slide.title"></h3>
                     <p class="text-lg lg:text-xl" x-text="slide.description"></p>
                 </div>
 
