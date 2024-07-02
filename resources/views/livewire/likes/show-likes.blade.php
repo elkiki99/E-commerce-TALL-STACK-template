@@ -1,7 +1,12 @@
-<div class="w-full pb-10 mx-auto mt-16 xl:w-8/12 md:px-10 ">
+<div class="w-full pb-10 mx-auto mt-16 xl:w-8/12 md:px-10">
     @if(!$likes->isEmpty())
         @foreach($likes as $product)
-            <div class="w-full mb-5 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200"> 
+            <div 
+                wire:key="like-{{ $product->id }}" 
+                wire:loading.class="opacity-50"
+                wire:target="removeFromLikes({{ $product->id }})"
+                class="w-full mb-5 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200"
+            > 
                 <div>
                     @if($product->stock < 1)
                         <div class="relative top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
@@ -13,6 +18,7 @@
                 <div class="relative">
                     <div class="lg:flex">   
                         <div class="relative flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-300 lg:w-1/2">
+                            <livewire:likes.add-to-likes :product="$product" />
                             <a href="{{ route('products.show', ['product' => $product->id]) }}">
                                 <img class="object-cover w-auto h-auto transition-transform duration-200 transform hover:scale-105 lg:object-cover max-h-96" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
                             </a>
@@ -35,16 +41,21 @@
                                         </a>
                                     @endforeach
                                 </div>
-                                
-                                {{-- <p class="mt-4 text-gray-500 break-words text-md dark:text-gray-300">{!! $product->description !!}</p> --}}
                             </div>
                             
                             @if(auth()->check() && auth()->user()->admin === 1)
                                 <div class="my-2 mt-auto ml-auto">
                                     <div class="flex flex-row m-5">
                                         <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="px-2 mr-2">
+                                            Edit
                                         </a>
-                                        <button type="button" wire:click="$dispatch('showAlert', {{ $product->id }})"></button>
+                                        <button 
+                                            type="button" 
+                                            wire:click="removeFromLikes({{ $product->id }})" 
+                                            wire:loading.attr="disabled"
+                                        >
+                                            Remove
+                                        </button>
                                     </div>
                                 </div>
                             @else

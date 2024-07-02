@@ -18,6 +18,9 @@
         <div class="relative">
             <div class="lg:flex">   
                 <div class="relative flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-300 lg:w-1/2">
+                    @if(auth()->check())
+                        <livewire:likes.add-to-likes :product="$product" />
+                    @endif
                     <img class="object-cover w-auto h-auto transition-transform duration-200 transform hover:scale-105 lg:object-cover max-h-96" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
                 </div>
                 

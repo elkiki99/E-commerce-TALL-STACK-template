@@ -29,8 +29,7 @@ class AddToLikes extends Component
             ]);
             $this->isLiked = true;
         }
-
-        $this->dispatch('closeModal');
+        $this->dispatch('likesUpdated');
     }
 
     public function removeFromLikes()
@@ -39,6 +38,8 @@ class AddToLikes extends Component
             ->where('product_id', $this->product->id)
             ->delete();
         $this->isLiked = false;
+        $this->dispatch('likeRemoved', $this->product->id);
+        $this->dispatch('likesUpdated');
     }
 
     public function render()

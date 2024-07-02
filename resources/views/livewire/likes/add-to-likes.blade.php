@@ -1,9 +1,12 @@
-<div x-data="{ modelOpen: false, liked: @json($isLiked) }"
+<div 
+    x-data="{ modelOpen: false, liked: @json($isLiked) }"
     x-init="Livewire.on('closeModal', () => { modelOpen = false; });"
 >
-    <button @click="if (liked) { $wire.removeFromLikes().then(() => { liked = false; }); } else { modelOpen = true; $wire.addToLikes().then(() => { liked = true; }); }">
+    <button 
+        @click="if (liked) { $wire.removeFromLikes().then(() => { liked = false; }); } else { modelOpen = true; $wire.addToLikes().then(() => { liked = true; }); }"
+    >
         <svg xmlns="http://www.w3.org/2000/svg" 
-             :class="liked ? 'fill-current text-red-600' : 'fill-none'" 
+             :class="!liked ? 'fill-none' : 'fill-current text-red-600'" 
              viewBox="0 0 24 24" 
              stroke-width="1" 
              stroke="currentColor" 
