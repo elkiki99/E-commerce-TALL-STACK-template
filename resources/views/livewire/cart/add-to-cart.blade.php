@@ -1,5 +1,5 @@
-<div class="flex items-center flex-grow pl-1 mt-2" x-data="{ quantity: 1 }">
-    <div class="w-full"> 
+<div class="flex items-center flex-grow pl-1 mt-2">
+    <div class="w-full" x-data="{ quantity: 1 }"> 
         <x-primary-button type="button" x-on:click="$wire.addToCart(quantity)" class="flex items-center justify-center w-full capitalize rounded-full">
             <p class="text-lg">Add</p>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 ml-2 dark:text-gray-800">

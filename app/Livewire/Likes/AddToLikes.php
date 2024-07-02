@@ -8,24 +8,37 @@ use Livewire\Component;
 class AddToLikes extends Component
 {
     public $product;
+    public $isLiked;
+
+    public function mount($product)
+    {
+        $this->product = $product;
+        $this->isLiked = Like::where('user_id', auth()->id())
+                            ->where('product_id', $this->product->id)
+                            ->exists();
+    }
 
     public function addToLikes()
     {
-        $like = Like::where('user_id', auth()->user()->id)
-                    ->where('product_id', $this->product->id)
-                    ->first();
-
-        if(!$like) {
+        if ($this->isLiked) {
+            $this->removeFromLikes();
+        } else {
             Like::create([
-                'user_id' => auth()->user()->id,
+                'user_id' => auth()->id(),
                 'product_id' => $this->product->id,
             ]);
-        } else {
-            $like->delete();
+            $this->isLiked = true;
         }
 
-        $this->dispatch('triggerModal');
+        $this->dispatch('closeModal');
+    }
 
+    public function removeFromLikes()
+    {
+        Like::where('user_id', auth()->id())
+            ->where('product_id', $this->product->id)
+            ->delete();
+        $this->isLiked = false;
     }
 
     public function render()

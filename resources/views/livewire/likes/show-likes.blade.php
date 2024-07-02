@@ -1,4 +1,4 @@
-<div class="w-full pb-10 mx-auto mt-16 xl:w-10/12 md:px-10 ">
+<div class="w-full pb-10 mx-auto mt-16 xl:w-8/12 md:px-10 ">
     @if(!$likes->isEmpty())
         @foreach($likes as $product)
             <div class="w-full mb-5 overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-200"> 
@@ -59,5 +59,9 @@
                 </div>
             </div>
         @endforeach
+    @else
+        <div class="m-8 my-5 mt-16 text-gray-500">
+            <p>No liked products</p>
+        </div>
     @endif
 </div>

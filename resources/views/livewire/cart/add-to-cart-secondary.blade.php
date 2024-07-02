@@ -1,5 +1,5 @@
-<div class="flex items-center flex-grow pl-1 mt-2" x-data="{ quantity: 1 }">
-    <div class="ml-auto">
+<div class="flex items-center flex-grow pl-1 mt-2">
+    <div class="ml-auto" x-data="{ quantity: 1 }">
         <x-secondary-button type="button" x-on:click="$wire.addToCart(quantity)" class="flex items-center justify-center rounded-md md:w-auto">
             <p>Add</p>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 ml-2 dark:text-gray-300">

@@ -8,13 +8,13 @@
             title: 'Sports Gear for Champions',
             description: 'Explore our premium collection of sports equipment and apparel.',           
         },                
-        {   
+        {{-- {   
             type: 'video',
             src: '{{ asset("storage/img/people.mp4") }}',
             alt: 'Zoom In Shot Of Group Of Confident Trendy Authentic People Posing Outdoors.',  
             title: 'Unleash Your Potential',
             description: 'Gear up with the latest technology for your best performance yet.',            
-        },                
+        },                 --}}
         {{-- {                    
             type: 'video',
             src: '{{ asset("storage/img/bodybuilder.mp4") }}',                   
@@ -90,9 +90,9 @@
     </button> --}}
     
     <!-- Indicators -->
-    <div class="absolute rounded-xl bottom-3 md:bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-4 md:gap-3 px-1.5 py-1 md:px-2" role="group" aria-label="slides" >
+    {{-- <div class="absolute rounded-xl bottom-3 md:bottom-5 left-1/2 z-20 flex -translate-x-1/2 gap-4 md:gap-3 px-1.5 py-1 md:px-2" role="group" aria-label="slides" >
         <template x-for="(slide, index) in slides">
             <button class="transition rounded-full cursor-pointer size-2" x-on:click="(currentSlideIndex = index + 1), setAutoplayInterval(autoplayIntervalTime)" x-bind:class="[currentSlideIndex === index + 1 ? 'bg-slate-300' : 'bg-slate-300/50']" x-bind:aria-label="'slide ' + (index + 1)"></button>
         </template>
-    </div>
+    </div> --}}
 </div>
