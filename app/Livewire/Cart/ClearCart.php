@@ -14,28 +14,23 @@ class ClearCart extends Component
         $this->productId = $productId;
     }
 
-    public function clearingCart()
-    {
-        $this->dispatch('clearingCart');
-    }
-
-    public function confirmClearCart()
+    public function clearCart()
     {
         if(auth()->check()) {
             $cart = Cart::where('user_id', auth()->user()->id);
 
             if($cart) {
                 $cart->delete();
-                $this->dispatch('cartCleared');
+                // $this->dispatch('cartCleared');
             }
         } else {            
             $cart = session()->get('cart', []);
 
             if($cart) {
                 session()->forget('cart');
-                $this->dispatch('cartCleared');
             }
         }
+        $this->redirect('/cart', navigate: true);
     }
 
     public function render()

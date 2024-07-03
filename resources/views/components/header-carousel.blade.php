@@ -7,21 +7,7 @@
             alt: 'Video of man skateboarding through Paris.',  
             title: 'Sports Gear for Champions',
             description: 'Explore our premium collection of sports equipment and apparel.',           
-        },                
-        {{-- {   
-            type: 'video',
-            src: '{{ asset("storage/img/people.mp4") }}',
-            alt: 'Zoom In Shot Of Group Of Confident Trendy Authentic People Posing Outdoors.',  
-            title: 'Unleash Your Potential',
-            description: 'Gear up with the latest technology for your best performance yet.',            
-        },                 --}}
-        {{-- {                    
-            type: 'video',
-            src: '{{ asset("storage/img/bodybuilder.mp4") }}',                   
-            alt: 'Bodybuilder Training With Barbell In A Gym.',    
-            title: 'Elevate Your Game',
-            description: 'Achieve greatness with our cutting-edge sports accessories.',       
-        },             --}}
+        },
     ],           
     currentSlideIndex: 1,
     isPaused: false,

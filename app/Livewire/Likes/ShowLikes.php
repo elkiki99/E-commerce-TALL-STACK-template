@@ -21,6 +21,12 @@ class ShowLikes extends Component
         }
     }
 
+    public function removeAllLikes()
+    {
+        Like::where('user_id', auth()->user()->id)->delete();
+        $this->redirect('/likes', navigate: true);
+    }
+
     public function mount(Product $product)
     {
         $this->product = $product;
@@ -28,7 +34,7 @@ class ShowLikes extends Component
     
     public function render()
     {
-        $likes = Auth::user()->likedProducts()->with('likes')->get();
+        $likes = Auth::user()->likedProducts()->with('likes')->paginate(2);
 
         return view('livewire.likes.show-likes', [
             'likes' => $likes

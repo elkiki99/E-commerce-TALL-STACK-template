@@ -64,7 +64,6 @@ class ShowCart extends Component
             $cart[$productId]['quantity'] = $quantity;
             session()->put('cart', $cart);
         }
-
     }
 
     public function remove($productId)
