@@ -49,7 +49,9 @@
                                 <livewire:likes.add-to-likes :product="$product" />
                             @endif
                             <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">
-                                <img class="object-cover w-64 h-64 transition-transform duration-200 transform hover:scale-105" loading="lazy" src="{{ asset('storage/img/products/' . $product->image ) }}" alt="{{ $product->name }}">
+                                <img class="object-cover w-64 h-64 transition-transform duration-200 transform hover:scale-105" loading="lazy" 
+                                {{-- src="{{ asset('storage/img/products/' . $product->image ) }}"  --}}
+                                alt="{{ $product->name }}">
                             </a>
                         </div>
                         <div class="mx-5">

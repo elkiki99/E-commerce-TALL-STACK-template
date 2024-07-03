@@ -45,7 +45,7 @@
                                 <p class="text-blue-600 dark:text-blue-400">10% OFF</p>
                                 <p class="mt-2 text-4xl text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
 
-                                <livewire:product.product-rating />
+                                <livewire:products.product-ranking />
                                                     
                                 <div class="flex flex-wrap mt-4">
                                     @foreach ($product->tags as $tag)
@@ -83,15 +83,10 @@
                 </div>
             </div>
         @endforeach
-        
-        <div class="justify-end w-full px-5 py-5">
-            {{ $likes->links() }}
-        </div>
 
-
-        <div>
+        <div class="mx-5 lg:mx-0">
             <x-danger-button 
-                class="flex items-center justify-center w-full text-center md:w-auto" 
+                class="flex items-center justify-center w-full mt-5 text-center md:w-auto" 
                 type="button"
                 x-on:click.prevent="$dispatch('open-modal', 'confirm-remove-likes')">Remove likes
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-6">
@@ -122,12 +117,13 @@
                 </form>
             </x-modal>
         </div>
-
-
-        
+            
+        <div class="justify-end w-full px-2 py-5">
+            {{ $likes->links() }}
+        </div>        
     @else
         <div class="justify-end w-full px-5 py-5">
-            <a wire:navigate href="{{ route('home') }}" class="my-5 text-gray-500">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
+            <a wire:navigate href="{{ route('home') }}" class="my-5 text-gray-500">No likes found!<span class="text-violet-500"> Go shopping!</span></a>
         </div>
     @endif
 </div>

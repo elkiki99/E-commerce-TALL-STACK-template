@@ -37,6 +37,7 @@ class AddToLikes extends Component
         Like::where('user_id', auth()->id())
             ->where('product_id', $this->product->id)
             ->delete();
+            
         $this->isLiked = false;
         $this->dispatch('likeRemoved', $this->product->id);
         $this->dispatch('likesUpdated');

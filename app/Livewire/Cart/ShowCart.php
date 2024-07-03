@@ -11,7 +11,6 @@ class ShowCart extends Component
     public $cart;
     public $products = [];
     public $grandTotal = 0;
-
     protected $listeners = ['cartUpdated' => 'loadCartProducts'];
 
     public function mount()

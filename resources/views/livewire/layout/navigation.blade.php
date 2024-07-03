@@ -209,7 +209,7 @@
                             </x-nav-link>
                             
                             <a href="{{route('cart.show')}}">
-                                <livewire:cart-counter />
+                                <livewire:cart.cart-counter />
                             </a>
                         </div>
                     @endguest
@@ -246,7 +246,7 @@
                                 </x-nav-link>
                                 
                                 <a href="{{route('cart.show')}}">
-                                    <livewire:cart-counter />
+                                    <livewire:cart.cart-counter />
                                 </a>
                             </div>
                         @endif
@@ -377,7 +377,7 @@
                                 </svg>
                                 
                                 <div class="ml-2">
-                                    <livewire:cart-counter />
+                                    <livewire:cart.cart-counter />
                                 </div>
                             </div>
                         </x-responsive-nav-link>

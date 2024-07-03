@@ -34,7 +34,7 @@ class ShowLikes extends Component
     
     public function render()
     {
-        $likes = Auth::user()->likedProducts()->with('likes')->paginate(2);
+        $likes = Auth::user()->likedProducts()->with('likes')->paginate(10);
 
         return view('livewire.likes.show-likes', [
             'likes' => $likes

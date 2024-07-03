@@ -21,7 +21,6 @@ class ClearCart extends Component
 
             if($cart) {
                 $cart->delete();
-                // $this->dispatch('cartCleared');
             }
         } else {            
             $cart = session()->get('cart', []);
