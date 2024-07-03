@@ -6,7 +6,7 @@
         @click="if (liked) { $wire.removeFromLikes().then(() => { liked = false; }); } else { modelOpen = true; $wire.addToLikes().then(() => { liked = true; }); }"
     >
         <svg xmlns="http://www.w3.org/2000/svg" 
-             :class="!liked ? 'fill-none' : 'fill-current text-red-600'" 
+             :class="!liked ? 'fill-none' : 'fill-current text-red-500'" 
              viewBox="0 0 24 24" 
              stroke-width="1" 
              stroke="currentColor" 
@@ -61,7 +61,7 @@
                 </p>
 
                 <div class="mt-4">
-                    <a href="{{ route('likes.index') }}" class="text-violet-500">View liked products</a>
+                    <a href="{{ route('likes.index') }}" class="text-violet-500">Go to liked products</a>
                 </div>
             </div>
         </div>

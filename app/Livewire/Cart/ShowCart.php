@@ -64,6 +64,7 @@ class ShowCart extends Component
             $cart[$productId]['quantity'] = $quantity;
             session()->put('cart', $cart);
         }
+
     }
 
     public function remove($productId)
@@ -81,7 +82,7 @@ class ShowCart extends Component
             session()->put('cart', $cart);
         }
         $this->loadCartProducts();
-        // $this->dispatch('cartUpdated');
+        $this->dispatch('cartUpdated');
     }
     
     public function render()

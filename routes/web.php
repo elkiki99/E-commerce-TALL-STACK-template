@@ -15,7 +15,7 @@ Route::view('dashboard', 'dashboard')->middleware('auth', 'verified')->name('das
 Route::view('profile', 'profile')->middleware('auth', 'verified')->name('profile');
 
 Route::get('/cart', [CartController::class, 'show'])->name('cart.show');
-Route::get('/likes', [LikeController::class, 'index'])->name('likes.index');
+Route::get('/likes', [LikeController::class, 'index'])->middleware('auth', 'verified')->name('likes.index');
 
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');

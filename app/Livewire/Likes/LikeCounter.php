@@ -10,6 +10,7 @@ class LikeCounter extends Component
     public $likesCount = 0;
     
     protected $listeners = ['likesUpdated' => 'updateLikesCount'];
+    // protected $listeners = []
 
     public function mount()
     {
