@@ -1,12 +1,12 @@
 <div class="flex flex-col p-10 text-gray-900 dark:text-gray-100">
     @if(!$likes->isEmpty())
         @foreach($likes as $product)
-            <div 
-                wire:key="like-{{ $product->id }}" 
+            <div
+                wire:key="{{ $product->id }}"
                 wire:loading.class="opacity-50"
-                wire:target="removeFromLikes({{ $product->id }})"
+                wire:target="remove({{ $product->id }})"
                 class="w-full mb-5 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800 dark:text-gray-200"
-            > 
+            >
                 <div>
                     @if($product->stock < 1)
                         <div class="relative top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-red-500 bg-opacity-75">
@@ -18,7 +18,19 @@
                 <div class="relative">
                     <div class="lg:flex">   
                         <div class="relative flex items-center justify-center p-4 bg-gray-100 dark:bg-gray-300 lg:w-1/2">
-                            <livewire:likes.add-to-likes :product="$product" />
+                            <button
+                                    wire:key="remove-{{ $product->id }}" 
+                                    wire:click="remove({{ $product->id }})"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" 
+                                    {{-- :class="!liked ? 'fill-none' : ''"  --}}
+                                    viewBox="0 0 24 24" 
+                                    stroke-width="1" 
+                                    stroke="currentColor" 
+                                    class="absolute z-10 w-10 h-10 ml-auto mr-2 text-red-600 transition-transform duration-200 transform fill-current hover:scale-125 right-2 top-2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                    </svg>
+                                </button>
                             <a href="{{ route('products.show', ['product' => $product->id]) }}">
                                 <img class="object-cover w-auto h-auto transition-transform duration-200 transform hover:scale-105 lg:object-cover max-h-96" loading="lazy" src="{{ asset('storage/img/products/' . $product->image )}}" alt="{{ $product->name }}">
                             </a>
@@ -27,12 +39,14 @@
                         <div class="flex flex-col justify-between p-4 pb-0 lg:w-1/2 lg:pb-10">
                             <div>
                                 <a class="mt-4 text-blue-600 text-md dark:text-blue-400" href="{{ route('categories.show', ['category' => $product->category->id]) }}">{{ $product->category->category }}</a>
-                            
-                                <h2 class="mt-2 text-3xl font-semibold text-gray-800 dark:text-gray-300">{{ $product->name }} <span class="text-sm text-blue-400"></span></h2>
+                                
+                                <a href="{{ route('products.show', ['product' => $product->id]) }}">
+                                    <h2 class="mt-2 text-3xl font-semibold text-gray-800 dark:text-gray-300">{{ $product->name }} <span class="text-sm text-blue-400"></span></h2>
+                                </a>
                                 <p class="text-blue-600 dark:text-blue-400">10% OFF</p>
                                 <p class="mt-2 text-4xl text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
 
-                                <livewire:product.product-rating :product="$product" />
+                                <livewire:product.product-rating />
                                                     
                                 <div class="flex flex-wrap mt-4">
                                     @foreach ($product->tags as $tag)

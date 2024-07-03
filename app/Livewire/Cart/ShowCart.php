@@ -81,7 +81,7 @@ class ShowCart extends Component
             session()->put('cart', $cart);
         }
         $this->loadCartProducts();
-        $this->dispatch('cartUpdated');
+        // $this->dispatch('cartUpdated');
     }
     
     public function render()
