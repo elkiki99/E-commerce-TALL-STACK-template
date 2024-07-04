@@ -4,7 +4,7 @@
     <div class="w-full" x-data="{ quantity: 1 }" >
         <x-primary-button
             type="button"
-            x-on:click.prevent="$wire.addToCart(quantity).then(() =>$dispatch('open-modal', 'add-to-cart'))"
+            x-on:click.prevent="$wire.addToCart(quantity).then(() =>$dispatch('open-modal', 'add-to-cart-{{ $productId }}'))"
             class="flex items-center justify-center w-full capitalize rounded-full"
         ><p class="text-lg">Add</p>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 ml-2 dark:text-gray-800">
@@ -13,7 +13,7 @@
         </x-primary-button>
     </div>
     
-    <x-modal name="add-to-cart" :show="$errors->isNotEmpty()" focusable>
+    <x-modal name="add-to-cart-{{ $productId }}" :show="$errors->isNotEmpty()" focusable>
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                 {{ __('Product added successfully!') }}

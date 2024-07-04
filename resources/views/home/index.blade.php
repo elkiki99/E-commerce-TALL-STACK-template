@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="w-full h-auto bg-yellow-500">
-        <p class="text-white text-center">Check our latest discounts!</p>
+        <p class="text-center text-white">Check our latest discounts!</p>
     </div>
 
     <x-header-carousel />

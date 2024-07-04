@@ -1,11 +1,11 @@
 <div x-data="{ liked: @json($isLiked) }">
     <button 
         type="button"
-        x-on:click.prevent="if(liked) { 
+        @click.prevent="if(liked) { 
             $wire.removeFromLikes().then(() => { liked = false; }); 
         } else { 
             $wire.addToLikes().then(() => { 
-                $dispatch('open-modal', 'add-to-likes');
+                $dispatch('open-modal', 'add-to-likes-{{ $product->id }}');
                 liked = true
             }); 
         }"
@@ -20,7 +20,7 @@
         </svg>
     </button>
 
-    <x-modal name="add-to-likes" :show="$errors->isNotEmpty()" focusable>
+    <x-modal name="add-to-likes-{{ $product->id }}" :show="$errors->isNotEmpty()" focusable>
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                 {{ __('Great choice!') }}

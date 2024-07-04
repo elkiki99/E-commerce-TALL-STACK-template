@@ -4,7 +4,7 @@
     <div class="ml-auto" x-data="{ quantity: 1 }" >
         <x-secondary-button 
             type="button"
-            x-on:click.prevent="$wire.addToCart(quantity).then(() =>$dispatch('open-modal', 'add-to-cart'))"
+            x-on:click.prevent="$wire.addToCart(quantity).then(() =>$dispatch('open-modal', 'add-to-cart-{{ $productId }}'))"
             class="flex items-center justify-center rounded-md md:w-auto"
         >
             <p>Add</p>
@@ -14,7 +14,7 @@
         </x-secondary-button>  
     </div>
     
-    <x-modal name="add-to-cart" :show="$errors->isNotEmpty()" focusable>
+    <x-modal name="add-to-cart-{{ $productId }}" :show="$errors->isNotEmpty()" focusable>
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                 {{ __('Product added successfully!') }}
