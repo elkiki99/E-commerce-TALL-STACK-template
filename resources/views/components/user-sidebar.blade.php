@@ -7,13 +7,13 @@
             </a>
         </li>
         <li>
-            <a wire:navigate href="{{ route('orders.index') }}" class="block px-4 py-2 text-sm font-medium  rounded-md {{ (request()->is('orders') || request()->is('order/*')) ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
-                My orders
+            <a wire:navigate href="{{ route('likes.index') }}" class="block px-4 py-2 text-sm font-medium  rounded-md {{ request()->is('likes') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
+                My likes
             </a>
         </li>
         <li>
-            <a wire:navigate href="{{ route('likes.index') }}" class="block px-4 py-2 text-sm font-medium  rounded-md {{ request()->is('likes') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
-                My likes
+            <a wire:navigate href="{{ route('orders.index') }}" class="block px-4 py-2 text-sm font-medium  rounded-md {{ (request()->is('orders') || request()->is('order/*')) ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
+                My orders
             </a>
         </li>
         <li>

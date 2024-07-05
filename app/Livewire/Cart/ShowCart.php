@@ -31,6 +31,7 @@ class ShowCart extends Component
                         'product' => $item->product,
                         'quantity' => $item->quantity,
                     ];
+                    $this->grandTotal += $item->product->price * $item->quantity;
                 }
             }
         } else {

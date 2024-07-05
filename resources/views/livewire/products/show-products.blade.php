@@ -110,31 +110,3 @@
         {{ $products->links() }}
     </div>
 </div>
-
-@script
-    <script>
-        Livewire.on('showAlert', (productId) => {
-            Swal.fire({
-                title: 'Are you sure?',
-                title: 'Delete this product?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'The product was deleted',
-                        'Deleted succesfully',
-                        'success'
-                    );
-                    window.setTimeout(() => {
-                        @this.call('deleteProduct', productId);
-                    }, 1500);
-                }
-            })
-        });
-    </script>
-@endscript

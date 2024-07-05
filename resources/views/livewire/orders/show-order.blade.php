@@ -82,7 +82,6 @@
                     );
                     window.setTimeout(() => {
                         @this.call('completeOrder', paymentId);
-                        // window.location.href = '/orders';
                     }, 1500);
                 }
             })
