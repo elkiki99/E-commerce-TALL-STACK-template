@@ -12,13 +12,11 @@ class ShowOrder extends Component
     public $payment;
     public $paymentItems;
     public $grandTotal = 0;
-    
-    protected $listeners = ['completeOrder'];
 
-    public function completeOrder(Payment $payment)
+    public function completeOrder()
     {
-        Mail::to(auth()->user())->queue(new OrderDelivered($payment));
-        $payment->delete();
+        Mail::to(auth()->user())->queue(new OrderDelivered($this->payment));
+        $this->payment->delete();
         session()->flash('message', 'Order delivered successfully');
         return redirect()->route('orders.index');
     }

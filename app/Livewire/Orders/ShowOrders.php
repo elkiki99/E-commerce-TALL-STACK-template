@@ -17,8 +17,6 @@ class ShowOrders extends Component
     public $searchOrders = '';
     public $searchDate = '';
 
-    protected $listeners = ['completeOrder'];
-
     public function completeOrder(Payment $payment)
     {
         Mail::to(auth()->user())->queue(new OrderDelivered($payment));
