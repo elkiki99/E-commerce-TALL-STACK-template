@@ -15,7 +15,7 @@
                     <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Quick Links</h2>
                     <ul class="space-y-2">
                         <li>
-                            <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">About us</a>
+                            <a wire:navigate href="{{ route('about') }}" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">About us</a>
                         </li>
                         <li>
                             <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Contact us</a>
