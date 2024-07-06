@@ -14,7 +14,6 @@ class ShowCategory extends Component
 
     public $category;
     public string $searchProduct = '';
-    protected $listeners = ['deleteProduct', 'addToCart'];
 
     public function deleteProduct(Product $product)
     {

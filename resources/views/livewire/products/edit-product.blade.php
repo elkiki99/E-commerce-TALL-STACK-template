@@ -1,5 +1,5 @@
 
-<form class="pb-10 space-y-5 md:w-1/2" novalidate wire:submit.prevent='editProduct'>  
+<form class="pb-10 space-y-5 md:w-7/12" novalidate wire:submit.prevent='editProduct'>  
     <div class="mt-4">
         <x-input-label for="name" :value="__('Product name')" />
         <x-text-input 

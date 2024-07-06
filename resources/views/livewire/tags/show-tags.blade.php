@@ -74,31 +74,3 @@
         {{ $tags->links() }}
     </div>
 </div>
-
-@script
-    <script>    
-        Livewire.on('showAlert', (tagId) => {
-            Swal.fire({
-                title: 'Delete this tag?',
-                text: 'This action cannot be restored',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire(
-                        'The tag was deleted',
-                        'Deleted succesfully',
-                        'success'
-                    );
-                    window.setTimeout(() => {
-                        @this.call('deleteTag', tagId);
-                    }, 1500);
-                }
-            })
-        });
-    </script>
-@endscript

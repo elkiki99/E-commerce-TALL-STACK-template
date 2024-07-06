@@ -14,7 +14,6 @@ class ShowTag extends Component
 
     public $tag;
     public string $searchProduct = '';
-    protected $listeners = ['deleteProduct', 'addToCart'];
 
     public function deleteProduct(Product $product)
     {

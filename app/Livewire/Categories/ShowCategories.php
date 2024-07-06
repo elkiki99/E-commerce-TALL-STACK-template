@@ -12,8 +12,6 @@ class ShowCategories extends Component
     use WithPagination;
     public $searchCategory = '';
 
-    protected $listeners = ['deleteCategory'];
-
     public function deleteCategory(Category $category)
     {
         if($category->products->count() === 0) {

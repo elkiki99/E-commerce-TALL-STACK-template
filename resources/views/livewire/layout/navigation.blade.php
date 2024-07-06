@@ -63,44 +63,19 @@
                                 @endif
                             </x-slot>
                         </x-dropdown>
-
-                        <x-dropdown align="right" width="48">
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none">
-                                    {{ __('Tags') }}
-
-                                    <div class="">
-                                        <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
-
-                            <x-slot name="content">
-                                @if (Schema::hasTable('tags') && App\Models\Tag::count() > 0)
-                                    @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
-                                    <x-dropdown-link 
-                                        wire:navigate
-                                        class="z-50"
-                                        href="{{route('tags.show', ['tag' => $tag->id])}}">{{
-                                        $tag->tag }}
-                                    </x-dropdown-link>
-                                    @endforeach
-                                @endif
-                            </x-slot>
-                        </x-dropdown>
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-5 sm:flex">
                         <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
-                            {{ __('FAQ') }}
+                            {{ __('About') }}
                         </a>
                     </div>  
+                    
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-5 sm:flex">
+                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
+                            {{ __('FAQ') }}
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Settings Dropdown -->
@@ -126,7 +101,7 @@
 
                             <x-slot name="content">
                                 @if(auth()->user()->admin === 1)
-                                    <div class="block lg:hidden ">
+                                    <div class="block md:hidden ">
                                         <x-dropdown-link :href="route('profile')" wire:navigate>
                                             {{ __('Profile') }}
                                         </x-dropdown-link>
@@ -141,18 +116,6 @@
                                         </x-dropdown-link>
                                         <x-dropdown-link :href="route('products.index')" wire:navigate>
                                             {{ __('Edit products') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('categories.create')" wire:navigate>
-                                            {{ __('Create new category') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('categories.index')" wire:navigate>
-                                            {{ __('Edit categories') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('tags.create')" wire:navigate>
-                                            {{ __('Create new tag') }}
-                                        </x-dropdown-link>
-                                        <x-dropdown-link :href="route('tags.index')" wire:navigate>
-                                            {{ __('Edit tags') }}
                                         </x-dropdown-link>
                                     </div>
                                     
@@ -169,7 +132,7 @@
                                         {{ __('Profile') }}
                                     </x-dropdown-link>
                                     
-                                    <div class="block lg:hidden">
+                                    <div class="block md:hidden">
                                         <x-dropdown-link :href="route('orders.index')" wire:navigate>
                                             {{ __('My orders') }}
                                         </x-dropdown-link>
@@ -201,11 +164,9 @@
 
                         <div class="hidden space-x-2 sm:-my-px sm:ms-5 sm:flex">
                             <x-nav-link :href="route('cart.show')" wire:navigate>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                  </svg>
                             </x-nav-link>
                             
                             <a href="{{route('cart.show')}}">
@@ -238,11 +199,9 @@
                             
                             <div class="hidden mx-2 sm:flex">
                                 <x-nav-link :href="route('cart.show')" wire:navigate>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                        stroke="currentColor" class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                      </svg>
                                 </x-nav-link>
                                 
                                 <a href="{{route('cart.show')}}">
@@ -278,11 +237,9 @@
                         <div class="flex">
                             <p>My cart</p>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6 ml-auto">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-auto size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                              </svg>
                         </div>
                     </x-responsive-nav-link>
                 </div>
@@ -370,11 +327,9 @@
                             <div class="flex">
                                 <p>My cart</p>
 
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                    stroke="currentColor" class="w-6 h-6 ml-auto">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-auto size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                                  </svg>
                                 
                                 <div class="ml-2">
                                     <livewire:cart.cart-counter />
@@ -407,18 +362,8 @@
                 </div>
                 @endforeach
             @endif
-        </div>
-        
-        <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-            @if (Schema::hasTable('tags') && App\Models\Tag::count() > 0)
-                @foreach (App\Models\Tag::orderBy('tag', 'desc')->get() as $tag)
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link wire:navigate href="{{route('tags.show', ['tag' => $tag->id])}}">
-                        {{ $tag->tag }}
-                    </x-responsive-nav-link>
-                </div>
-                @endforeach
-            @endif
+            <x-responsive-nav-link wire:navigate href="#">About</x-responsive-nav-link>
+            <x-responsive-nav-link wire:navigate href="#">FAQ</x-responsive-nav-link>
         </div>
     </div>
 </nav>

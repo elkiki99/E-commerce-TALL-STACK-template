@@ -56,28 +56,11 @@
                                 </div>
                             </div>
                             
-                            @if(auth()->check() && auth()->user()->admin === 1)
-                                <div class="my-2 mt-auto ml-auto">
-                                    <div class="flex flex-row m-5">
-                                        <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="px-2 mr-2">
-                                            Edit
-                                        </a>
-                                        <button 
-                                            type="button" 
-                                            wire:click="removeFromLikes({{ $product->id }})" 
-                                            wire:loading.attr="disabled"
-                                        >
-                                            Remove
-                                        </button>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="my-5">
-                                    @if($product->stock > 0)
-                                        @livewire('cart.add-to-cart', ['productId' => $product->id])
-                                    @endif
-                                </div>
-                            @endif
+                            <div class="my-5">
+                                @if($product->stock > 0)
+                                    @livewire('cart.add-to-cart', ['productId' => $product->id])
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

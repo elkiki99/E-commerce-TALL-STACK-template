@@ -12,8 +12,6 @@ class ShowTags extends Component
     use WithPagination;
     public $searchTag = '';
 
-    protected $listeners = ['deleteTag'];
-
     public function deleteTag(Tag $tag)
     {
         $tag->products()->detach();
