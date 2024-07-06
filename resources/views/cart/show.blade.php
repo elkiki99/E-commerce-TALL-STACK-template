@@ -15,7 +15,7 @@
         
         <div class="w-full overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
             <h1 class="mt-10 text-2xl font-bold text-center dark:text-gray-100">Go to checkout</h1>
-            
+                
             <livewire:cart.show-cart :cart="$cart" :payment="$payment" />
         </div>
     </div>

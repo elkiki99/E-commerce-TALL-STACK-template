@@ -99,11 +99,11 @@
                     </div>
                 </form>
             </x-modal>
-        </div>
-            
-        <div class="justify-end w-full px-2 py-5">
+        </div>     
+           
+        <div class="justify-end w-full px-5 pt-5">
             {{ $likes->links() }}
-        </div>        
+        </div>
     @else
         <div class="justify-end w-full px-5 py-5">
             <a wire:navigate href="{{ route('home') }}" class="my-5 text-gray-500">No likes found!<span class="text-violet-500"> Go shopping!</span></a>

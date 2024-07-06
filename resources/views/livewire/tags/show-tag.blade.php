@@ -45,7 +45,7 @@
                             </div>
                         @endif
                         <div class="flex items-center justify-center bg-gray-200 dark:bg-gray-300">
-                            @if(auth()->check())
+                            @if(auth()->check() && auth()->user()->admin !== 1)
                                 <livewire:likes.add-to-likes :product="$product" />
                             @endif
                             <a wire:navigate href="{{ route('products.show', ['product' => $product->id]) }}">

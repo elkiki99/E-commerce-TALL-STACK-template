@@ -4,6 +4,9 @@
             <x-table-cart :products="$products" :grandTotal="$grandTotal" />
         </table>
     @else
+    <div class="justify-end w-full px-5 py-5">
+
         <a class="my-5 text-gray-500" wire:navigate href="{{ route('home') }}">There's no products yet!<span class="text-violet-500"> Go shopping!</span></a>
+    </div>
     @endif
 </div>

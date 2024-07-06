@@ -100,7 +100,7 @@
                 </div>
             </div>
         @endforeach
-        
+
         <div class="justify-end w-full px-5 py-5">
             {{ $payments->links() }}
         </div>
@@ -108,7 +108,9 @@
         @if (auth()->user()->admin === 1)
             <p class="p-5 my-5 text-gray-500">No active orders</p>
         @else
-            <a wire:navigate href="{{ route('home') }}" class="my-5 text-gray-500">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
+            <div class="justify-end w-full p-5">
+                <a wire:navigate href="{{ route('home') }}" class="my-5 text-gray-500">No orders found!<span class="text-violet-500"> Go shopping!</span></a>
+            </div>
         @endif
     @endif
 </div>

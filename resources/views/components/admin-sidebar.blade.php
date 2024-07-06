@@ -1,5 +1,5 @@
 <div>
-    <div class="hidden p-4 mb-10 min-w-64 xl:block">
+    <div class="hidden p-4 mb-10 min-w-56 xl:block">
         <ul class="mt-4 space-y-2">
             <li>
                 <a wire:navigate href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('dashboard') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
@@ -25,7 +25,7 @@
             <li>
                 <a wire:navigate href="{{ route('products.create') }}" class="block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('products/create') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">
                     <div class="flex items-center justify-between">
-                        <span>Create new product</span>
+                        <span>Create product</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>

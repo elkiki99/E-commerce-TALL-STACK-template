@@ -233,6 +233,8 @@
         <div class="pt-2 pb-3 space-y-1">
             @guest
                 <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link wire:navigate class="flex" href="#">About</x-responsive-nav-link>
+                    <x-responsive-nav-link wire:navigate class="flex" href="#">FAQ</x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('cart.show')" wire:navigate>
                         <div class="flex">
                             <p>My cart</p>
@@ -284,21 +286,6 @@
                             {{ __('Edit products') }}
                         </x-responsive-nav-link>
                         
-                        <x-responsive-nav-link :href="route('categories.create')" :active="request()->routeIs('categories.create')" wire:navigate>
-                            {{ __('Create new category') }}
-                        </x-responsive-nav-link>
-                        
-                        <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')" wire:navigate>
-                            {{ __('Edit categories') }}
-                        </x-responsive-nav-link>
-
-                        <x-responsive-nav-link :href="route('tags.create')" :active="request()->routeIs('tags.create')" wire:navigate>
-                            {{ __('Create new tag') }}
-                        </x-responsive-nav-link>
-                            
-                        <x-responsive-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')" wire:navigate>
-                            {{ __('Edit tags') }}
-                        </x-responsive-nav-link>
                         <button wire:click="logout" class="w-full text-start">
                             <x-responsive-nav-link >
                                 {{ __('Log Out') }}
@@ -340,6 +327,9 @@
                         <x-responsive-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')" wire:navigate>
                             {{ __('My orders') }}
                         </x-responsive-nav-link>
+
+                        <x-responsive-nav-link wire:navigate class="flex" href="#">About</x-responsive-nav-link>
+                        <x-responsive-nav-link wire:navigate class="flex" href="#">FAQ</x-responsive-nav-link>
                         
                         <button wire:click="logout" class="w-full text-start">
                             <x-responsive-nav-link>
@@ -362,8 +352,6 @@
                 </div>
                 @endforeach
             @endif
-            <x-responsive-nav-link wire:navigate href="#">About</x-responsive-nav-link>
-            <x-responsive-nav-link wire:navigate href="#">FAQ</x-responsive-nav-link>
         </div>
     </div>
 </nav>

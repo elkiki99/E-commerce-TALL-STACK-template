@@ -1,5 +1,5 @@
 <div>
-    <div class="hidden p-4 mb-10 min-w-64 xl:block">
+    <div class="hidden p-4 mb-10 min-w-56 xl:block">
         <ul class="mt-4 space-y-2">
             <li>
                 <a wire:navigate href="{{ route('cart.show') }}" class="block px-4 py-2 text-sm font-medium rounded-md {{ request()->is('cart') ? 'bg-gray-900 text-gray-100 hover:bg-gray-800 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300' : 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-300 dark:bg-gray-900 dark:hover:text-gray-900' }}">

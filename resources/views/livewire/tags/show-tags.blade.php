@@ -66,11 +66,11 @@
                 </x-modal>
             </p>
         @endforeach
+
+        <div class="justify-end w-full px-5 py-10">
+            {{ $tags->links() }}
+        </div>
     @else
         <p class="my-5 text-gray-500">No tags found</p>
     @endif
-
-    <div class="justify-end w-full px-5 py-10">
-        {{ $tags->links() }}
-    </div>
 </div>

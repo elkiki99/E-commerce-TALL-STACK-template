@@ -26,8 +26,10 @@
                 Track your order
                 @endif
             </h1>
-
-            <livewire:orders.show-order :payment="$payment" />
+            
+            <div class="p-5 md:flex md:justify-center">
+                <livewire:orders.show-order :payment="$payment" />
+            </div>
         </div>
     </div>
 </x-app-layout>

@@ -17,6 +17,7 @@ class CartController extends Controller
             $cart = session()->get('cart', []);
         }
 
+        $this->authorize('viewCart', Cart::class);
         return view('cart.show', [
             'cart' => $cart,
             'payment' => $payment,
