@@ -1,11 +1,11 @@
 <div class="flex flex-col p-10 text-gray-900 dark:text-gray-100">    
     @if(($items))
-        <div class="justify-center">
-            @foreach ($items as $item)
-                <div class="flex border-t-2 border-gray-200 dark:border-gray-600 col-2">
-                    <img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="m-2 h-36 w-36 lg:h-32 lg:w-32"></img>
-                    <div class="mt-2">
-                        <p class="font-bold lg:text-xl dark:text-gray-300">{{ $item['product']->name }}</p>
+    <div class="justify-center w-full">
+        @foreach ($items as $item)
+                <div class="flex w-full border-t-2 border-gray-200 dark:border-gray-600">
+                    <img src="{{ asset('storage/img/products/' . $item['product']->image ) }}" alt="{{ $item['product']->name }}" class="flex-shrink-0 m-2 h-36 w-36"></img>
+                    <div class="w-full mt-2 ml-4">
+                        <p class="text-xl font-bold dark:text-gray-300">{{ $item['product']->name }}</p>
                         <p class="text-2xl lg:text-3xl">${{ $item['product']->price }}</p>
                         <p class="text-lg font-normal dark:text-gray-400">Quantity: <span class="font-bold">{{ $item['quantity'] }}</span></p>
                         <p class="text-lg font-normal dark:text-gray-300">Total: <span class="font-bold dark:text-gray-100">${{ $item['product']->price * $item['quantity']  }}</span></p>

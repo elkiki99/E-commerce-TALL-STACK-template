@@ -66,13 +66,13 @@
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-5 sm:flex">
-                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
+                        <a href="{{ route('about') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
                             {{ __('About') }}
                         </a>
                     </div>  
                     
                     <div class="hidden space-x-8 sm:-my-px sm:ms-5 sm:flex">
-                        <a href="#" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
+                        <a href="{{ route('faq') }}" class="inline-flex items-center px-1 pt-1 text-sm font-medium leading-5 text-gray-500 transition duration-150 ease-in-out border-b-2 border-transparent hover:cursor-pointer dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 focus:outline-none focus:text-gray-700 dark:focus:text-gray-300 focus:border-gray-300 dark:focus:border-gray-700">
                             {{ __('FAQ') }}
                         </a>
                     </div>
@@ -233,8 +233,8 @@
         <div class="pt-2 pb-3 space-y-1">
             @guest
                 <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link wire:navigate class="flex" href="#">About</x-responsive-nav-link>
-                    <x-responsive-nav-link wire:navigate class="flex" href="#">FAQ</x-responsive-nav-link>
+                    <x-responsive-nav-link wire:navigate class="flex" href="{{ route('about') }}">About</x-responsive-nav-link>
+                    <x-responsive-nav-link wire:navigate class="flex" href="{{ route('faq') }}">FAQ</x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('cart.show')" wire:navigate>
                         <div class="flex">
                             <p>My cart</p>
@@ -328,8 +328,8 @@
                             {{ __('My orders') }}
                         </x-responsive-nav-link>
 
-                        <x-responsive-nav-link wire:navigate class="flex" href="#">About</x-responsive-nav-link>
-                        <x-responsive-nav-link wire:navigate class="flex" href="#">FAQ</x-responsive-nav-link>
+                        <x-responsive-nav-link wire:navigate class="flex" href="{{ route('about') }}">About</x-responsive-nav-link>
+                        <x-responsive-nav-link wire:navigate class="flex" href="{{ route('faq') }}">FAQ</x-responsive-nav-link>
                         
                         <button wire:click="logout" class="w-full text-start">
                             <x-responsive-nav-link>

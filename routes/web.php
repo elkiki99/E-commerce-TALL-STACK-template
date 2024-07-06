@@ -11,6 +11,10 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;    
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/about', function () { return view('home.about'); })->name('about');
+Route::get('/faq', function () { return view('home.faq'); })->name('faq');
+
 Route::view('dashboard', 'dashboard')->middleware('auth', 'verified')->name('dashboard');
 Route::view('profile', 'profile')->middleware('auth', 'verified')->name('profile');
 

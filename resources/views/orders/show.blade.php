@@ -2,9 +2,9 @@
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
             @if(auth()->user()->admin === 1)
-            {{ __('Order details') }}
+                {{ __('Order details') }}
             @else
-            {{ __('Your order') }}
+                {{ __('Your order') }}
             @endif
         </h2>
     </x-slot>
@@ -26,10 +26,7 @@
                 Track your order
                 @endif
             </h1>
-            
-            <div class="p-5 md:flex md:justify-center">
-                <livewire:orders.show-order :payment="$payment" />
-            </div>
+            <livewire:orders.show-order :payment="$payment" />
         </div>
     </div>
 </x-app-layout>
