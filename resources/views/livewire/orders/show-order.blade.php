@@ -36,11 +36,12 @@
             <p class="font-light">Name: <span class="font-semibold">{{$payment->user->name}}</span></p>
             <p class="font-light">E-mail: <span class="font-semibold">{{$payment->user->email}}</span></p>
             <p class="font-light">Date: <span class="font-semibold">{{$payment->created_at}}</span></p>
+            <p class="font-light">Order id: <span class="text-sm font-light break-all">{{$payment->payment_id}}</span></p>
         </div>
     @endif
         
     <div class="mt-5">
-        <p class="text-2xl font-bold dark:text-gray-100"><strong class="text-xl dark:text-gray-400">Grand total:</strong> ${{ number_format($grandTotal, 2) }}</p>
+        <p class="text-2xl font-bold dark:text-gray-100"><strong class="text-xl dark:text-gray-300">Grand total:</strong> ${{ number_format($grandTotal, 2) }}</p>
     </div>
 
     @if(auth()->user()->admin === 1)

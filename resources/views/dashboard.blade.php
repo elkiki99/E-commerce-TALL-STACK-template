@@ -52,14 +52,14 @@
                 <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
                     {{-- <a wire:navigate href="#" class="block p-6"> --}}
                         <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Total Sales</span>
-                        <span class="block mt-2 text-gray-600 dark:text-gray-400">${{ number_format(App\Models\Payment::sum('amount'), 2) }}</span>
+                        <span class="block mt-2 text-xl text-gray-600 dark:text-gray-400">${{ number_format(App\Models\Payment::sum('amount'), 2) }}</span>
                     {{-- </a> --}}
                 </div>
                 
                 <!-- Product of the Month -->
                 <div class="block w-full p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
                     {{-- <a wire:navigate href="#" class="block p-6"> --}}
-                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Product of the Month</span>
+                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Product of the month</span>
                         @if($productOfTheMonth)
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ $productOfTheMonth->name }}</span>
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">Sales: {{ $productSalesCount }}</span>
@@ -72,7 +72,7 @@
                 <!-- Inventory and Products -->
                 <div class="block p-6 overflow-hidden bg-white rounded-lg shadow-sm dark:bg-gray-800">
                     {{-- <a wire:navigate href="#" class="block p-6"> --}}
-                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Products in Stock</span>
+                        <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Stock</span>
                         <span class="block mt-2 text-gray-600 dark:text-gray-400">{{ App\Models\Product::where('stock', '>', 0)->count() }}</span>
                     {{-- </a> --}}
                 </div>
@@ -81,7 +81,7 @@
                     <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Products</span>
                     <div class="flex items-center">
                         <a wire:navigate href="{{ route('products.create')}}" class="flex items-center mt-2 text-gray-600 transition-transform transform dark:text-gray-400 hover:scale-105">
-                            Create new product
+                            New product
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="flex items-center">
                         <a wire:navigate href="{{ route('products.index')}}" class="flex items-center mt-2 text-gray-600 transition-transform transform dark:text-gray-400 hover:scale-105">
-                            Manage products
+                            Manage
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>
@@ -101,7 +101,7 @@
                     <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Categories</span>
                     <div class="flex items-center">
                         <a wire:navigate href="{{ route('categories.create')}}" class="flex items-center mt-2 text-gray-600 transition-transform transform dark:text-gray-400 hover:scale-105">
-                            Create new category
+                            New category
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="flex items-center">
                         <a wire:navigate href="{{ route('categories.index')}}" class="flex items-center mt-2 text-gray-600 transition-transform transform dark:text-gray-400 hover:scale-105">
-                            Manage categories
+                            Manage
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>
@@ -121,7 +121,7 @@
                     <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">Tags</span>
                     <div class="flex items-center">
                         <a wire:navigate href="{{ route('tags.create')}}" class="flex items-center mt-2 text-gray-600 transition-transform transform dark:text-gray-400 hover:scale-105">
-                            Create new tag
+                            New tag
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="flex items-center">
                         <a wire:navigate href="{{ route('tags.index')}}" class="flex items-center mt-2 text-gray-600 transition-transform transform dark:text-gray-400 hover:scale-105">
-                            Manage tags
+                            Manage
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="ml-2 size-4">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                             </svg>

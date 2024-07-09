@@ -5,7 +5,7 @@
             <div class="flex flex-col md:w-1/2">
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">E-commerce Template</h2>
                 <p class="text-base text-gray-800 dark:text-gray-300">
-                    E-commerce Template is a leading sports equipment and apparel retailer. We offer a wide range of products for all your sports needs.
+                    E-commerce Template is a free and open-source e-commerce template created with Tailwind CSS, Alpine.js, Livewire and of course, Laravel.
                 </p>
             </div>
             <!-- Column 2 & 3 -->
@@ -20,9 +20,6 @@
                         <li>
                             <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Contact us</a>
                         </li>
-                        <li>
-                            <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Work with us</a>
-                        </li>
                     </ul>
                 </div>
                 <!-- Column 3 -->
@@ -33,10 +30,7 @@
                             <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Blog</a>
                         </li>
                         <li>
-                            <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Help Center</a>
-                        </li>
-                        <li>
-                            <a href="#" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Privacy Policy</a>
+                            <a wire:navigate href="{{ route('privacy-policy') }}" class="text-base text-gray-800 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Privacy Policy</a>
                         </li>
                     </ul>
                 </div>

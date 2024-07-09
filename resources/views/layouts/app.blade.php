@@ -42,7 +42,7 @@
 
         <!-- Page Content -->
         <main class="flex-grow min-h-screen">
-            @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/') && !request()->is('about') && !request()->is('faq'))
+            @if(auth()->check() && auth()->user()->admin === 1 && !request()->is('/') && !request()->is('about') && !request()->is('faq') && !request()->is('privacy-policy'))
                 <div class="flex min-h-screen">
                     <div class="sticky h-full overflow-y-auto top-16">
                         <x-admin-sidebar />
@@ -51,7 +51,7 @@
                         {{ $slot }}
                     </div>
                 </div>
-            @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/') && !request()->is('about') && !request()->is('faq'))
+            @elseif(auth()->check() && auth()->user()->admin === 0 && !request()->is('/') && !request()->is('about') && !request()->is('faq') && !request()->is('privacy-policy'))
                 <div class="flex min-h-screen">
                     <div class="sticky h-full overflow-y-auto top-16">
                         <x-user-sidebar />
