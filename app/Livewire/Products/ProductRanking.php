@@ -21,7 +21,7 @@ class ProductRanking extends Component
         $this->product = Product::find($this->product);
         $this->averageRating = 
             // $product->ratings()->avg('rating')
-            3.5
+            4
         ;
     }
 
