@@ -45,7 +45,7 @@
                                 <p class="text-blue-600 dark:text-blue-400">10% OFF</p>
                                 <p class="mt-2 text-4xl text-gray-900 dark:text-gray-200">${{ $product->price }}</p>
 
-                                <livewire:products.product-ranking />
+                                <livewire:products.product-ranking :product="$product" />
                                                     
                                 <div class="flex flex-wrap mt-4">
                                     @foreach ($product->tags as $tag)

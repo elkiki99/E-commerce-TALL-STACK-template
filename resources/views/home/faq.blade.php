@@ -7,7 +7,7 @@
     <x-header-carousel />
 
     <section class="py-12 bg-gray-100 dark:bg-gray-900">
-        <div class="container px-4 mx-auto">
+        <div class="container mx-auto sm:px-4">
             <div class="mb-8 text-center">
                 <h2 class="text-3xl font-bold dark:text-gray-100">Frequently Asked Questions</h2>
                 <p class="mt-6 text-gray-700 dark:text-gray-400">Find answers to the most common questions below.</p>
