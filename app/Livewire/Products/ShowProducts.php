@@ -31,12 +31,12 @@ class ShowProducts extends Component
 
     public function render()
     {
-        $products = Product::latest()
-            ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchProduct . '%'))
-            ->paginate(24);
+        // $products = Product::latest()
+        //     ->when($this->searchProduct !== '', fn(Builder $query) => $query->where('name', 'like', '%' . $this->searchProduct . '%'))
+        //     ->paginate(24);
 
         return view('livewire.products.show-products', [
-            'products' => $products
+            // 'products' => $products
         ]);
     }
 }
